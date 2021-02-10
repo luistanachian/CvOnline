@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cv.DB\Cv.Dao.csproj" />
+    <ProjectReference Include="..\Cv.Models\Cv.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Class\" />
+    <Folder Include="Interface\" />
+  </ItemGroup>
+
+</Project>
