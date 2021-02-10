@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,11 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Cv.Dao\Cv.Dao.csproj" />
     <ProjectReference Include="..\Cv.Models\Cv.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Class\" />
-    <Folder Include="Interface\" />
   </ItemGroup>
 
 </Project>
