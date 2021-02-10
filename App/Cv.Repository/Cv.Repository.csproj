@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cv.DB\Cv.Dao.csproj" />
+    <ProjectReference Include="..\Cv.Dao\Cv.Dao.csproj" />
     <ProjectReference Include="..\Cv.Models\Cv.Models.csproj" />
   </ItemGroup>
 
