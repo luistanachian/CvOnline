@@ -1,13 +1,15 @@
 ﻿using Cv.Dao.Helpers;
 using Cv.Dao.Interface;
 using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Cv.Dao.Class
 {
     public class BaseDaoMongoDb<TEntity> : IBaseDaoMongoDb<TEntity> where TEntity : class
     {
-        public long Delete(FilterDefinition<TEntity> filter)
+        public long Delete(Expression<Func<TEntity, bool>> filter)
         {
             var db = HelperMongoDb.DataBase;
             var collection = db.GetCollection<TEntity>(typeof(TEntity).Name);
@@ -24,7 +26,7 @@ namespace Cv.Dao.Class
             return list;
         }
 
-        public IList<TEntity> GetListByFunc(FilterDefinition<TEntity> filter, int? top = null)
+        public IList<TEntity> GetListByFunc(Expression<Func<TEntity, bool>> filter, int? top = null)
         {
             var db = HelperMongoDb.DataBase;
             var collection = db.GetCollection<TEntity>(typeof(TEntity).Name);
@@ -32,7 +34,7 @@ namespace Cv.Dao.Class
             return list;
         }
 
-        public TEntity GetOneByFunc(FilterDefinition<TEntity> filter)
+        public TEntity GetOneByFunc(Expression<Func<TEntity, bool>> filter)
         {
             var list = GetListByFunc(filter, 1);
             return list?[0];
@@ -45,7 +47,7 @@ namespace Cv.Dao.Class
             collection.InsertOne(entity);
         }
 
-        public long Update(FilterDefinition<TEntity> filter, TEntity entity)
+        public long Update(Expression<Func<TEntity, bool>> filter, TEntity entity)
         {
             var db = HelperMongoDb.DataBase;
             var collection = db.GetCollection<TEntity>(typeof(TEntity).Name);
