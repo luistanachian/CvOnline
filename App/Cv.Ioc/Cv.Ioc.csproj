@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -6,6 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cv.Business\Cv.Business.csproj" />
+    <ProjectReference Include="..\Cv.Dao\Cv.Dao.csproj" />
+    <ProjectReference Include="..\Cv.Repository\Cv.Repository.csproj" />
   </ItemGroup>
 
 </Project>
