@@ -31,6 +31,7 @@ namespace Cv.AppConsole
             {
                 Console.WriteLine($"{item.Code} - {item.Country}");
             }
+            Console.ReadKey();
         }
         private static IHostBuilder CreateHostBuilder(string[] args)
         {
