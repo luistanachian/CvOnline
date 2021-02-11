@@ -1,11 +1,11 @@
 ﻿using Cv.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Cv.Business.Interface
 {
-    public interface ICountriesBusiness : IBaseBusiness<CountryModel, string>
+    public interface ICountriesBusiness 
     {
+        IList<CountryModel> GetAll();
+        CountryModel GetById(string code);
     }
 }

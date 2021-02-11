@@ -1,6 +1,5 @@
 ﻿using Cv.Business.Interface;
 using Cv.Ioc;
-using Cv.Models;
 using Microsoft.Extensions.Hosting;
 using System;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,14 +22,7 @@ namespace Cv.AppConsole
 
         public void Run()
         {
-            countriesBusiness.Insert(new CountryModel { Code = "AR", Country = "Argentina" });
-            countriesBusiness.Insert(new CountryModel { Code = "VE", Country = "Venezuela" });
-
-            var list = countriesBusiness.GetAll();
-            foreach (var item in list)
-            {
-                Console.WriteLine($"{item.Code} - {item.Country}");
-            }
+            TestCountries();
             Console.ReadKey();
         }
         private static IHostBuilder CreateHostBuilder(string[] args)
@@ -40,6 +32,25 @@ namespace Cv.AppConsole
                 services.AddTransient<Program>();
                 services.ConfigureIOC();
             });
+        }
+
+
+        public void TestCountries()
+        {
+            Console.WriteLine("TestCountries");
+
+            Console.WriteLine();
+            Console.WriteLine("TestCountries - GetAll");
+            var list = countriesBusiness.GetAll();
+            foreach (var item in list)
+            {
+                Console.WriteLine($"{item.CodeCountry} - {item.Country}");
+            }
+
+            Console.WriteLine();
+            var country = countriesBusiness.GetById("VE");
+            Console.WriteLine($"TestCountries - GetById('{country.CodeCountry}')");
+            Console.WriteLine($"{country.CodeCountry} - {country.Country}");
         }
     }
 }

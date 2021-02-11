@@ -8,35 +8,13 @@ namespace Cv.Business.Class
     public class CountriesBusiness : ICountriesBusiness
     {
 
-        private readonly ICountriesRepository _countriesRepository;
+        private readonly ICountriesRepository countriesRepository;
         public CountriesBusiness(ICountriesRepository countriesRepository)
         {
-            _countriesRepository = countriesRepository;
+            this.countriesRepository = countriesRepository;
         }
 
-        public bool Delete(string id)
-        {
-            return _countriesRepository.Delete(id);
-        }
-
-        public IList<CountryModel> GetAll()
-        {
-            return _countriesRepository.GetAll();
-        }
-
-        public CountryModel GetById(string id)
-        {
-            return _countriesRepository.GetById(id);
-        }
-
-        public void Insert(CountryModel entity)
-        {
-            _countriesRepository.Insert(entity);
-        }
-
-        public bool Update(CountryModel entity)
-        {
-            return _countriesRepository.Update(entity);
-        }
+        public IList<CountryModel> GetAll() => countriesRepository.GetAll();
+        public CountryModel GetById(string code) => countriesRepository.GetById(code);
     }
 }

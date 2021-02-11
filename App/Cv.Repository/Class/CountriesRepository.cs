@@ -2,6 +2,7 @@
 using Cv.Models;
 using Cv.Repository.Interface;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cv.Repository.Class
 {
@@ -13,33 +14,16 @@ namespace Cv.Repository.Class
             _countriesDao = countriesDao;
         }
 
-        public bool Delete(string id)
-        {
-            var deletedRows = _countriesDao.Delete(e => e.Code == id);
-            return deletedRows > 0;
-        }
-
         public IList<CountryModel> GetAll()
         {
             var listModel = _countriesDao.GetAll();
-            return listModel;
+            return listModel.OrderBy(c => c.Country).ToList();
         }
 
-        public CountryModel GetById(string id)
+        public CountryModel GetById(string code)
         {
-            var model = _countriesDao.GetOneByFunc(e => e.Code == id);
+            var model = _countriesDao.GetOneByFunc(e => e.CodeCountry == code);
             return model;
-        }
-
-        public void Insert(CountryModel entity)
-        {
-            _countriesDao.Insert(entity);
-        }
-
-        public bool Update(CountryModel entity)
-        {
-            var updateRows = _countriesDao.Update(e => e.Code == entity.Code, entity);
-            return updateRows > 0;
         }
     }
 }

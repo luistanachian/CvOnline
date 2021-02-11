@@ -12,11 +12,13 @@ namespace Cv.Ioc
     {
         public static void ConfigureIOC(this IServiceCollection services)
         {
-            //services.AddDbContext<ClassContext>();
-
             services.AddSingleton<ICountriesDao, CountriesDao>();
             services.AddSingleton<ICountriesRepository, CountriesRepository>();
             services.AddSingleton<ICountriesBusiness, CountriesBusiness>();
+
+            services.AddSingleton<IStatesDao, StatesDao>();
+            services.AddSingleton<IStatesRepository, StatesRepository>();
+            services.AddSingleton<IStatesBusiness, StatesBusiness>();
         }
     }
 }
