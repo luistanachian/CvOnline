@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Cv.Models.Enums;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Cv.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+
         public string Name { get; set; }
         public string LastName { get; set; }
         public string BirthDay { get; set; }
@@ -22,10 +24,17 @@ namespace Cv.Models
         public string Nacionality { get; set; }
         public string Occupation { get; set; }
         public string TargetRole { get; set; }
+        public SeniorityEnum Seniority { get; set; }
+
+
+        public List<LanguageModel> ListLanguages { get; set; }
+        public RelocateModel Relocate { get; set; }
+
 
         public string EMail { get; set; }
-        public List<string> ListPhones { get; set; }
+        public string Phone { get; set; }
         public List<string> ListSocialNetworks { get; set; }
+
 
         public List<EducationModel> ListEducations { get; set; }
         public List<WorkExperienceModel> ListWorkExperiences { get; set; }
