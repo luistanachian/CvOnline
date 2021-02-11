@@ -8,21 +8,21 @@ namespace Cv.Repository.Class
 {
     public class CountriesRepository : ICountriesRepository
     {
-        private readonly ICountriesDao _countriesDao;
+        private readonly ICountriesDao countriesDao;
         public CountriesRepository(ICountriesDao countriesDao)
         {
-            _countriesDao = countriesDao;
+            this.countriesDao = countriesDao;
         }
 
         public IList<CountryModel> GetAll()
         {
-            var listModel = _countriesDao.GetAll();
+            var listModel = countriesDao.GetAll();
             return listModel.OrderBy(c => c.Country).ToList();
         }
 
         public CountryModel GetById(string code)
         {
-            var model = _countriesDao.GetOneByFunc(e => e.CodeCountry == code);
+            var model = countriesDao.GetOneByFunc(e => e.CodeCountry == code);
             return model;
         }
     }

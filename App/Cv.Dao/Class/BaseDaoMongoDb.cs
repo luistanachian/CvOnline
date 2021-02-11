@@ -1,4 +1,4 @@
-﻿using Cv.Dao.Helpers;
+﻿using Cv.Dao.Configurations;
 using Cv.Dao.Interface;
 using MongoDB.Driver;
 using System;
@@ -7,51 +7,40 @@ using System.Linq.Expressions;
 
 namespace Cv.Dao.Class
 {
-    public class BaseDaoMongoDb<TEntity> : IBaseDaoMongoDb<TEntity> where TEntity : class
+    public class BaseDaoMongoDb<T> : IBaseDaoMongoDb<T> where T : class
     {
-        public long Delete(Expression<Func<TEntity, bool>> filter)
+        public long Delete(Expression<Func<T, bool>> filter)
         {
-            var db = HelperMongoDb.DataBase;
-            var collection = db.GetCollection<TEntity>(typeof(TEntity).Name);
-
-            var deleteResult = collection.DeleteOne(filter);
-            return deleteResult.DeletedCount;
+            var result = ConnectionsMongoDb<T>.GetCollection().DeleteOne(filter);
+            return result.DeletedCount;
         }
 
-        public IList<TEntity> GetAll()
+        public IList<T> GetAll()
         {
-            var db = HelperMongoDb.DataBase;
-            var collection = db.GetCollection<TEntity>(typeof(TEntity).Name);
-            var list = collection.Find(e => true).ToList();
-            return list;
+            var result = ConnectionsMongoDb<T>.GetCollection().Find(e => true).ToList();
+            return result;
         }
 
-        public IList<TEntity> GetListByFunc(Expression<Func<TEntity, bool>> filter, int? top = null)
+        public IList<T> GetListByFunc(Expression<Func<T, bool>> filter, int? top = null)
         {
-            var db = HelperMongoDb.DataBase;
-            var collection = db.GetCollection<TEntity>(typeof(TEntity).Name);
-            var list = collection.Find(filter).Limit(top).ToList();
-            return list;
+            var result = ConnectionsMongoDb<T>.GetCollection().Find(filter).Limit(top).ToList();
+            return result;
         }
 
-        public TEntity GetOneByFunc(Expression<Func<TEntity, bool>> filter)
+        public T GetOneByFunc(Expression<Func<T, bool>> filter)
         {
-            var list = GetListByFunc(filter, 1);
-            return list?[0];
+            var result = GetListByFunc(filter, 1);
+            return result?[0];
         }
 
-        public void Insert(TEntity entity)
+        public void Insert(T entity)
         {
-            var db = HelperMongoDb.DataBase;
-            var collection = db.GetCollection<TEntity>(typeof(TEntity).Name);
-            collection.InsertOne(entity);
+            ConnectionsMongoDb<T>.GetCollection().InsertOne(entity);
         }
 
-        public long Update(Expression<Func<TEntity, bool>> filter, TEntity entity)
+        public long Update(Expression<Func<T, bool>> filter, T entity)
         {
-            var db = HelperMongoDb.DataBase;
-            var collection = db.GetCollection<TEntity>(typeof(TEntity).Name);
-            var result = collection.ReplaceOne(filter, entity);
+            var result = ConnectionsMongoDb<T>.GetCollection().ReplaceOne(filter, entity);
             return result.ModifiedCount;
         }
     }
