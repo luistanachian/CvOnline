@@ -100,8 +100,8 @@ namespace Cv.AppConsole
                 Education = EducationTypeEnum.Technician,
                 ListLanguages = new List<LanguageModel>
                 {
-                    new LanguageModel{ CodeLanguage = "ES", Level = LevelLanguageEnum.Native },
-                    new LanguageModel{ CodeLanguage = "EN", Level = LevelLanguageEnum.Basic }
+                    new LanguageModel { CodeLanguage = "ES", Level = LevelLanguageEnum.Native },
+                    new LanguageModel { CodeLanguage = "EN", Level = LevelLanguageEnum.Basic }
                 },
                 Relocate = new RelocateModel
                 {
@@ -109,7 +109,7 @@ namespace Cv.AppConsole
                     Married = true,
                     Pet = false,
                     EstimateDate = DateTime.Today,
-                    Comments = "Me faltan algunos documentos de Venezuela"
+                    Comments = "Me faltan algunos documentos de Venezuela" //TODO lista de commentModel
                 },
                 EMails = new List<string> { "tanachian501@gmail.com" },
                 Phones = new List<string> { "+5493517730268" },
@@ -138,8 +138,61 @@ namespace Cv.AppConsole
                         Title = ".Net Core"
                     }
                 },
-                ListSkills = null, //TODO terminar de probar
-                ListWorkExperiences = null//TODO terminar de probar
+                ListWorkExperiences = new List<WorkExperienceModel>
+                {
+                    new WorkExperienceModel
+                    {
+                        Role = "Developer .net",
+                        Company = "Bancor",
+                        Current = true,
+                        StartDate = DateTime.Parse("2018-05-28"),
+                        EndDate = null,
+                        ListReferences = new List<ReferenceModel>
+                        {
+                            new ReferenceModel
+                            {
+                                Name = "Fulanito",
+                                LastName = "De Tal",
+                                Email = "fulanito@gmail.com",
+                                Phone = "+543511234567",
+                                Role = "PM",
+                                WorkRelationship = WorkRelationshipEnum.Supervisor,
+                                ReferenceAnswer = "Se dormia en el laburo"
+                            }
+                        },
+                        Comments = new List<CommentModel>
+                        {
+                            new CommentModel
+                            {
+                                Date = DateTime.Now,
+                                User = "ltanachian",
+                                Comment = "Trabajó para una consultora que le presta servicios a bancor"
+                            }
+                        }
+
+                    }
+                },
+                ListSkills = new List<SkillModel>
+                {
+                    new SkillModel
+                    {
+                        Skill = "C#",
+                        FrequencyUsed = FrequencyUsedEnum.EveryEay,
+                        Current = true,
+                        LastUsed = null,
+                        Score = 9,
+                        Years = 9
+                    },
+                    new SkillModel
+                    {
+                        Skill = "SQL",
+                        FrequencyUsed = FrequencyUsedEnum.EveryEay,
+                        Current = true,
+                        LastUsed = null,
+                        Score = 9,
+                        Years = 9
+                    }
+                }
             };
             candidatesBusiness.Insert(candidate);
             Console.WriteLine("TestCandidates - Insert End");

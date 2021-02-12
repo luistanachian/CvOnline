@@ -9,9 +9,9 @@ namespace Cv.Models
         public string Role { get; set; }
         public string Company { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public bool Current { get; set; }
         public List<ReferenceModel> ListReferences { get; set; }
-        public string Comments { get; set; }
+        public List<CommentModel> Comments { get; set; }
     }
 }

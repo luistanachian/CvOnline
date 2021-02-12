@@ -9,6 +9,7 @@ namespace Cv.Models
         public int Score { get; set; }
         public FrequencyUsedEnum FrequencyUsed { get; set; }
         public int Years { get; set; }
-        public DateTime LastUsed { get; set; }
+        public DateTime? LastUsed { get; set; }
+        public bool Current { get; set; }
     }
 }
