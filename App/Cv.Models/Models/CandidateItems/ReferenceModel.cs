@@ -1,6 +1,6 @@
 ﻿using Cv.Models.Enums;
 
-namespace Cv.Models.Models
+namespace Cv.Models
 {
     public class ReferenceModel
     {
