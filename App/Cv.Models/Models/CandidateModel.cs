@@ -23,17 +23,19 @@ namespace Cv.Models
         public string Dni { get; set; }
         public string Nacionality { get; set; }
         public string Occupation { get; set; }
-        public string TargetRole { get; set; }
+        public string Role { get; set; }
         public SeniorityEnum Seniority { get; set; }
+        public EdutationTypeEnum Edutation { get; set; }
 
 
         public List<LanguageModel> ListLanguages { get; set; }
         public RelocateModel Relocate { get; set; }
 
 
-        public string EMail { get; set; }
-        public string Phone { get; set; }
+        public List<string> EMail { get; set; }
+        public List<string> Phone { get; set; }
         public List<string> ListSocialNetworks { get; set; }
+        public List<string> ListPortfolio { get; set; }
 
 
         public List<EducationModel> ListEducations { get; set; }
