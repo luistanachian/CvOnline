@@ -19,6 +19,10 @@ namespace Cv.Ioc
             services.AddSingleton<IStatesDao, StatesDao>();
             services.AddSingleton<IStatesRepository, StatesRepository>();
             services.AddSingleton<IStatesBusiness, StatesBusiness>();
+
+            services.AddSingleton<ICandidatesDao, CandidatesDao>();
+            services.AddSingleton<ICandidatesRepository, CandidatesRepository>();
+            services.AddSingleton<ICandidatesBusiness, CandidatesBusiness>();
         }
     }
 }

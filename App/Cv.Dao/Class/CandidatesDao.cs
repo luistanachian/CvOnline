@@ -3,7 +3,7 @@ using Cv.Models;
 
 namespace Cv.Dao.Class
 {
-    public class CandidateDaos : BaseDaoMongoDb<CandidateModel>, ICandidatesDao
+    public class CandidatesDao : BaseDaoMongoDb<CandidateModel>, ICandidatesDao
     {
     }
 }
