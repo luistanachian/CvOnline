@@ -37,6 +37,10 @@ namespace Cv.Dao.Class
         {
             ConnectionsMongoDb<T>.GetCollection().InsertOne(entity);
         }
+        public void InsertMany(List<T> listEntity)
+        {
+            ConnectionsMongoDb<T>.GetCollection().InsertMany(listEntity);
+        }
 
         public long Update(Expression<Func<T, bool>> filter, T entity)
         {

@@ -1,6 +1,7 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
 using Cv.Repository.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,9 +14,14 @@ namespace Cv.Repository.Class
         {
             this.candidatesDao = candidatesDao;
         }
-        public void Insert(CandidateModel candidated)
+        public void Insert(CandidateModel candidate)
         {
-            candidatesDao.Insert(candidated);
+            candidate.CandidateId = Guid.NewGuid().ToString().Replace("-","");
+            candidatesDao.Insert(candidate);
+        }
+        public void InsertMany(List<CandidateModel> listCandidates)
+        { 
+            candidatesDao.InsertMany(listCandidates);
         }
         public bool Update(CandidateModel candidate)
         {
