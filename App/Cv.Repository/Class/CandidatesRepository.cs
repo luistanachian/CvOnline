@@ -19,18 +19,18 @@ namespace Cv.Repository.Class
         }
         public bool Update(CandidateModel candidate)
         {
-            var result = candidatesDao.Update(c => c.Id == candidate.Id, candidate);
+            var result = candidatesDao.Update(c => c.CandidateId == candidate.CandidateId, candidate);
             return result > 0;
         }
         public bool Delete(string id)
         {
-            var result = candidatesDao.Delete(c => c.Id == id);
+            var result = candidatesDao.Delete(c => c.CandidateId == id);
             return result > 0;
         }
         public IList<CandidateModel> GetAllByCompanyId(string companyId)
         {
             var result = candidatesDao.GetListByFunc(c => c.CompanyId == companyId);
-            return result.OrderBy(c => c.LastName).ThenBy(c => c.Name).ToList();
+            return result.OrderBy(c => c.PersonalData.LastName).ThenBy(c => c.PersonalData.Name).ToList();
         }
     }
 }

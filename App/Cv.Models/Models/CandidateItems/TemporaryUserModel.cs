@@ -9,6 +9,7 @@ namespace Cv.Models
         public DateTime EndDate { get; set; }
         public int ErrorCounter { get; set; }
 
+        public bool EditPhoto { get; set; }
         public bool EditPersonalData { get; set; }
         public bool EditRelocate { get; set; }
         public bool EditLanguages { get; set; }

@@ -13,6 +13,7 @@ namespace Cv.Models
         public string CompanyId { get; set; }
         public StatusCandiateEnum Status { get; set; }
         public TemporaryUserModel TemporaryUser { get; set; }
+        public string Photo { get; set; }
         public PersonalDataModel PersonalData { get; set; }
         public RelocateModel Relocate { get; set; }
         public List<LanguageModel> ListLanguages { get; set; }

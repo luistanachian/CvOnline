@@ -72,32 +72,46 @@ namespace Cv.AppConsole
             Console.WriteLine();
             Console.WriteLine("TestCandidates - Insert Start");
 
-
             var candidate = new CandidateModel
             {
                 CompanyId = "holaCompany",
-                Name = "Luis",
-                LastName = "Tanachian",
-                BirthDay = "1990-01-05",
-                Sex = "M",
-                Dni = "95900127",
-                Nacionality = "VE",
-                Occupation = "Tecnico en informatica",
-                Role = "Dev .net",
-                Adress = new AdressModel
+                Status = StatusCandiateEnum.Available,
+                TemporaryUser = new TemporaryUserModel
                 {
-                    Country = "AR",
-                    State = "Cordoba",
-                    Location = "Cordoba Capital",
-                    Street = "Bahia Blanca",
-                    Number = "317",
-                    Floor = "2",
-                    Department = "F",
-                    PostalCode = "5000"
-
+                    User = "ltanachian",
+                    Passeord = "1234",
+                    EndDate = DateTime.Now.AddDays(3),
+                    EditPortfolios = true,
+                    EditPhoto = true
                 },
-                Seniority = SeniorityEnum.Senior,
-                Education = EducationTypeEnum.Technician,
+                Photo = "C://photo.jpg",
+                PersonalData = new PersonalDataModel
+                {
+                    Name = "Luis",
+                    LastName = "Tanachian",
+                    BirthDay = "1990-01-05",
+                    Sex = "M",
+                    Dni = "95900127",
+                    Nacionality = "VE",
+                    Occupation = "Tecnico en informatica",
+                    Role = "Dev .net",
+                    Adress = new AdressModel
+                    {
+                        Country = "AR",
+                        State = "Cordoba",
+                        Location = "Cordoba Capital",
+                        Street = "Bahia Blanca",
+                        Number = "317",
+                        Floor = "2",
+                        Department = "F",
+                        PostalCode = "5000"
+
+                    },
+                    Seniority = SeniorityEnum.Senior,
+                    EMails = new List<string> { "tanachian501@gmail.com" },
+                    Phones = new List<string> { "+5493517730268" },
+                    ListSocialNetworks = new List<string> { "Facebook", "Instagram" },
+                },
                 ListLanguages = new List<LanguageModel>
                 {
                     new LanguageModel { CodeLanguage = "ES", Level = LevelLanguageEnum.Native },
@@ -111,9 +125,6 @@ namespace Cv.AppConsole
                     EstimateDate = DateTime.Today,
                     Comments = "Me faltan algunos documentos de Venezuela" //TODO lista de commentModel
                 },
-                EMails = new List<string> { "tanachian501@gmail.com" },
-                Phones = new List<string> { "+5493517730268" },
-                ListSocialNetworks = new List<string> { "Facebook", "Instagram" },
                 ListPortfolios = new List<string> { "GitHub", "GitLab" },
                 ListEducations = new List<EducationModel>
                 {
@@ -191,6 +202,15 @@ namespace Cv.AppConsole
                         LastUsed = null,
                         Score = 9,
                         Years = 9
+                    }
+                },
+                Comments = new List<CommentModel>
+                {
+                    new CommentModel
+                    {
+                        Date = DateTime.Now,
+                        User = "ltanachian",
+                        Comment = "Lo llame y no contesto"
                     }
                 }
             };
