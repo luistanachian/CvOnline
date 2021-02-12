@@ -8,7 +8,8 @@ namespace Cv.Models.Enums
     {
         VeryLittle = 0,
         Little = 1,
-        Much = 2,
-        EveryEay = 3
+        Medium = 2,
+        Much = 3,
+        EveryEay = 4
     }
 }
