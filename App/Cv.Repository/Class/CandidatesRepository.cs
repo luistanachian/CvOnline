@@ -1,9 +1,11 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
 using Cv.Repository.Interface;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Cv.Repository.Class
 {
@@ -21,12 +23,22 @@ namespace Cv.Repository.Class
         }
         public void InsertMany(List<CandidateModel> listCandidates)
         { 
-            candidatesDao.InsertMany(listCandidates);
+            candidatesDao.Insert(listCandidates);
         }
-        public bool Update(CandidateModel candidate)
+        public bool Replace(CandidateModel candidate)
         {
-            var result = candidatesDao.Update(c => c.CandidateId == candidate.CandidateId, candidate);
+            var result = candidatesDao.Replace(c => c.CandidateId == candidate.CandidateId, candidate);
             return result > 0;
+        }
+        public bool Update(CandidateModel candidate, UpdateDefinition<CandidateModel> update)
+        {
+            var result = candidatesDao.Update(c => c.CandidateId == candidate.CandidateId, update);
+            return result > 0;
+        }
+        public long Update(Expression<Func<CandidateModel, bool>> filter, UpdateDefinition<CandidateModel> update)
+        {
+            var result = candidatesDao.Update(filter, update, true);
+            return result;
         }
         public bool Delete(string id)
         {

@@ -14,7 +14,7 @@ namespace Cv.Business.Class
         }
         public void Insert(CandidateModel candidate) => candidatesRepository.Insert(candidate);
         public void InsertMany(List<CandidateModel> listCandidate) => candidatesRepository.InsertMany(listCandidate);
-        public bool Update(CandidateModel candidate) => candidatesRepository.Update(candidate);
+        public bool Update(CandidateModel candidate) => candidatesRepository.Replace(candidate);
         public bool Delete(string id) => candidatesRepository.Delete(id);
         public IList<CandidateModel> GetAllByCompanyId(string companyId) => candidatesRepository.GetAllByCompanyId(companyId);
 

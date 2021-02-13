@@ -37,14 +37,20 @@ namespace Cv.Dao.Class
         {
             ConnectionsMongoDb<T>.GetCollection().InsertOne(entity);
         }
-        public void InsertMany(List<T> listEntity)
+        public void Insert(List<T> listEntity)
         {
             ConnectionsMongoDb<T>.GetCollection().InsertMany(listEntity);
         }
 
-        public long Update(Expression<Func<T, bool>> filter, T entity)
+        public long Replace(Expression<Func<T, bool>> filter, T entity)
         {
             var result = ConnectionsMongoDb<T>.GetCollection().ReplaceOne(filter, entity);
+            return result.ModifiedCount;
+        }
+        public long Update(Expression<Func<T, bool>> filter, UpdateDefinition<T> update, bool many = false)
+        {
+            var collection = ConnectionsMongoDb<T>.GetCollection();
+            var result = many ? collection.UpdateMany(filter, update) : collection.UpdateOne(filter, update);
             return result.ModifiedCount;
         }
     }
