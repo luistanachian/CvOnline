@@ -3,8 +3,9 @@
     public enum StatusCandiateEnum
     {
         Available = 0,
-        Contracted = 1,
-        OnClient = 2,
-        BlackList = 3
+        Taken = 1,
+        Contracted = 2,
+        OnClient = 3,
+        BlackList = 4
     }
 }
