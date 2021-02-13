@@ -19,8 +19,8 @@ namespace Cv.Models
         public DateTime LastUpdate { get; set; }
         [BsonElement("st")]
         public StatusCandiateEnum Status { get; set; }
-        [BsonElement("clid")]
-        public string ClientId { get; set; }
+        [BsonElement("csid")]
+        public string ClientOrSearchId { get; set; }
         [BsonElement("us")]
         public TemporaryUserModel TemporaryUser { get; set; }
         [BsonElement("ph")]

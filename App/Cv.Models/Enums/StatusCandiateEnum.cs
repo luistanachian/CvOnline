@@ -5,7 +5,7 @@
         Available = 0,
         Taken = 1,
         Contracted = 2,
-        OnClient = 3,
+        ContractedOnClient = 3,
         BlackList = 4
     }
 }
