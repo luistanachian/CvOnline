@@ -8,7 +8,7 @@ namespace Cv.Dao.Configurations
         {
             var Client = new MongoClient(ConfigMongoDb.ConectionString);
             var db = Client.GetDatabase(ConfigMongoDb.BD_CvOnline);
-            var collection = db.GetCollection<T>(typeof(T).Name);
+            var collection = db.GetCollection<T>(ConfigMongoDb.GetNameCollection<T>());
             return collection;
         }
     }

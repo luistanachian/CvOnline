@@ -67,13 +67,10 @@ namespace Cv.AppConsole
 
         public void TestCandidates()
         {
-            Console.WriteLine("TestCandidates");
-
-            Console.WriteLine();
             Console.WriteLine("TestCandidates - Insert Start");
             var list = new List<CandidateModel>();
 
-            for (int i = 0; i < 999999; i++)
+            for (int i = 0; i < 100000; i++)
             {
                 var candidate = new CandidateModel
                 {
