@@ -1,5 +1,4 @@
-﻿using Cv.Models;
-using System;
+﻿using System;
 
 namespace Cv.Dao.Configurations
 {

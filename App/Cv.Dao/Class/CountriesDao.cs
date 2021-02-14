@@ -1,9 +1,10 @@
-﻿using Cv.Dao.Interface;
+﻿using Cv.Dao.Base.Class;
+using Cv.Dao.Interface;
 using Cv.Models;
 
 namespace Cv.Dao.Class
 {
-    public class CountriesDao : BaseDaoMongoDb<CountryModel>, ICountriesDao
+    public class CountriesDao : BaseDao<CountryModel>, ICountriesDao
     {
     }
 }

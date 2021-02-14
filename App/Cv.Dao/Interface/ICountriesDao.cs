@@ -1,8 +1,11 @@
-﻿using Cv.Models;
+﻿using Cv.Dao.Base.Interface;
+using Cv.Models;
 
 namespace Cv.Dao.Interface
 {
-    public interface ICountriesDao : IBaseDaoMongoDb<CountryModel>
+    public interface ICountriesDao :
+        IGetAllDao<CountryModel>,
+        IGetByDao<CountryModel>
     {
     }
 }

@@ -1,13 +1,20 @@
-﻿using Cv.Dao.Configurations;
+﻿using Cv.Dao.Base.Interface;
+using Cv.Dao.Configurations;
 using Cv.Dao.Interface;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Cv.Dao.Class
+namespace Cv.Dao.Base.Class
 {
-    public class BaseDaoMongoDb<T> : IBaseDaoMongoDb<T> where T : class
+    public class BaseDao<T> :
+        IGetAllDao<T>,
+        IGetByDao<T>,
+        IInsertDao<T>,
+        IUpdateDao<T>,
+        IDeleteDao<T>
+        where T : class
     {
         public long Delete(Expression<Func<T, bool>> filter)
         {
