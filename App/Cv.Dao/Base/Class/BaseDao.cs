@@ -12,7 +12,7 @@ namespace Cv.Dao.Base.Class
         IGetAllDao<T>,
         IGetByDao<T>,
         IInsertDao<T>,
-        IUpdateDao<T>,
+        IReplaceDao<T>,
         IDeleteDao<T>
         where T : class
     {
@@ -44,20 +44,10 @@ namespace Cv.Dao.Base.Class
         {
             ConnectionsMongoDb<T>.GetCollection().InsertOne(entity);
         }
-        public void Insert(List<T> listEntity)
-        {
-            ConnectionsMongoDb<T>.GetCollection().InsertMany(listEntity);
-        }
 
         public long Replace(Expression<Func<T, bool>> filter, T entity)
         {
             var result = ConnectionsMongoDb<T>.GetCollection().ReplaceOne(filter, entity);
-            return result.ModifiedCount;
-        }
-        public long Update(Expression<Func<T, bool>> filter, UpdateDefinition<T> update, bool many = false)
-        {
-            var collection = ConnectionsMongoDb<T>.GetCollection();
-            var result = many ? collection.UpdateMany(filter, update) : collection.UpdateOne(filter, update);
             return result.ModifiedCount;
         }
     }

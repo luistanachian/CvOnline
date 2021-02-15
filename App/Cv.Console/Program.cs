@@ -34,7 +34,8 @@ namespace Cv.AppConsole
         public void Run()
         {
             //TestCountries();
-            TestCandidates();
+            TestCandidatesDelete();
+            TestCandidatesInsert();
             Console.ReadKey();
         }
         private static IHostBuilder CreateHostBuilder(string[] args)
@@ -66,8 +67,9 @@ namespace Cv.AppConsole
         }
 
 
-        public void TestCandidates()
+        public void TestCandidatesDelete()
         {
+            candidatesBusiness.Replace(new CandidateModel());
             string company = "holaCompany";
             var list = new List<CandidateModel>();
 
@@ -81,71 +83,70 @@ namespace Cv.AppConsole
                 candidatesBusiness.Delete(item.CandidateId);
 
             Console.WriteLine("TestCandidates - Delete End");
-
+        }
+        public void TestCandidatesInsert()
+        {
+            string company = "holaCompany";
             Console.WriteLine("TestCandidates - Insert Start");
-            list = new List<CandidateModel>();
 
-            for (int i = 0; i < 100000; i++)
+            var candidate = new CandidateModel
             {
-                var candidate = new CandidateModel
+                CompanyId = company,
+                Status = StatusCandiateEnum.ContractedOnClient,
+                ClientOrSearchId = Guid.NewGuid().ToString(),
+                StarDate = DateTime.Now.AddDays(-5),
+                LastUpdate = DateTime.Now,
+                TemporaryUser = new TemporaryUserModel
                 {
-                    CandidateId = Guid.NewGuid().ToString(),
-                    CompanyId = company,
-                    Status = StatusCandiateEnum.ContractedOnClient,
-                    ClientOrSearchId = Guid.NewGuid().ToString(),
-                    StarDate = DateTime.Now.AddDays(-5),
-                    LastUpdate = DateTime.Now,
-                    TemporaryUser = new TemporaryUserModel
+                    User = "ltanachian",
+                    Passeord = "1234",
+                    EndDate = DateTime.Now.AddDays(3),
+                    EditPortfolios = true,
+                    EditPhoto = true
+                },
+                Photo = "C://photo.jpg",
+                PersonalData = new PersonalDataModel
+                {
+                    Name = "Luis",
+                    LastName = "Tanachian",
+                    BirthDay = "1990-01-05",
+                    Sex = "M",
+                    Dni = "95900127",
+                    Nacionality = "VE",
+                    Occupation = "Tecnico en informatica",
+                    Role = "Dev .net",
+                    Adress = new AdressModel
                     {
-                        User = "ltanachian",
-                        Passeord = "1234",
-                        EndDate = DateTime.Now.AddDays(3),
-                        EditPortfolios = true,
-                        EditPhoto = true
-                    },
-                    Photo = "C://photo.jpg",
-                    PersonalData = new PersonalDataModel
-                    {
-                        Name = "Luis",
-                        LastName = "Tanachian",
-                        BirthDay = "1990-01-05",
-                        Sex = "M",
-                        Dni = "95900127",
-                        Nacionality = "VE",
-                        Occupation = "Tecnico en informatica",
-                        Role = "Dev .net",
-                        Adress = new AdressModel
-                        {
-                            Country = "AR",
-                            State = "Cordoba",
-                            Location = "Cordoba Capital",
-                            Street = "Bahia Blanca",
-                            Number = "317",
-                            Floor = "2",
-                            Department = "F",
-                            PostalCode = "5000"
+                        Country = "AR",
+                        State = "Cordoba",
+                        Location = "Cordoba Capital",
+                        Street = "Bahia Blanca",
+                        Number = "317",
+                        Floor = "2",
+                        Department = "F",
+                        PostalCode = "5000"
 
-                        },
-                        Seniority = SeniorityEnum.Senior,
-                        EMails = new List<string> { "tanachian501@gmail.com" },
-                        Phones = new List<string> { "+5493517730268" },
-                        ListSocialNetworks = new List<string> { "Facebook", "Instagram" },
                     },
-                    ListLanguages = new List<LanguageModel>
+                    Seniority = SeniorityEnum.Senior,
+                    EMails = new List<string> { "tanachian501@gmail.com" },
+                    Phones = new List<string> { "+5493517730268" },
+                    ListSocialNetworks = new List<string> { "Facebook", "Instagram" },
+                },
+                ListLanguages = new List<LanguageModel>
                 {
                     new LanguageModel { CodeLanguage = "ES", Level = LevelLanguageEnum.Native },
                     new LanguageModel { CodeLanguage = "EN", Level = LevelLanguageEnum.Basic }
                 },
-                    Relocate = new RelocateModel
-                    {
-                        Children = 1,
-                        Married = true,
-                        Pet = false,
-                        EstimateDate = DateTime.Today,
-                        Comments = "Me faltan algunos documentos de Venezuela" //TODO lista de commentModel
-                    },
-                    ListPortfolios = new List<string> { "GitHub", "GitLab" },
-                    ListEducations = new List<EducationModel>
+                Relocate = new RelocateModel
+                {
+                    Children = 1,
+                    Married = true,
+                    Pet = false,
+                    EstimateDate = DateTime.Today,
+                    Comments = "Me faltan algunos documentos de Venezuela" //TODO lista de commentModel
+                },
+                ListPortfolios = new List<string> { "GitHub", "GitLab" },
+                ListEducations = new List<EducationModel>
                 {
                     new EducationModel
                     {
@@ -168,7 +169,7 @@ namespace Cv.AppConsole
                         Title = ".Net Core"
                     }
                 },
-                    ListWorkExperiences = new List<WorkExperienceModel>
+                ListWorkExperiences = new List<WorkExperienceModel>
                 {
                     new WorkExperienceModel
                     {
@@ -202,7 +203,7 @@ namespace Cv.AppConsole
 
                     }
                 },
-                    ListSkills = new List<SkillModel>
+                ListSkills = new List<SkillModel>
                 {
                     new SkillModel
                     {
@@ -223,7 +224,7 @@ namespace Cv.AppConsole
                         Years = 9
                     }
                 },
-                    Comments = new List<CommentModel>
+                Comments = new List<CommentModel>
                 {
                     new CommentModel
                     {
@@ -232,10 +233,11 @@ namespace Cv.AppConsole
                         Comment = "Lo llame y no contesto"
                     }
                 }
-                };
-                list.Add(candidate);
-            }
-            candidatesBusiness.InsertMany(list);
+            };
+            var insertado = candidatesBusiness.Insert(candidate);
+            Console.WriteLine();
+            Console.WriteLine($"TestCandidates - Insert Result {insertado}");
+            Console.WriteLine();
             Console.WriteLine("TestCandidates - Insert End");
         }
 

@@ -1,5 +1,6 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
+using Cv.Business.Validations;
 using Cv.Repository.Interface;
 using System.Collections.Generic;
 
@@ -12,10 +13,24 @@ namespace Cv.Business.Class
         {
             this.candidatesRepository = candidatesRepository;
         }
-        public void Insert(CandidateModel candidate) => candidatesRepository.Insert(candidate);
-        public void InsertMany(List<CandidateModel> listCandidate) => candidatesRepository.InsertMany(listCandidate);
-        public bool Update(CandidateModel candidate) => candidatesRepository.Replace(candidate);
-        public bool Delete(string id) => candidatesRepository.Delete(id);
+        public bool Insert(CandidateModel candidate)
+        {
+            if (CandidateValidate.IsOk(candidate))
+            {
+                candidatesRepository.Insert(candidate);
+                return true;
+            }
+            return false;
+        }
+        public bool Replace(CandidateModel candidate) => candidatesRepository.Replace(candidate);
+        public bool Delete(string id)
+        {
+            if (!string.IsNullOrWhiteSpace(id))
+                return candidatesRepository.Delete(id);
+
+            return false;
+
+        }
         public IList<CandidateModel> GetAllByCompanyId(string companyId) => candidatesRepository.GetAllByCompanyId(companyId);
 
     }

@@ -18,27 +18,13 @@ namespace Cv.Repository.Class
         }
         public void Insert(CandidateModel candidate)
         {
-            candidate.CandidateId = Guid.NewGuid().ToString().Replace("-","");
+            candidate.CandidateId = Guid.NewGuid().ToString();
             candidatesDao.Insert(candidate);
-        }
-        public void InsertMany(List<CandidateModel> listCandidates)
-        { 
-            candidatesDao.Insert(listCandidates);
         }
         public bool Replace(CandidateModel candidate)
         {
             var result = candidatesDao.Replace(c => c.CandidateId == candidate.CandidateId, candidate);
             return result > 0;
-        }
-        public bool Update(CandidateModel candidate, UpdateDefinition<CandidateModel> update)
-        {
-            var result = candidatesDao.Update(c => c.CandidateId == candidate.CandidateId, update);
-            return result > 0;
-        }
-        public long Update(Expression<Func<CandidateModel, bool>> filter, UpdateDefinition<CandidateModel> update)
-        {
-            var result = candidatesDao.Update(filter, update, true);
-            return result;
         }
         public bool Delete(string id)
         {
