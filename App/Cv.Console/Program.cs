@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Cv.Models;
 using System.Collections.Generic;
 using Cv.Models.Enums;
+using System.Linq;
 
 namespace Cv.AppConsole
 {
@@ -67,16 +68,33 @@ namespace Cv.AppConsole
 
         public void TestCandidates()
         {
-            Console.WriteLine("TestCandidates - Insert Start");
+            string company = "holaCompany";
             var list = new List<CandidateModel>();
+
+            Console.WriteLine("TestCandidates - Get Start");
+            list = candidatesBusiness.GetAllByCompanyId(company).ToList();
+            Console.WriteLine("TestCandidates - Get End");
+
+            Console.WriteLine("TestCandidates - Delete Start");
+
+            foreach (var item in list)
+                candidatesBusiness.Delete(item.CandidateId);
+
+            Console.WriteLine("TestCandidates - Delete End");
+
+            Console.WriteLine("TestCandidates - Insert Start");
+            list = new List<CandidateModel>();
 
             for (int i = 0; i < 100000; i++)
             {
                 var candidate = new CandidateModel
                 {
                     CandidateId = Guid.NewGuid().ToString(),
-                    CompanyId = "holaCompany",
-                    Status = StatusCandiateEnum.Available,
+                    CompanyId = company,
+                    Status = StatusCandiateEnum.ContractedOnClient,
+                    ClientOrSearchId = Guid.NewGuid().ToString(),
+                    StarDate = DateTime.Now.AddDays(-5),
+                    LastUpdate = DateTime.Now,
                     TemporaryUser = new TemporaryUserModel
                     {
                         User = "ltanachian",

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Cv.Business.Class
 {
-    public sealed sealed class CountriesBusiness : ICountriesBusiness
+    public sealed class CountriesBusiness : ICountriesBusiness
     {
 
         private readonly ICountriesRepository countriesRepository;
