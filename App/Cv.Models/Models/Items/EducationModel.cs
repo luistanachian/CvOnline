@@ -10,9 +10,7 @@ namespace Cv.Models
         [BsonElement("et")]
         public EducationTypeEnum EdutationType { get; set; }
         [BsonElement("sd")]
-        public string StartDate { get; set; }
-        [BsonElement("ed")]
-        public string EndDate { get; set; }
+        public string YearEnd { get; set; }
         [BsonElement("ct")]
         public bool Current { get; set; }
         [BsonElement("te")]

@@ -26,33 +26,30 @@ namespace Cv.Test.MockModel
                     EditPhoto = true
                 },
                 Photo = "C://photo.jpg",
-                PersonalData = new PersonalDataModel
+                Name = "Luis",
+                LastName = "Tanachian",
+                BirthDay = "1990-01-05",
+                Sex = "M",
+                Dni = "95900127",
+                Nacionality = "VE",
+                Occupation = "Tecnico en informatica",
+                Role = "Dev .net",
+                Adress = new AdressModel
                 {
-                    Name = "Luis",
-                    LastName = "Tanachian",
-                    BirthDay = "1990-01-05",
-                    Sex = "M",
-                    Dni = "95900127",
-                    Nacionality = "VE",
-                    Occupation = "Tecnico en informatica",
-                    Role = "Dev .net",
-                    Adress = new AdressModel
-                    {
-                        Country = "AR",
-                        State = "Cordoba",
-                        Location = "Cordoba Capital",
-                        Street = "Bahia Blanca",
-                        Number = "317",
-                        Floor = "2",
-                        Department = "F",
-                        PostalCode = "5000"
+                    Country = "AR",
+                    State = "Cordoba",
+                    Location = "Cordoba Capital",
+                    Street = "Bahia Blanca",
+                    Number = "317",
+                    Floor = "2",
+                    Department = "F",
+                    PostalCode = "5000"
 
-                    },
-                    Seniority = SeniorityEnum.Senior,
-                    EMails = new List<string> { "tanachian501@gmail.com" },
-                    Phones = new List<string> { "+5493517730268" },
-                    ListSocialNetworks = new List<string> { "Facebook", "Instagram" },
                 },
+                Seniority = SeniorityEnum.Senior,
+                EMails = new List<string> { "tanachian501@gmail.com" },
+                Phones = new List<string> { "+5493517730268" },
+                ListSocialNetworks = new List<string> { "Facebook", "Instagram" },
                 ListLanguages = new List<LanguageModel>
                 {
                     new LanguageModel { CodeLanguage = "ES", Level = LevelLanguageEnum.Native },
@@ -74,8 +71,7 @@ namespace Cv.Test.MockModel
                         CodeCountry = "VE",
                         EdutationType = EducationTypeEnum.Technician,
                         Institute = "Upta Federico Brito Figueroa",
-                        StartDate = "2007",
-                        EndDate = "2011",
+                        YearEnd = "2011",
                         Current = false,
                         Title = "TSU en Informatica"
                     },
@@ -84,8 +80,7 @@ namespace Cv.Test.MockModel
                         CodeCountry = "AR",
                         EdutationType = EducationTypeEnum.Course,
                         Institute = "Kinetic corp",
-                        StartDate = "2020-06",
-                        EndDate = "2020-06",
+                        YearEnd = "2020",
                         Current = false,
                         Title = ".Net Core"
                     }

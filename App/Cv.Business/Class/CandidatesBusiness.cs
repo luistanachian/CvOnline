@@ -17,6 +17,8 @@ namespace Cv.Business.Class
         public bool Insert(CandidateModel candidate)
         {
             candidate.CandidateId = Guid.NewGuid().ToString();
+            candidate.StarDate = DateTime.Now;
+            candidate.LastUpdate = DateTime.Now;
             if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
             {
                 candidatesRepository.Insert(candidate);
@@ -26,6 +28,7 @@ namespace Cv.Business.Class
         }
         public bool Replace(CandidateModel candidate)
         {
+            candidate.LastUpdate = DateTime.Now;
             if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
                 return candidatesRepository.Replace(candidate);
 

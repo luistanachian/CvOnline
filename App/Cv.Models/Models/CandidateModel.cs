@@ -11,35 +11,32 @@ namespace Cv.Models
         [BsonId]
         [BsonRepresentation(BsonType.String)]
         public string CandidateId { get; set; }
-        [BsonElement("cid")]
         public string CompanyId { get; set; }
-        [BsonElement("sd")]
         public DateTime StarDate { get; set; }
-        [BsonElement("ld")]
         public DateTime LastUpdate { get; set; }
-        [BsonElement("st")]
         public StatusCandiateEnum Status { get; set; }
-        [BsonElement("csid")]
         public string ClientOrSearchId { get; set; }
-        [BsonElement("us")]
         public TemporaryUserModel TemporaryUser { get; set; }
-        [BsonElement("ph")]
         public string Photo { get; set; }
-        [BsonElement("pd")]
-        public PersonalDataModel PersonalData { get; set; }
-        [BsonElement("re")]
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string BirthDay { get; set; }
+        public string Sex { get; set; }
+        public string Dni { get; set; }
+        public string Nacionality { get; set; }
+        public AdressModel Adress { get; set; }
+        public List<string> EMails { get; set; }
+        public List<string> Phones { get; set; }
+        public List<string> ListSocialNetworks { get; set; }
+        public string Occupation { get; set; }
+        public string Role { get; set; }
+        public SeniorityEnum Seniority { get; set; }
         public RelocateModel Relocate { get; set; }
-        [BsonElement("le")]
         public List<LanguageModel> ListLanguages { get; set; }
-        [BsonElement("po")]
         public List<string> ListPortfolios { get; set; }
-        [BsonElement("ed")]
         public List<EducationModel> ListEducations { get; set; }
-        [BsonElement("we")]
         public List<WorkExperienceModel> ListWorkExperiences { get; set; }
-        [BsonElement("sk")]
         public List<SkillModel> ListSkills { get; set; }
-        [BsonElement("cs")]
         public List<CommentModel> Comments { get; set; }
     }
 }
