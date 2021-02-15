@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace Cv.Repository.Class
 {
-    public class CandidatesRepository : ICandidatesRepository
+    public sealed class CandidatesRepository : ICandidatesRepository
     {
         private readonly ICandidatesDao candidatesDao;
         public CandidatesRepository(ICandidatesDao candidatesDao)

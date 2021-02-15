@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Cv.Business.Class
 {
-    public class CandidatesBusiness : ICandidatesBusiness
+    public sealed class CandidatesBusiness : ICandidatesBusiness
     {
         private readonly ICandidatesRepository candidatesRepository;
         public CandidatesBusiness(ICandidatesRepository candidatesRepository)

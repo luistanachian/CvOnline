@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace Cv.Dao.Base.Class
 {
-    public class BaseDao<T> :
+    public abstract class BaseDao<T> :
         IGetAllDao<T>,
         IGetByDao<T>,
         IInsertDao<T>,

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Cv.Repository.Class
 {
-    public class StatesRepository : IStatesRepository
+    public sealed class StatesRepository : IStatesRepository
     {
         private readonly IStatesDao statesDao;
         public StatesRepository(IStatesDao statesDao)
