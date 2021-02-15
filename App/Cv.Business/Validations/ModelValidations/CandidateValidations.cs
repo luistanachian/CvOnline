@@ -6,13 +6,11 @@ namespace Cv.Business.Validations
 {
     public static class CandidateValidate
     {
-        public static bool IsOk(CandidateModel candidate) =>
-            ValidateModel<CandidateModel>.IsOk(candidate, Predicates);
-        
-
-        private static readonly Predicate<CandidateModel>[] Predicates =
+        public static readonly Predicate<CandidateModel>[] Predicates =
         {
-            (c) => !string.IsNullOrWhiteSpace(c.PersonalData.Nacionality) && c.PersonalData.Nacionality.Count() == 2
+            (c) => Validator.Guid(c.CandidateId),
+            (c) => Validator.Guid(c.CompanyId),
+            (c) => Validator.Object(c.PersonalData) && Validator.Text(c.PersonalData.Nacionality, 2)
         };
     }
 }

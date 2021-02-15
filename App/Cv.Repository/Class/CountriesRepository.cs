@@ -14,7 +14,7 @@ namespace Cv.Repository.Class
             this.countriesDao = countriesDao;
         }
 
-        public IList<CountryModel> GetAll()
+        public List<CountryModel> GetAll()
         {
             var listModel = countriesDao.GetAll();
             return listModel.OrderBy(c => c.Country).ToList();

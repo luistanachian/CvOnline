@@ -13,7 +13,7 @@ namespace Cv.Business.Class
             this.statesRepository = statesRepository;
         }
 
-        public IList<StateModel> GetAllByCountry(string codeCountry) => statesRepository.GetAllByCountry(codeCountry);
+        public List<StateModel> GetAllByCountry(string codeCountry) => statesRepository.GetAllByCountry(codeCountry);
         public StateModel GetByIdState(string idState) => statesRepository.GetByIdState(idState);
     }
 }

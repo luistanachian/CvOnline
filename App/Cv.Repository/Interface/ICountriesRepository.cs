@@ -5,7 +5,7 @@ namespace Cv.Repository.Interface
 {
     public interface ICountriesRepository
     {
-        IList<CountryModel> GetAll();
+        List<CountryModel> GetAll();
         CountryModel GetById(string code);
     }
 }

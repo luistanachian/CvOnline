@@ -18,7 +18,6 @@ namespace Cv.Repository.Class
         }
         public void Insert(CandidateModel candidate)
         {
-            candidate.CandidateId = Guid.NewGuid().ToString();
             candidatesDao.Insert(candidate);
         }
         public bool Replace(CandidateModel candidate)
@@ -31,7 +30,7 @@ namespace Cv.Repository.Class
             var result = candidatesDao.Delete(c => c.CandidateId == id);
             return result > 0;
         }
-        public IList<CandidateModel> GetAllByCompanyId(string companyId)
+        public List<CandidateModel> GetAllByCompanyId(string companyId)
         {
             var result = candidatesDao.GetListByFunc(c => c.CompanyId == companyId);
             return result.OrderBy(c => c.PersonalData.LastName).ThenBy(c => c.PersonalData.Name).ToList();

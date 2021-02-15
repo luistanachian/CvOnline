@@ -14,7 +14,7 @@ namespace Cv.Repository.Class
             this.statesDao = statesDao;
         }
 
-        public IList<StateModel> GetAllByCountry(string codeCountry)
+        public List<StateModel> GetAllByCountry(string codeCountry)
         {
             var listModel = statesDao.GetListByFunc(s => s.CodeCountry == codeCountry);
             return listModel.OrderBy(s => s.State).ToList();

@@ -3,6 +3,7 @@ using Cv.Models;
 using Cv.Business.Validations;
 using Cv.Repository.Interface;
 using System.Collections.Generic;
+using System;
 
 namespace Cv.Business.Class
 {
@@ -15,23 +16,35 @@ namespace Cv.Business.Class
         }
         public bool Insert(CandidateModel candidate)
         {
-            if (CandidateValidate.IsOk(candidate))
+            candidate.CandidateId = Guid.NewGuid().ToString();
+            if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
             {
                 candidatesRepository.Insert(candidate);
                 return true;
             }
             return false;
         }
-        public bool Replace(CandidateModel candidate) => candidatesRepository.Replace(candidate);
+        public bool Replace(CandidateModel candidate)
+        {
+            if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
+                return candidatesRepository.Replace(candidate);
+
+            return false;
+        }
         public bool Delete(string id)
         {
-            if (!string.IsNullOrWhiteSpace(id))
+            if (Validator.Guid(id))
                 return candidatesRepository.Delete(id);
 
             return false;
+        }
+        public List<CandidateModel> GetAllByCompanyId(string companyId)
+        {
+            if (Validator.Guid(companyId))
+                return candidatesRepository.GetAllByCompanyId(companyId);
+
+            return null;
 
         }
-        public IList<CandidateModel> GetAllByCompanyId(string companyId) => candidatesRepository.GetAllByCompanyId(companyId);
-
     }
 }

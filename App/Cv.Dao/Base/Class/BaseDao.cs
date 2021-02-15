@@ -22,13 +22,13 @@ namespace Cv.Dao.Base.Class
             return result.DeletedCount;
         }
 
-        public IList<T> GetAll()
+        public List<T> GetAll()
         {
             var result = ConnectionsMongoDb<T>.GetCollection().Find(e => true).ToList();
             return result;
         }
 
-        public IList<T> GetListByFunc(Expression<Func<T, bool>> filter, int? top = null)
+        public List<T> GetListByFunc(Expression<Func<T, bool>> filter, int? top = null)
         {
             var result = ConnectionsMongoDb<T>.GetCollection().Find(filter).Limit(top).ToList();
             return result;
