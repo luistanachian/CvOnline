@@ -15,6 +15,7 @@ namespace Cv.Business.Class
         }
 
         public List<CountryModel> GetAll() => countriesRepository.GetAll();
-        public CountryModel GetById(string code) => countriesRepository.GetById(code);
+        public CountryModel GetByIso2(string iso2) => countriesRepository.GetByIso2(iso2);
+        public CountryModel GetByIso3(string iso3) => countriesRepository.GetByIso3(iso3);
     }
 }

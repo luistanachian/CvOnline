@@ -1,7 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-
-namespace Cv.Models
+﻿namespace Cv.Models
 {
     public class RelocateModel
     {

@@ -1,5 +1,4 @@
 ﻿using Cv.Models.Enums;
-using MongoDB.Bson.Serialization.Attributes;
 
 namespace Cv.Models
 {

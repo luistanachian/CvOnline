@@ -6,6 +6,7 @@ namespace Cv.Repository.Interface
     public interface ICountriesRepository
     {
         List<CountryModel> GetAll();
-        CountryModel GetById(string code);
+        CountryModel GetByIso2(string iso2);
+        CountryModel GetByIso3(string iso3);
     }
 }
