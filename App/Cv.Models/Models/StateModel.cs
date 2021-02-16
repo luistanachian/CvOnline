@@ -8,9 +8,7 @@ namespace Cv.Models
         [BsonId]
         [BsonRepresentation(BsonType.String)]
         public string IdState { get; set; }
-        [BsonElement("codecountry")]
         public string CodeCountry { get; set; }
-        [BsonElement("state")]
         public string State { get; set; }
     }
 }
