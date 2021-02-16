@@ -7,8 +7,13 @@ namespace Cv.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.String)]
-        public string IdState { get; set; }
-        public string CodeCountry { get; set; }
-        public string State { get; set; }
+        public int _id { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public int country_id { get; set; }
+        public string country_code { get; set; }
+        public string state_code { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
     }
 }
