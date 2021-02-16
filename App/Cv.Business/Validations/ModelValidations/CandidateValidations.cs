@@ -41,7 +41,6 @@ namespace Cv.Business.Validations
                     Validator.Object(c.Relocate) &&
                     Validator.Text(c.Relocate.RelocateDependentsOrPets, 1, 50, true) &&
                     Validator.Date_YYYYMMDD(c.Relocate.RelocateEstimateDate)),
-
             (c) => c.ListEducations == null || 
                     (c.ListEducations.Count > 0 && 
                     !c.ListEducations.Any(e =>
@@ -68,7 +67,22 @@ namespace Cv.Business.Validations
                                 !Validator.Phone(r.Phone) ||
                                 !Validator.Text(r.Role, 1, 50, true) ||
                                 !Validator.Text(r.ReferenceAnswer, 1, 200, true)
-                        )))))
+                        ))))),
+            (c) => c.ListSkills == null ||
+                    (c.ListSkills.Count > 0 &&
+                    !c.ListSkills.Any(e =>
+                        !Validator.Text(e.Skill, 1, 50) ||
+                        !(e.LastUsed == null || Validator.Date_YYYYMMDD(e.LastUsed)) ||
+                        !(e.Score >= 1 && e.Score <= 10) ||
+                        !(e.Months >= 0 && e.Score <= 11) ||
+                        !(e.Years >= 0 && e.Score <= 50)
+                    )),
+            (c) => c.Comments == null ||
+                    (c.Comments.Count > 0 &&
+                    !c.Comments.Any(c=>
+                        !Validator.Text(c.User, 4, 16) ||
+                        !Validator.Text(c.Comment, 1, 200)
+                    )),
         };
     }
 }
