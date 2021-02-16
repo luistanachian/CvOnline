@@ -41,6 +41,7 @@ namespace Cv.Business.Validations
                     Validator.Object(c.Relocate) &&
                     Validator.Text(c.Relocate.RelocateDependentsOrPets, 1, 50, true) &&
                     Validator.Date_YYYYMMDD(c.Relocate.RelocateEstimateDate)),
+
             (c) => c.ListEducations == null || 
                     (c.ListEducations.Count > 0 && 
                     !c.ListEducations.Any(e =>
@@ -49,17 +50,25 @@ namespace Cv.Business.Validations
                         !(Validator.Text(e.YearEnd, 4, 4) && Validator.Number(e.YearEnd)) ||
                         !Validator.Text(e.Title, 1, 100)
                     )),
-
             (c) => c.ListWorkExperiences == null ||
                     (c.ListWorkExperiences.Count > 0 &&
-                    !c.ListWorkExperiences.Any(w =>
-                        !Validator.Text(w.Role, 1, 50) ||
-                        !Validator.Text(w.Company, 1, 50) ||
-                        !Validator.Date_YYYYMMDD(w.StartDate) ||
-                        !((w.Current && w.EndDate == null) || (!w.Current && Validator.Date_YYYYMMDD(w.EndDate)))
-                    )),
-
-
+                        !c.ListWorkExperiences.Any(w =>
+                            !Validator.Text(w.Role, 1, 50) ||
+                            !Validator.Text(w.Company, 1, 50) ||
+                            !Validator.Date_YYYYMMDD(w.StartDate) ||
+                            !((w.Current && w.EndDate == null) || (!w.Current && Validator.Date_YYYYMMDD(w.EndDate))) ||
+                            !Validator.Text(w.Comment, 1, 200, true)
+                        ) &&
+                        (c.ListWorkExperiences.Any(w => w.ListReferences == null) ||
+                            (c.ListWorkExperiences.Any(w => w.ListReferences.Count() > 0) &&
+                            !c.ListWorkExperiences.Any(w => w.ListReferences.Any(r =>
+                                !Validator.Text(r.Name, 2, 50) ||
+                                !Validator.Text(r.LastName, 2, 50)||
+                                !Validator.Email(r.Email) ||
+                                !Validator.Phone(r.Phone) ||
+                                !Validator.Text(r.Role, 1, 50, true) ||
+                                !Validator.Text(r.ReferenceAnswer, 1, 200, true)
+                        )))))
         };
     }
 }

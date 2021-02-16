@@ -99,15 +99,7 @@ namespace Cv.Test.MockModel
                                 ReferenceAnswer = "Se dormia en el laburo"
                             }
                         },
-                        Comments = new List<CommentModel>
-                        {
-                            new CommentModel
-                            {
-                                Date = DateTime.Now,
-                                User = "ltanachian",
-                                Comment = "Trabajó para una consultora que le presta servicios a bancor"
-                            }
-                        }
+                        Comment = "Trabajó para una consultora que le presta servicios a bancor"
 
                     }
                 },
