@@ -109,7 +109,6 @@ namespace Cv.Test.MockModel
                     {
                         Skill = "C#",
                         FrequencyUsed = FrequencyUsedEnum.EveryEay,
-                        Current = true,
                         LastUsed = null,
                         Score = 9,
                         Years = 9
@@ -118,8 +117,7 @@ namespace Cv.Test.MockModel
                     {
                         Skill = "SQL",
                         FrequencyUsed = FrequencyUsedEnum.EveryEay,
-                        Current = true,
-                        LastUsed = null,
+                        LastUsed = "2021-02-08",
                         Score = 9,
                         Years = 9
                     }
