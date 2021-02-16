@@ -24,8 +24,6 @@ namespace Cv.Models.Models
         public string Name { get; set; }
         [BsonElement("do")]
         public string Document { get; set; }
-        [BsonElement("as")]
-        public AdressModel Adress { get; set; }
         [BsonElement("em")]
         public List<string> EMails { get; set; }
         [BsonElement("ps")]

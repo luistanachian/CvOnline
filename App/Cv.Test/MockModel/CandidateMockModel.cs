@@ -20,7 +20,7 @@ namespace Cv.Test.MockModel
                 TemporaryUser = new TemporaryUserModel
                 {
                     User = "ltanachian",
-                    Passeord = "1234",
+                    Passeord = "12345678",
                     EndDate = DateTime.Now.AddDays(3),
                     EditPortfolios = true,
                     EditPhoto = true
@@ -34,22 +34,20 @@ namespace Cv.Test.MockModel
                 Nacionality = "VE",
                 Occupation = "Tecnico en informatica",
                 Role = "Dev .net",
-                Adress = new AdressModel
-                {
-                    Country = "AR",
-                    State = "Cordoba",
-                    Location = "Cordoba Capital",
-                    Street = "Bahia Blanca",
-                    Number = "317",
-                    Floor = "2",
-                    Department = "F",
-                    PostalCode = "5000"
 
-                },
+                Country = "AR",
+                State = "Cordoba",
+                Location = "Cordoba Capital",
+                AdressOne = "Bahia Blanca 317",
+                AdressTwo = "Piso 2, depto F",
+                PostalCode = "5000",
+                
                 Seniority = SeniorityEnum.Senior,
                 EMails = new List<string> { "tanachian501@gmail.com" },
                 Phones = new List<string> { "+5493517730268" },
-                ListSocialNetworks = new List<string> { "Facebook", "Instagram" },
+
+                ListSocialNetworks = new List<string> { "https://www.facebook.com/artutanach/", "https://www.instagram.com/tanach5/" },
+                
                 ListLanguages = new List<LanguageModel>
                 {
                     new LanguageModel { CodeLanguage = "ES", Level = LevelLanguageEnum.Native },
@@ -63,7 +61,7 @@ namespace Cv.Test.MockModel
                     EstimateDate = DateTime.Today,
                     Comments = "Me faltan algunos documentos de Venezuela" //TODO lista de commentModel
                 },
-                ListPortfolios = new List<string> { "GitHub", "GitLab" },
+                ListPortfolios = new List<string> { "https://github.com/luistanachian" },
                 ListEducations = new List<EducationModel>
                 {
                     new EducationModel

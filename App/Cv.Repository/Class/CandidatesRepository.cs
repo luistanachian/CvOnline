@@ -33,7 +33,7 @@ namespace Cv.Repository.Class
         public List<CandidateModel> GetAllByCompanyId(string companyId)
         {
             var result = candidatesDao.GetListByFunc(c => c.CompanyId == companyId);
-            return result.OrderBy(c => c.PersonalData.LastName).ThenBy(c => c.PersonalData.Name).ToList();
+            return result.OrderBy(c => c.LastName).ThenBy(c => c.Name).ToList();
         }
     }
 }
