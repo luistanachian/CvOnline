@@ -5,7 +5,9 @@ namespace Cv.Repository.Interface
 {
     public interface IStatesRepository
     {
-        List<StateModel> GetAllByCountry(string codeCountry);
-        StateModel GetByIdState(string idState);
+        List<StateModel> GetAllByCountry(string code);
+        List<StateModel> GetAllByCountry(int id);
+        StateModel GetByIdState(int id);
+        StateModel GetByIdState(string code);
     }
 }
