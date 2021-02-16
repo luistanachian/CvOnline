@@ -11,9 +11,9 @@ namespace Cv.Models
         [BsonElement("cy")]
         public string Company { get; set; }
         [BsonElement("sd")]
-        public DateTime StartDate { get; set; }
+        public string StartDate { get; set; }
         [BsonElement("ed")]
-        public DateTime? EndDate { get; set; }
+        public string EndDate { get; set; }
         [BsonElement("ct")]
         public bool Current { get; set; }
         [BsonElement("lr")]

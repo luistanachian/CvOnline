@@ -24,23 +24,22 @@ namespace Cv.Models
         public string Sex { get; set; }
         public string Dni { get; set; }
         public string Nacionality { get; set; }
-
         public string Country { get; set; }
         public string State { get; set; }
         public string Location { get; set; }
         public string AdressOne { get; set; }
         public string AdressTwo { get; set; }
         public string PostalCode { get; set; }
-
         public List<string> EMails { get; set; }
         public List<string> Phones { get; set; }
         public List<string> ListSocialNetworks { get; set; }
         public string Occupation { get; set; }
         public string Role { get; set; }
         public SeniorityEnum Seniority { get; set; }
-        public RelocateModel Relocate { get; set; }
         public List<LanguageModel> ListLanguages { get; set; }
         public List<string> ListPortfolios { get; set; }
+        public WorkModeEnum WorkMode { get; set; }
+        public RelocateModel Relocate { get; set; }
         public List<EducationModel> ListEducations { get; set; }
         public List<WorkExperienceModel> ListWorkExperiences { get; set; }
         public List<SkillModel> ListSkills { get; set; }

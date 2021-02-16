@@ -34,39 +34,33 @@ namespace Cv.Test.MockModel
                 Nacionality = "VE",
                 Occupation = "Tecnico en informatica",
                 Role = "Dev .net",
-
                 Country = "AR",
                 State = "Cordoba",
                 Location = "Cordoba Capital",
                 AdressOne = "Bahia Blanca 317",
                 AdressTwo = "Piso 2, depto F",
                 PostalCode = "5000",
-                
                 Seniority = SeniorityEnum.Senior,
                 EMails = new List<string> { "tanachian501@gmail.com" },
                 Phones = new List<string> { "+5493517730268" },
-
                 ListSocialNetworks = new List<string> { "https://www.facebook.com/artutanach/", "https://www.instagram.com/tanach5/" },
-                
                 ListLanguages = new List<LanguageModel>
                 {
                     new LanguageModel { CodeLanguage = "ES", Level = LevelLanguageEnum.Native },
                     new LanguageModel { CodeLanguage = "EN", Level = LevelLanguageEnum.Basic }
                 },
+                ListPortfolios = new List<string> { "https://github.com/luistanachian" },
+                WorkMode = WorkModeEnum.Any,
                 Relocate = new RelocateModel
                 {
-                    Children = 1,
-                    Married = true,
-                    Pet = false,
-                    EstimateDate = DateTime.Today,
-                    Comments = "Me faltan algunos documentos de Venezuela" //TODO lista de commentModel
+                    RelocateDependentsOrPets = "Esposa e hijo",
+                    RelocateEstimateDate = "2021-02-20"
                 },
-                ListPortfolios = new List<string> { "https://github.com/luistanachian" },
                 ListEducations = new List<EducationModel>
                 {
                     new EducationModel
                     {
-                        CodeCountry = "VE",
+                        Country = "VE",
                         EdutationType = EducationTypeEnum.Technician,
                         Institute = "Upta Federico Brito Figueroa",
                         YearEnd = "2011",
@@ -75,7 +69,7 @@ namespace Cv.Test.MockModel
                     },
                     new EducationModel
                     {
-                        CodeCountry = "AR",
+                        Country = "AR",
                         EdutationType = EducationTypeEnum.Course,
                         Institute = "Kinetic corp",
                         YearEnd = "2020",
@@ -90,7 +84,7 @@ namespace Cv.Test.MockModel
                         Role = "Developer .net",
                         Company = "Bancor",
                         Current = true,
-                        StartDate = DateTime.Parse("2018-05-28"),
+                        StartDate = "2018-05-28",
                         EndDate = null,
                         ListReferences = new List<ReferenceModel>
                         {

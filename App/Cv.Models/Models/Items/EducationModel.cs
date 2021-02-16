@@ -16,6 +16,6 @@ namespace Cv.Models
         [BsonElement("te")]
         public string Title { get; set; }
         [BsonElement("cc")]
-        public string CodeCountry { get; set; }
+        public string Country { get; set; }
     }
 }
