@@ -9,7 +9,7 @@ namespace Cv.Models
     public class CandidateModel
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonRepresentation(BsonType.String)]
         public string CandidateId { get; set; }
         public string CompanyId { get; set; }
         public DateTime StarDate { get; set; }

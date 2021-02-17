@@ -9,7 +9,7 @@ namespace Cv.Models.Models
     public class ClientModel
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonRepresentation(BsonType.String)]
         public string ClientId { get; set; }
         public string CompanyId { get; set; }
         public DateTime StarDate { get; set; }

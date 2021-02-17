@@ -8,7 +8,7 @@ namespace Cv.Models
     public class UserModel
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonRepresentation(BsonType.String)]
         public string UserId { get; set; }
         public string CompanyId { get; set; }
         public DateTime StarDate { get; set; }
