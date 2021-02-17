@@ -24,8 +24,10 @@ namespace Cv.Models
         public string Sex { get; set; }
         public string Dni { get; set; }
         public string Nacionality { get; set; }
-        public string Country { get; set; }
-        public string State { get; set; } 
+        public int CountryId { get; set; }
+        public string CountryCode { get; set; }
+        public int StateId { get; set; }
+        public string StateName { get; set; }
         public string AdressOne { get; set; }
         public string AdressTwo { get; set; }
         public string PostalCode { get; set; }
