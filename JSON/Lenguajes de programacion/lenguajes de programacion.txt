@@ -262,7 +262,6 @@ IDL
 Idris
 Inform
 J
-J
 J#
 J++
 JADE
@@ -287,7 +286,6 @@ JScript .NET
 Julia
 Jython
 K
-K
 Kaleidoscope
 Karel
 KEE
@@ -303,7 +301,6 @@ KRYPTON
 KornShell (ksh)
 Kodu
 Kv
-L
 LabVIEW
 Ladder
 LANSA
@@ -340,7 +337,6 @@ Lucid
 Lustre
 LYaPAS
 Lynx
-M
 M2001
 M4
 M#
@@ -390,7 +386,6 @@ MUMPS
 MuPAD
 Mutan
 Mystic Programming Language (MPL)
-N
 NASM
 Napier88
 Neko
@@ -414,7 +409,6 @@ NSIS
 Nu
 NWScript
 NXT-G
-O
 o:XML
 Oak
 Oberon
@@ -445,7 +439,6 @@ Oriel
 Orwell
 Oxygene
 Oz
-P
 P
 P4
 P′′
@@ -508,7 +501,6 @@ Pure
 Pure Data
 PureScript
 Python
-Q
 Q (programming language from Kx Systems)
 Q# (Microsoft programming language)
 Qalb
@@ -517,7 +509,6 @@ QtScript
 QuakeC
 QPL
 .QL
-R
 R
 R++
 Racket
@@ -541,7 +532,6 @@ RSL
 RTL/2
 Ruby
 Rust
-S
 S
 S2
 S3
@@ -611,7 +601,6 @@ Swift (parallel scripting language)
 SYMPL
 SystemVerilog
 T
-T
 TACL
 TACPOL
 TADS
@@ -638,7 +627,6 @@ TUTOR
 TXL
 TypeScript
 Tynker
-U
 Ubercode
 UCSD Pascal
 Umple
@@ -647,7 +635,6 @@ Uniface
 UNITY
 Unix shell
 UnrealScript
-V
 Vala
 Verilog
 VHDL
@@ -660,7 +647,6 @@ Visual J++
 Visual LISP
 Visual Objects
 Visual Prolog
-W
 WATFIV, WATFOR
 WebAssembly
 WebDNA
@@ -668,7 +654,6 @@ Whiley
 Winbatch
 Wolfram Language
 Wyvern
-X
 X++
 X10
 xBase
@@ -687,12 +672,10 @@ XSB
 XSharp
 XSLT
 Xtend
-Y
 Yorick
 YQL
 Yoix
 YUI
-Z
 Z notation
 Zebra, ZPL, ZPL2
 Zeno
