@@ -15,8 +15,8 @@ namespace Cv.Models.Models
         public string CompanyId { get; set; }
         public StatusSearchEnum Status { get; set; }
         public int NumberOfEmployees { get; set; }
-        public List<SkillRequiredModel>  NecessarySkills { get; set; }
-        public List<AssignedCandidateModel> AssignedCandidates { get; set; }
+        public List<SkillRequiredModel>  NecessarySkills { get; set; } //TODO falta
+        public List<AssignedCandidateModel> AssignedCandidates { get; set; } //TODO falta
         public List<string> AssignedUsers { get; set; }
     }
 }
