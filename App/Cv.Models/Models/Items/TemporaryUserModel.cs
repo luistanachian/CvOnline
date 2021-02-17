@@ -8,6 +8,7 @@ namespace Cv.Models
         public string Passeord { get; set; }
         public DateTime EndDate { get; set; }
         public int ErrorCounter { get; set; }
+
         public bool EditPhoto { get; set; }
         public bool EditPersonalData { get; set; }
         public bool EditRelocate { get; set; }
