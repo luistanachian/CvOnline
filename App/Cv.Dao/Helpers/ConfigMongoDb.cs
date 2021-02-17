@@ -14,7 +14,7 @@ namespace Cv.Dao.Configurations
             {
                 "CandidateModel" => "Candidates",
                 "CountryModel" => "Countries",
-                "ClientModel" => "Clients",
+                "StateModel" => "States",
                 _ => throw new Exception("The type of model, is not mapped."),
             };
         }

@@ -6,8 +6,8 @@ namespace Cv.Models
     public class StateModel
     {
         [BsonId]
-        [BsonRepresentation(BsonType.String)]
-        public int _id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string _id { get; set; }
         public int id { get; set; }
         public string name { get; set; }
         public int country_id { get; set; }

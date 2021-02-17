@@ -9,12 +9,15 @@ namespace Cv.AppConsole
     {
         private readonly ICountriesBusiness countriesBusiness;
         private readonly ICandidatesBusiness candidatesBusiness;
+        private readonly IStatesBusiness statesBusiness;
         public Program(
             ICountriesBusiness countriesBusiness,
-            ICandidatesBusiness candidatesBusiness)
+            ICandidatesBusiness candidatesBusiness,
+            IStatesBusiness statesBusiness)
         {
             this.countriesBusiness = countriesBusiness;
             this.candidatesBusiness = candidatesBusiness;
+            this.statesBusiness = statesBusiness;
         }
 
         public static void Main(string[] args)
@@ -28,6 +31,7 @@ namespace Cv.AppConsole
             //aca va todo lo que se necesita ejecutar
 
             var countries = countriesBusiness.GetAll();
+            var states = statesBusiness.GetAllByCountry("VE");
         }
         private static IHostBuilder CreateHostBuilder(string[] args)
         {
@@ -37,6 +41,5 @@ namespace Cv.AppConsole
                 services.ConfigureIOC();
             });
         }
-
     }
 }
