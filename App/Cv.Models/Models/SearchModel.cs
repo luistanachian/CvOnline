@@ -2,6 +2,7 @@
 using Cv.Models.Models.Items;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 
 namespace Cv.Models.Models
@@ -13,10 +14,26 @@ namespace Cv.Models.Models
         public string SearchId { get; set; }
         public string ClientId { get; set; }
         public string CompanyId { get; set; }
+        public string UserId { get; set; }
+        public DateTime DateSearchCreated { get; set; }
+        public string SearchEndDate { get; set; }
+        public string WorkingStartDate { get; set; }
         public StatusSearchEnum Status { get; set; }
+        public string Occupation { get; set; }
+        public string Role { get; set; }
         public int NumberOfEmployees { get; set; }
-        public List<SkillRequiredModel>  NecessarySkills { get; set; } //TODO falta
-        public List<AssignedCandidateModel> AssignedCandidates { get; set; } //TODO falta
+        public int EstimateAmount { get; set; }
+        public int CurrencyId { get; set; }
+        public WorkModeEnum WorkMode { get; set; }
+        public bool Relocate { get; set; }
+        public int CountryId { get; set; }
+        public int StateId { get; set; }
+        public string AdressOne { get; set; }
+        public string AdressTwo { get; set; }
+        public string PostalCode { get; set; }
+        public List<SkillRequiredModel>  NecessarySkills { get; set; }
+        public List<AssignedCandidateModel> AssignedCandidates { get; set; }
         public List<string> AssignedUsers { get; set; }
+        public List<CommentModel> Comments { get; set; }
     }
 }

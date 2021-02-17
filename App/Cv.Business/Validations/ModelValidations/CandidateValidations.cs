@@ -32,19 +32,19 @@ namespace Cv.Business.Validations
             (c) => (c.StateId == 0 || c.StateName == null) || (c.StateId > 0 && Validator.Text(c.StateName, 1, 50)), 
             (c) => Validator.Text(c.AdressOne, 1, 100, true),
             (c) => Validator.Text(c.AdressTwo, 1, 100, true),
-            (c) => !c.EMails.Any(e => !Validator.Email(e)),
+            (c) => !c.Emails.Any(e => !Validator.Email(e)),
             (c) => !c.Phones.Any(p => !Validator.Phone(p)),
             (c) => c.ListSocialNetworks == null || (c.ListSocialNetworks.Count > 0 && !c.ListSocialNetworks.Any(u => !Validator.Url(u))),
             (c) => c.ListLanguages == null || (c.ListLanguages.Count > 0 && !c.ListLanguages.Any(l => !Validator.Text(l.CodeLanguage, 2, 2))),
             (c) => c.ListPortfolios == null || (c.ListPortfolios.Count > 0 && !c.ListPortfolios.Any(p => !Validator.Url(p))),
             (c) => c.Relocate == null || (
                     Validator.Object(c.Relocate) &&
-                    Validator.Text(c.Relocate.RelocateDependentsOrPets, 1, 50, true) &&
-                    Validator.Date_YYYYMMDD(c.Relocate.RelocateEstimateDate)),
+                    Validator.Text(c.Relocate.DependentsOrPets, 1, 50, true) &&
+                    Validator.Date_YYYYMMDD(c.Relocate.EstimateDate)),
             (c) => c.ListEducations == null || 
                     (c.ListEducations.Count > 0 && 
                     !c.ListEducations.Any(e =>
-                        !Validator.Text(e.Country, 2, 2) ||
+                        !Validator.Text(e.CountryId, 2, 2) ||
                         !Validator.Text(e.Institute, 1, 100) ||
                         !(Validator.Text(e.YearEnd, 4, 4) && Validator.Number(e.YearEnd)) ||
                         !Validator.Text(e.Title, 1, 100)

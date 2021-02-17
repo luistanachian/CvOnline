@@ -42,7 +42,7 @@ namespace Cv.Test.MockModel
                 AdressTwo = "Piso 2, depto F",
                 PostalCode = "5000",
                 Seniority = SeniorityEnum.Senior,
-                EMails = new List<string> { "tanachian501@gmail.com" },
+                Emails = new List<string> { "tanachian501@gmail.com" },
                 Phones = new List<string> { "+5493517730268" },
                 ListSocialNetworks = new List<string> { "https://www.facebook.com/artutanach/", "https://www.instagram.com/tanach5/" },
                 ListLanguages = new List<LanguageModel>
@@ -54,14 +54,14 @@ namespace Cv.Test.MockModel
                 WorkMode = WorkModeEnum.Any,
                 Relocate = new RelocateModel
                 {
-                    RelocateDependentsOrPets = "Esposa e hijo",
-                    RelocateEstimateDate = "2021-02-20"
+                    DependentsOrPets = "Esposa e hijo",
+                    EstimateDate = "2021-02-20"
                 },
                 ListEducations = new List<EducationModel>
                 {
                     new EducationModel
                     {
-                        Country = "VE",
+                        CountryId = "VE",
                         EdutationType = EducationTypeEnum.Technician,
                         Institute = "Upta Federico Brito Figueroa",
                         YearEnd = "2011",
@@ -70,7 +70,7 @@ namespace Cv.Test.MockModel
                     },
                     new EducationModel
                     {
-                        Country = "AR",
+                        CountryId = "AR",
                         EdutationType = EducationTypeEnum.Course,
                         Institute = "Kinetic corp",
                         YearEnd = "2020",
