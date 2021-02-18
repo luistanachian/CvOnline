@@ -19,6 +19,7 @@ namespace Cv.Models
         public DateTime LastUpdateDate { get; set; }
         public string SearchEndDate { get; set; }
         public string WorkingStartDate { get; set; }
+        public ModeContractEnum ModeContract { get; set; }
         public StatusSearchEnum Status { get; set; }
         public string Occupation { get; set; }
         public string Role { get; set; }
@@ -32,7 +33,7 @@ namespace Cv.Models
         public string AdressOne { get; set; }
         public string AdressTwo { get; set; }
         public string PostalCode { get; set; }
-        public List<SkillRequiredItem>  NecessarySkills { get; set; }
+        public List<SkillRequiredItem> NecessarySkills { get; set; }
         public List<AssignedCandidateItem> AssignedCandidates { get; set; }
         public List<string> AssignedUsers { get; set; }
         public List<CommentItem> Comments { get; set; }
