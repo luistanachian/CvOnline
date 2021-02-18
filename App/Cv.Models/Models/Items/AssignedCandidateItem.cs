@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Cv.Models.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace Cv.Models.Items
 {
@@ -10,6 +12,9 @@ namespace Cv.Models.Items
         public int EstimateAmount { get; set; }
         public string StartEstimateDate { get; set; }
         public string RelocateEstimateDate { get; set; }
-        public string Comment { get; set; }
+        public StatusAssignedCandidateEnum Status { get; set; }
+        public List<CommentItem> CommentsInterview { get; set; }
+        public List<TestItem> Tests { get; set; }
+        public List<CommentItem> CommentsInterviewClient { get; set; }
     }
 }
