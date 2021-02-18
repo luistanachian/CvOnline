@@ -25,7 +25,6 @@ namespace Cv.Models
         public int CountClient { get; set; }
         public int CountClientBlackList { get; set; }
         public int CountClientDeleted { get; set; }
-        public List<CompanyMonthlyStatisticsModel> MonthlyStatistics { get; set; }
-        public List<CompanyAnnualStatisticsModel> AnnualStatistics { get; set; }
+        public List<CompanyStatisticsModel> Statistics { get; set; }
     }
 }
