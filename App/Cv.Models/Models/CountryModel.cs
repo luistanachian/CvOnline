@@ -21,8 +21,8 @@ namespace Cv.Models
         public string native { get; set; }
         public string region { get; set; }
         public string subregion { get; set; }
-        public List<TimezoneModel> timezones { get; set; }
-        public TranslationModel translations { get; set; }
+        public List<TimezoneItem> timezones { get; set; }
+        public TranslationItem translations { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
         public string emoji { get; set; }

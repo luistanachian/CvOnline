@@ -17,7 +17,7 @@ namespace Cv.Test.MockModel
                 ClientOrSearchId = Guid.NewGuid().ToString(),
                 StarDate = DateTime.Now.AddDays(-5),
                 LastUpdate = DateTime.Now,
-                TemporaryUser = new TemporaryUserModel
+                TemporaryUser = new TemporaryUserItem
                 {
                     User = "ltanachian",
                     Passeord = "12345678",
@@ -45,10 +45,10 @@ namespace Cv.Test.MockModel
                 Emails = new List<string> { "tanachian501@gmail.com" },
                 Phones = new List<string> { "+5493517730268" },
                 ListSocialNetworks = new List<string> { "https://www.facebook.com/artutanach/", "https://www.instagram.com/tanach5/" },
-                ListLanguages = new List<LanguageModel>
+                ListLanguages = new List<LanguageItem>
                 {
-                    new LanguageModel { CodeLanguage = "ES", Level = LevelLanguageEnum.Native },
-                    new LanguageModel { CodeLanguage = "EN", Level = LevelLanguageEnum.Basic }
+                    new LanguageItem { CodeLanguage = "ES", Level = LevelLanguageEnum.Native },
+                    new LanguageItem { CodeLanguage = "EN", Level = LevelLanguageEnum.Basic }
                 },
                 ListPortfolios = new List<string> { "https://github.com/luistanachian" },
                 WorkMode = WorkModeEnum.Any,
@@ -57,9 +57,9 @@ namespace Cv.Test.MockModel
                     DependentsOrPets = "Esposa e hijo",
                     EstimateDate = "2021-02-20"
                 },
-                ListEducations = new List<EducationModel>
+                ListEducations = new List<EducationItem>
                 {
-                    new EducationModel
+                    new EducationItem
                     {
                         CountryId = "VE",
                         EdutationType = EducationTypeEnum.Technician,
@@ -68,7 +68,7 @@ namespace Cv.Test.MockModel
                         Current = false,
                         Title = "TSU en Informatica"
                     },
-                    new EducationModel
+                    new EducationItem
                     {
                         CountryId = "AR",
                         EdutationType = EducationTypeEnum.Course,
@@ -78,18 +78,18 @@ namespace Cv.Test.MockModel
                         Title = ".Net Core"
                     }
                 },
-                ListWorkExperiences = new List<WorkExperienceModel>
+                ListWorkExperiences = new List<WorkExperienceItem>
                 {
-                    new WorkExperienceModel
+                    new WorkExperienceItem
                     {
                         Role = "Developer .net",
                         Company = "Bancor",
                         Current = true,
                         StartDate = "2018-05-28",
                         EndDate = null,
-                        ListReferences = new List<ReferenceModel>
+                        ListReferences = new List<ReferenceItem>
                         {
-                            new ReferenceModel
+                            new ReferenceItem
                             {
                                 Name = "Fulanito",
                                 LastName = "De Tal",
@@ -104,9 +104,9 @@ namespace Cv.Test.MockModel
 
                     }
                 },
-                ListSkills = new List<SkillModel>
+                ListSkills = new List<SkillItem>
                 {
-                    new SkillModel
+                    new SkillItem
                     {
                         Skill = "C#",
                         FrequencyUsed = FrequencyUsedEnum.EveryEay,
@@ -115,7 +115,7 @@ namespace Cv.Test.MockModel
                         Months = 11,
                         Years = 9
                     },
-                    new SkillModel
+                    new SkillItem
                     {
                         Skill = "SQL",
                         FrequencyUsed = FrequencyUsedEnum.EveryEay,
@@ -125,9 +125,9 @@ namespace Cv.Test.MockModel
                         Years = 9
                     }
                 },
-                Comments = new List<CommentModel>
+                Comments = new List<CommentItem>
                 {
-                    new CommentModel
+                    new CommentItem
                     {
                         Date = DateTime.Now,
                         User = "ltanachian",

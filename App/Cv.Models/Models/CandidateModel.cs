@@ -18,7 +18,7 @@ namespace Cv.Models
         public string UserIdLastUpdate { get; set; }
         public StatusCandiateEnum Status { get; set; }
         public string ClientOrSearchId { get; set; }
-        public TemporaryUserModel TemporaryUser { get; set; }
+        public TemporaryUserItem TemporaryUser { get; set; }
         public string Photo { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
@@ -37,14 +37,14 @@ namespace Cv.Models
         public string Occupation { get; set; }
         public string Role { get; set; }
         public SeniorityEnum Seniority { get; set; }
-        public List<LanguageModel> ListLanguages { get; set; }
+        public List<LanguageItem> ListLanguages { get; set; }
         public List<string> ListPortfolios { get; set; }
         public WorkModeEnum WorkMode { get; set; }
         public bool Relocate { get; set; }
         public string DependentsOrPets { get; set; }
-        public List<EducationModel> ListEducations { get; set; }
-        public List<WorkExperienceModel> ListWorkExperiences { get; set; }
-        public List<SkillModel> ListSkills { get; set; }
-        public List<CommentModel> Comments { get; set; }
+        public List<EducationItem> ListEducations { get; set; }
+        public List<WorkExperienceItem> ListWorkExperiences { get; set; }
+        public List<SkillItem> ListSkills { get; set; }
+        public List<CommentItem> Comments { get; set; }
     }
 }

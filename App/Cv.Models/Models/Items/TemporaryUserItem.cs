@@ -2,7 +2,7 @@
 
 namespace Cv.Models
 {
-    public class TemporaryUserModel
+    public class TemporaryUserItem
     {
         public string User { get; set; }
         public string Passeord { get; set; }

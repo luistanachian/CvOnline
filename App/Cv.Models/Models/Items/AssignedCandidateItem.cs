@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Cv.Models.Models.Items
+namespace Cv.Models.Items
 {
-    public class AssignedCandidateModel
+    public class AssignedCandidateItem
     {
         public DateTime Date { get; set; }
         public string UserId { get; set; }

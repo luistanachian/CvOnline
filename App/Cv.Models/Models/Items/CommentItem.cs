@@ -2,7 +2,7 @@
 
 namespace Cv.Models
 {
-    public class CommentModel
+    public class CommentItem
     {
         public DateTime Date { get; set; }
         public string User { get; set; }

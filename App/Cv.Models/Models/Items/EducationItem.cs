@@ -2,7 +2,7 @@
 
 namespace Cv.Models
 {
-    public class EducationModel
+    public class EducationItem
     {
         public string Institute { get; set; }
         public EducationTypeEnum EdutationType { get; set; }

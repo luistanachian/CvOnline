@@ -1,6 +1,6 @@
 ﻿namespace Cv.Models
 {
-    public class TimezoneModel
+    public class TimezoneItem
     {
         public string zoneName { get; set; }
         public int gmtOffset { get; set; }

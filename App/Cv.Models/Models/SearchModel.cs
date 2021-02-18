@@ -1,11 +1,11 @@
 ﻿using Cv.Models.Enums;
-using Cv.Models.Models.Items;
+using Cv.Models.Items;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 
-namespace Cv.Models.Models
+namespace Cv.Models
 {
     public class SearchModel
     {
@@ -32,9 +32,9 @@ namespace Cv.Models.Models
         public string AdressOne { get; set; }
         public string AdressTwo { get; set; }
         public string PostalCode { get; set; }
-        public List<SkillRequiredModel>  NecessarySkills { get; set; }
-        public List<AssignedCandidateModel> AssignedCandidates { get; set; }
+        public List<SkillRequiredItem>  NecessarySkills { get; set; }
+        public List<AssignedCandidateItem> AssignedCandidates { get; set; }
         public List<string> AssignedUsers { get; set; }
-        public List<CommentModel> Comments { get; set; }
+        public List<CommentItem> Comments { get; set; }
     }
 }

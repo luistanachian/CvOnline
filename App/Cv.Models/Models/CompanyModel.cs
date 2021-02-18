@@ -1,4 +1,4 @@
-﻿using Cv.Models.Models.Items;
+﻿using Cv.Models.Items;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
@@ -23,6 +23,6 @@ namespace Cv.Models
         public string AdressTwo { get; set; }
         public string PostalCode { get; set; }
         public List<string> Emails { get; set; }
-        public CompanyConfigurationsModel Configurations { get; set; }
+        public CompanyConfigurationsItem Configurations { get; set; }
     }
 }

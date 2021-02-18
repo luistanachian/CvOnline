@@ -1,6 +1,6 @@
 ﻿namespace Cv.Models
 {
-    public class TranslationModel
+    public class TranslationItem
     {
         public string br { get; set; }
         public string pt { get; set; }

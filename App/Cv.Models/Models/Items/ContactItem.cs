@@ -1,6 +1,6 @@
-﻿namespace Cv.Models.Models.Items
+﻿namespace Cv.Models.Items
 {
-    public class ContactModel
+    public class ContactItem
     {
         public string Name { get; set; }
         public string LastName { get; set; }

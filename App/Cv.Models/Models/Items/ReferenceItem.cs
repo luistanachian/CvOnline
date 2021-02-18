@@ -2,7 +2,7 @@
 
 namespace Cv.Models
 {
-    public class ReferenceModel
+    public class ReferenceItem
     {
         public string Name { get; set; }
         public string LastName { get; set; }

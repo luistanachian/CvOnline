@@ -1,6 +1,6 @@
-﻿namespace Cv.Models.Models.Items
+﻿namespace Cv.Models.Items
 {
-    public class SkillRequiredModel
+    public class SkillRequiredItem
     {
         public string Skill { get; set; }
         public int Months { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Cv.Models
 {
-    public class SkillModel
+    public class SkillItem
     {
         public string Skill { get; set; }
         public int Score { get; set; }
