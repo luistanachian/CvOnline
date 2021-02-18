@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cv.Models.Models.Items
+namespace Cv.Models.Items
 {
     public class EventItem
     {

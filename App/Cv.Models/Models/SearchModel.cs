@@ -36,5 +36,6 @@ namespace Cv.Models
         public List<AssignedCandidateItem> AssignedCandidates { get; set; }
         public List<string> AssignedUsers { get; set; }
         public List<CommentItem> Comments { get; set; }
+        public List<EventItem> History { get; set; }
     }
 }
