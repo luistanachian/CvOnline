@@ -1,8 +1,7 @@
-﻿using MongoDB.Bson;
+﻿using Cv.Models.Items;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Cv.Models
 {
@@ -11,5 +10,6 @@ namespace Cv.Models
         [BsonId]
         [BsonRepresentation(BsonType.String)]
         public string UserId { get; set; }
+        public List<UserStatisticsByPeriodItem> StatisticsByPeriod { get; set; }
     }
 }

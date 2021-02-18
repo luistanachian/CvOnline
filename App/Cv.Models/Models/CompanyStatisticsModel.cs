@@ -9,22 +9,22 @@ namespace Cv.Models
         [BsonId]
         [BsonRepresentation(BsonType.String)]
         public string CompanyId { get; set; }
-        public int CountCandidatesAvailable { get; set; }
-        public int CountCandidatesTaken { get; set; }
-        public int CountCandidatesContracted { get; set; }
-        public int CountCandidatesContractedOnClient { get; set; }
-        public int CountCandidatesBlacklist { get; set; }
-        public int CountCandidatesDeleted { get; set; }
+        public int CandidatesAvailable { get; set; }
+        public int CandidatesTaken { get; set; }
+        public int CandidatesContracted { get; set; }
+        public int CandidatesContractedOnClient { get; set; }
+        public int CandidatesBlacklist { get; set; }
+        public int CandidatesDeleted { get; set; }
 
-        public int CountSearchesActive { get; set; }
-        public int CountSearchesPaused { get; set; }
-        public int CountSearchesCompleted { get; set; }
-        public int CountSearchesCanceledByClient { get; set; }
-        public int CountSearchesCanceledByCompany { get; set; }
+        public int SearchesActive { get; set; }
+        public int SearchesPaused { get; set; }
+        public int SearchesCompleted { get; set; }
+        public int SearchesCanceledByClient { get; set; }
+        public int SearchesCanceledByCompany { get; set; }
 
-        public int CountClient { get; set; }
-        public int CountClientBlackList { get; set; }
-        public int CountClientDeleted { get; set; }
-        public List<CompanyStatisticsModel> Statistics { get; set; }
+        public int Client { get; set; }
+        public int ClientBlackList { get; set; }
+        public int ClientDeleted { get; set; }
+        public List<CompanyStatisticsByPeriodItem> StatisticsByPeriod { get; set; }
     }
 }
