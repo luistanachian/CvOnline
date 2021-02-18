@@ -15,7 +15,8 @@ namespace Cv.Models.Models
         public string ClientId { get; set; }
         public string CompanyId { get; set; }
         public string UserId { get; set; }
-        public DateTime DateSearchCreated { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime LastUpdateDate { get; set; }
         public string SearchEndDate { get; set; }
         public string WorkingStartDate { get; set; }
         public StatusSearchEnum Status { get; set; }

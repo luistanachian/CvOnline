@@ -11,9 +11,10 @@ namespace Cv.Models
         [BsonRepresentation(BsonType.String)]
         public string UserId { get; set; }
         public string CompanyId { get; set; }
-        public DateTime StarDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public bool Blocked { get; set; }
         public DateTime NextExpirationDate { get; set; }
         public int ErrorCounter { get; set; }
         public UserTypeEnum UserType { get; set; }
