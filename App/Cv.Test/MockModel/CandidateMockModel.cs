@@ -35,9 +35,7 @@ namespace Cv.Test.MockModel
                 Occupation = "Tecnico en informatica",
                 Role = "Dev .net",
                 CountryId = 78,
-                CountryCode = "AR",
-                StateId = 689,                
-                StateName = "Cordoba", 
+                StateId = 689,
                 AdressOne = "Bahia Blanca 317",
                 AdressTwo = "Piso 2, depto F",
                 PostalCode = "5000",
@@ -52,16 +50,13 @@ namespace Cv.Test.MockModel
                 },
                 ListPortfolios = new List<string> { "https://github.com/luistanachian" },
                 WorkMode = WorkModeEnum.Any,
-                Relocate = new RelocateModel
-                {
-                    DependentsOrPets = "Esposa e hijo",
-                    EstimateDate = "2021-02-20"
-                },
+                Relocate = true,
+                DependentsOrPets = "Esposa e hijo",
                 ListEducations = new List<EducationItem>
                 {
                     new EducationItem
                     {
-                        CountryId = "VE",
+                        CountryId = 123,
                         EdutationType = EducationTypeEnum.Technician,
                         Institute = "Upta Federico Brito Figueroa",
                         YearEnd = "2011",
@@ -70,7 +65,7 @@ namespace Cv.Test.MockModel
                     },
                     new EducationItem
                     {
-                        CountryId = "AR",
+                        CountryId = 345,
                         EdutationType = EducationTypeEnum.Course,
                         Institute = "Kinetic corp",
                         YearEnd = "2020",
