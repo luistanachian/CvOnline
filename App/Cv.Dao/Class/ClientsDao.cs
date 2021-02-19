@@ -3,7 +3,7 @@ using Cv.Models;
 
 namespace Cv.Dao.Class
 {
-    public class ClientDao : BaseDao<ClientModel>, IClientDao
+    public class ClientsDao : BaseDao<ClientModel>, IClientDao
     {
     }
 }

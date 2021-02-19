@@ -3,7 +3,7 @@ using Cv.Models;
 
 namespace Cv.Dao.Interface
 {
-    public interface ICompanyStatisticsDao :
+    public interface ICompaniesStatisticsDao :
         IGetByDao<CompanyStatisticsModel>,
         IInsertDao<CompanyStatisticsModel>,
         IReplaceDao<CompanyStatisticsModel>,

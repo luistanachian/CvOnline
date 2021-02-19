@@ -4,7 +4,7 @@ using Cv.Models;
 
 namespace Cv.Dao.Class
 {
-    public class CompanyDao : BaseDao<CompanyModel>, ICompanyDao
+    public class CompaniesStatisticsDao : BaseDao<CompanyStatisticsModel>, ICompaniesStatisticsDao
     {
     }
 }
