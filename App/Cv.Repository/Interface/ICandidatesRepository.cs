@@ -1,4 +1,5 @@
 ﻿using Cv.Models;
+using Cv.Models.Enums;
 using System.Collections.Generic;
 
 namespace Cv.Repository.Interface
@@ -9,9 +10,9 @@ namespace Cv.Repository.Interface
         bool Replace(CandidateModel candidate);
         bool Delete(string id);
         CandidateModel GetBy(string companyId, string candidateId);
-        List<CandidateModel> GetBy(string companyId, int top, string name = null, int? countryId = null, int? stateId = null);
-        List<CandidateModel> GetBy(string companyId, int top, List<string> skills, int? countryId = null, int? stateId = null);
-        long GetCount(string companyId, string name = null, int? countryId = null, int? stateId = null);
-        long GetCount(string companyId, List<string> skills, int? countryId = null, int? stateId = null);
+        List<CandidateModel> GetBy(string companyId, int top, string name = null, StatusCandiateEnum? status = null, int? countryId = null, int? stateId = null);
+        List<CandidateModel> GetBy(string companyId, int top, List<string> skills, StatusCandiateEnum? status = null, int? countryId = null, int? stateId = null);
+        long GetCount(string companyId, string name = null, StatusCandiateEnum? status = null, int? countryId = null, int? stateId = null);
+        long GetCount(string companyId, List<string> skills, StatusCandiateEnum? status = null, int? countryId = null, int? stateId = null);
     }
 }

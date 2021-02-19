@@ -1,5 +1,6 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
+using Cv.Models.Enums;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
 using System;
@@ -75,6 +76,7 @@ namespace Cv.Repository.Class
             string companyId,
             int top,
             string name = null,
+            StatusCandiateEnum? status = null,
             int? countryId = null,
             int? stateId = null)
         {
@@ -82,6 +84,7 @@ namespace Cv.Repository.Class
             {
                 var result = candidatesDao.GetListByFunc(c =>
                     c.CompanyId == companyId &&
+                    (status == null || c.Status == status) &&
                     (string.IsNullOrWhiteSpace(name) ||
                         (c.Name.Contains(name) ||
                         c.LastName.Contains(name) ||
@@ -102,13 +105,15 @@ namespace Cv.Repository.Class
             string companyId,
             int top,
             List<string> skills,
+            StatusCandiateEnum? status = null,
             int? countryId = null,
             int? stateId = null)
         {
             try
             {
                 var result = candidatesDao.GetListByFunc(c =>
-                    c.CompanyId == companyId &&
+                    c.CompanyId == companyId && 
+                    (status == null || c.Status == status) &&
                     (c.ListSkills.Select(s => s.Skill).All(s => skills.Any(sks => sks == s))) &&
                     (countryId == null || c.CountryId == countryId) &&
                     (stateId == null || c.StateId == stateId)
@@ -125,6 +130,7 @@ namespace Cv.Repository.Class
         public long GetCount(
             string companyId,
             string name = null,
+            StatusCandiateEnum? status = null,
             int? countryId = null,
             int? stateId = null)
         {
@@ -132,6 +138,7 @@ namespace Cv.Repository.Class
             {
                 var result = candidatesDao.GetCount(c =>
                 c.CompanyId == companyId &&
+                (status == null || c.Status == status) &&
                 (string.IsNullOrWhiteSpace(name) ||
                     (c.Name.Contains(name) ||
                     c.LastName.Contains(name) ||
@@ -152,6 +159,7 @@ namespace Cv.Repository.Class
         public long GetCount(
             string companyId,
             List<string> skills,
+            StatusCandiateEnum? status = null,
             int? countryId = null,
             int? stateId = null)
         {
@@ -159,6 +167,7 @@ namespace Cv.Repository.Class
             {
                 var result = candidatesDao.GetCount(c =>
                 c.CompanyId == companyId &&
+                (status == null || c.Status == status) &&
                 (c.ListSkills.Select(s => s.Skill).All(s => skills.Any(sks => sks == s))) &&
                 (countryId == null || c.CountryId == countryId) &&
                 (stateId == null || c.StateId == stateId));
