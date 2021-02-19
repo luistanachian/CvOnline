@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Cv.Models
 {
-    class CompanyModel
+    public class CompanyModel
     {
         [BsonId]
         [BsonRepresentation(BsonType.String)]
