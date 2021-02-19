@@ -4,7 +4,7 @@ using Cv.Models;
 
 namespace Cv.Dao.Class
 {
-    public class SearchesHistoryDao : BaseDao<SearchHistoryModel>, ISearchesHistoryDao
+    public class SearchesDao : BaseDao<SearchModel>, ISearchesDao
     {
     }
 }

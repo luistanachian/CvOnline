@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Cv.Models
 {
-    class SearchHistoryModel
+    public class SearchHistoryModel
     {
         [BsonId]
         [BsonRepresentation(BsonType.String)]
