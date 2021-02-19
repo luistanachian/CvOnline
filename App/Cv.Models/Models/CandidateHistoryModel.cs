@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
-namespace Cv.Models.Models
+namespace Cv.Models
 {
     public class CandidateHistoryModel
     {

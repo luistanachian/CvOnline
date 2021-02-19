@@ -1,5 +1,5 @@
 ﻿using Cv.Dao.Base.Interface;
-using Cv.Models.Models;
+using Cv.Models;
 
 namespace Cv.Dao.Interface
 {
