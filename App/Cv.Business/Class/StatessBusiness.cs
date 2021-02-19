@@ -15,7 +15,7 @@ namespace Cv.Business.Class
         }
 
         public List<StateModel> GetAllByCountry(string code) => statesRepository.GetAllByCountry(code);
-        public List<StateModel> GetAllByCountry(int id) => statesRepository.GetAllByCountry(id);
+        public List<StateModel> GetAllByCountry(int id) => statesRepository.GetAllByCountryId(id);
         public StateModel GetByIdState(int id) => statesRepository.GetByIdState(id);
         public StateModel GetByIdState(string code) => statesRepository.GetByIdState(code);
     }

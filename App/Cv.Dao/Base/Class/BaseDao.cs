@@ -32,6 +32,11 @@ namespace Cv.Dao.Base.Class
             var result = ConnectionsMongoDb<T>.GetCollection().Find(filter).Limit(top).ToList();
             return result;
         }
+        public long GetCount(Expression<Func<T, bool>> filter)
+        {
+            var result = ConnectionsMongoDb<T>.GetCollection().Find(filter).CountDocuments();
+            return result;
+        }
 
         public T GetOneByFunc(Expression<Func<T, bool>> filter)
         {

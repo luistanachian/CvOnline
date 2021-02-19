@@ -20,14 +20,9 @@ namespace Cv.Repository.Class
             return listModel.OrderBy(c => c.name).ToList();
         }
 
-        public CountryModel GetByIso2(string iso2)
+        public CountryModel GetById(int id)
         {
-            var model = countriesDao.GetOneByFunc(e => e.iso2 == iso2);
-            return model;
-        }
-        public CountryModel GetByIso3(string iso3)
-        {
-            var model = countriesDao.GetOneByFunc(e => e.iso3 == iso3);
+            var model = countriesDao.GetOneByFunc(e => e.id == id);
             return model;
         }
     }

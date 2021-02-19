@@ -5,9 +5,13 @@ namespace Cv.Repository.Interface
 {
     public interface ICandidatesRepository
     {
-        void Insert(CandidateModel candidated);
+        bool Insert(CandidateModel candidate);
         bool Replace(CandidateModel candidate);
         bool Delete(string id);
-        List<CandidateModel> GetAllByCompanyId(string companyId);
+        CandidateModel GetBy(string companyId, string candidateId);
+        List<CandidateModel> GetBy(string companyId, int top, string name = null, int? countryId = null, int? stateId = null);
+        List<CandidateModel> GetBy(string companyId, int top, List<string> skills, int? countryId = null, int? stateId = null);
+        long GetCount(string companyId, string name = null, int? countryId = null, int? stateId = null);
+        long GetCount(string companyId, List<string> skills, int? countryId = null, int? stateId = null);
     }
 }

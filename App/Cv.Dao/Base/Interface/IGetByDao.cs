@@ -8,5 +8,6 @@ namespace Cv.Dao.Base.Interface
     {
         T GetOneByFunc(Expression<Func<T, bool>> filter);
         List<T> GetListByFunc(Expression<Func<T, bool>> filter, int? top = null);
+        long GetCount(Expression<Func<T, bool>> filter);
     }
 }
