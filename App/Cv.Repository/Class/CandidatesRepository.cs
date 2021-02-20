@@ -33,8 +33,7 @@ namespace Cv.Repository.Class
         {
             try
             {
-                var result = candidatesDao.Replace(c => c.CandidateId == candidate.CandidateId, candidate);
-                return result > 0;
+                return candidatesDao.Replace(c => c.CandidateId == candidate.CandidateId, candidate) > 0;
             }
             catch (Exception)
             {
@@ -46,8 +45,7 @@ namespace Cv.Repository.Class
         {
             try
             {
-                var result = candidatesDao.Delete(c => c.CandidateId == id);
-                return result > 0;
+                return candidatesDao.Delete(c => c.CandidateId == id) > 0;
             }
             catch (Exception)
             {
@@ -59,11 +57,9 @@ namespace Cv.Repository.Class
         {
             try
             {
-                var result = candidatesDao.GetOneByFunc(c =>
+                return candidatesDao.GetOneByFunc(c =>
                 c.CompanyId == companyId &&
                 c.CandidateId == candidateId);
-
-                return result;
             }
             catch (Exception)
             {
@@ -82,7 +78,9 @@ namespace Cv.Repository.Class
         {
             try
             {
-                var result = candidatesDao.GetListByFunc(c =>
+                name = name?.Trim();
+                
+                return candidatesDao.GetListByFunc(c =>
                     c.CompanyId == companyId &&
                     (status == null || c.Status == status) &&
                     (string.IsNullOrWhiteSpace(name) ||
@@ -92,8 +90,10 @@ namespace Cv.Repository.Class
                         $"{c.LastName} {c.Name}".Contains(name))) &&
                     (countryId == null || c.CountryId == countryId) &&
                     (stateId == null || c.StateId == stateId)
-                , top);
-                return result.OrderBy(c => c.LastName).ThenBy(c => c.Name).ToList();
+                , top)
+                    .OrderBy(c => c.LastName)
+                    .ThenBy(c => c.Name)
+                    .ToList();
             }
             catch (Exception)
             {
@@ -111,14 +111,19 @@ namespace Cv.Repository.Class
         {
             try
             {
-                var result = candidatesDao.GetListByFunc(c =>
+                if (skills == null || skills.Count == 0)
+                    return null;
+
+                return candidatesDao.GetListByFunc(c =>
                     c.CompanyId == companyId && 
                     (status == null || c.Status == status) &&
                     (c.ListSkills.Select(s => s.Skill).All(s => skills.Any(sks => sks == s))) &&
                     (countryId == null || c.CountryId == countryId) &&
                     (stateId == null || c.StateId == stateId)
-                , top);
-                return result.OrderBy(c => c.LastName).ThenBy(c => c.Name).ToList();
+                , top)
+                    .OrderBy(c => c.LastName)
+                    .ThenBy(c => c.Name)
+                    .ToList();
             }
             catch (Exception)
             {
@@ -136,7 +141,9 @@ namespace Cv.Repository.Class
         {
             try
             {
-                var result = candidatesDao.GetCount(c =>
+                name = name?.Trim();
+
+                return candidatesDao.GetCount(c =>
                 c.CompanyId == companyId &&
                 (status == null || c.Status == status) &&
                 (string.IsNullOrWhiteSpace(name) ||
@@ -146,9 +153,6 @@ namespace Cv.Repository.Class
                     $"{c.LastName} {c.Name}".Contains(name))) &&
                 (countryId == null || c.CountryId == countryId) &&
                 (stateId == null || c.StateId == stateId));
-
-                return result;
-
             }
             catch (Exception)
             {
@@ -165,14 +169,15 @@ namespace Cv.Repository.Class
         {
             try
             {
-                var result = candidatesDao.GetCount(c =>
+                if (skills == null || skills.Count == 0)
+                    return 0;
+
+                return candidatesDao.GetCount(c =>
                 c.CompanyId == companyId &&
                 (status == null || c.Status == status) &&
-                (c.ListSkills.Select(s => s.Skill).All(s => skills.Any(sks => sks == s))) &&
+                (c.ListSkills.Select(s => s.Skill.Trim()).All(s => skills.Any(sks => sks == s))) &&
                 (countryId == null || c.CountryId == countryId) &&
                 (stateId == null || c.StateId == stateId));
-
-                return result;
             }
             catch (Exception)
             {
