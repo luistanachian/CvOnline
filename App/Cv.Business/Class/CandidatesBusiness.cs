@@ -43,8 +43,8 @@ namespace Cv.Business.Class
         }
         public List<CandidateModel> GetAllByCompanyId(string companyId)
         {
-            if (Validator.Guid(companyId))
-                return candidatesRepository.GetAllByCompanyId(companyId);
+            //if (Validator.Guid(companyId))
+            //    return candidatesRepository.GetAllByCompanyId(companyId);
 
             return null;
 

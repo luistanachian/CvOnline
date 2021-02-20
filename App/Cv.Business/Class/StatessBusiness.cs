@@ -21,6 +21,9 @@ namespace Cv.Business.Class
             try
             {
                 result.Object = statesRepository.GetAllByCountryId(id);
+
+                if (result.Object == null || result.Object.Count == 0)
+                    result.AddError("No se encontraron los estados.");
             }
             catch (Exception)
             {
@@ -34,6 +37,9 @@ namespace Cv.Business.Class
             try
             {
                 result.Object = statesRepository.GetByIdState(id);
+
+                if (result.Object == null)
+                    result.AddError("No se encontro el estado.");
             }
             catch (Exception)
             {

@@ -21,10 +21,13 @@ namespace Cv.Business.Class
             try
             {
                 result.Object = countriesRepository.GetAll();
+
+                if(result.Object == null || result.Object.Count == 0)
+                    result.AddError("No se encontraron paises.");
             }
             catch (Exception)
             {
-                result.AddError("Error al consultar los estados.");
+                result.AddError("Error al consultar los paises.");
             }
             return result;
         }
@@ -34,10 +37,13 @@ namespace Cv.Business.Class
             try
             {
                 result.Object = countriesRepository.GetById(id);
+
+                if (result.Object == null)
+                    result.AddError("No se encontro el pais.");
             }
             catch (Exception)
             {
-                result.AddError("Error al consultar los estados.");
+                result.AddError("Error al consultar el pais.");
             }
             return result;
         }

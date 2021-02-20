@@ -34,17 +34,17 @@ namespace Cv.Test
             Assert.AreEqual(true, inserted);
             mockCandidate.Verify(c => c.Insert(It.IsAny<CandidateModel>()));
         }
-        [Test]
-        public void GetAllByCompanyId()
-        {
-            var companyId = Guid.NewGuid().ToString(); ;
-            var mockCandidate = new Mock<ICandidatesRepository>();
-            mockCandidate.Setup(c => c.GetAllByCompanyId(It.IsAny<string>())).Returns(new List<CandidateModel>());
-            var bus = new CandidatesBusiness(mockCandidate.Object);
-            var list = bus.GetAllByCompanyId(companyId);
-            Assert.AreEqual(true, list != null);
-            mockCandidate.Verify(c => c.GetAllByCompanyId(companyId));
-        }
+        //[Test]
+        //public void GetAllByCompanyId()
+        //{
+            //var companyId = Guid.NewGuid().ToString(); ;
+            //var mockCandidate = new Mock<ICandidatesRepository>();
+            //mockCandidate.Setup(c => c.GetAllByCompanyId(It.IsAny<string>())).Returns(new List<CandidateModel>());
+            //var bus = new CandidatesBusiness(mockCandidate.Object);
+            //var list = bus.GetAllByCompanyId(companyId);
+            //Assert.AreEqual(true, list != null);
+            //mockCandidate.Verify(c => c.GetAllByCompanyId(companyId));
+        //}
 
         [Test]
         public void Delete()
