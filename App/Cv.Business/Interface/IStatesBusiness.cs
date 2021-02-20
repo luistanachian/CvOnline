@@ -5,9 +5,7 @@ namespace Cv.Business.Interface
 {
     public interface IStatesBusiness
     {
-        List<StateModel> GetAllByCountry(string code);
-        List<StateModel> GetAllByCountry(int id);
-        StateModel GetByIdState(int id);
-        StateModel GetByIdState(string code);
+        ResultBus<List<StateModel>> GetAllByCountry(int id);
+        ResultBus<StateModel> GetByIdState(int id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
 using Cv.Repository.Interface;
+using System;
 using System.Collections.Generic;
 
 namespace Cv.Business.Class
@@ -14,8 +15,31 @@ namespace Cv.Business.Class
             this.countriesRepository = countriesRepository;
         }
 
-        public List<CountryModel> GetAll() => countriesRepository.GetAll();
-        public CountryModel GetByIso2(string iso2) => countriesRepository.GetByIso2(iso2);
-        public CountryModel GetByIso3(string iso3) => countriesRepository.GetByIso3(iso3);
+        public ResultBus<List<CountryModel>> GetAll()
+        {
+            var result = new ResultBus<List<CountryModel>>();
+            try
+            {
+                result.Object = countriesRepository.GetAll();
+            }
+            catch (Exception)
+            {
+                result.AddError("Error al consultar los estados.");
+            }
+            return result;
+        }
+        public ResultBus<CountryModel> GetById(int id)
+        {
+            var result = new ResultBus<CountryModel>();
+            try
+            {
+                result.Object = countriesRepository.GetById(id);
+            }
+            catch (Exception)
+            {
+                result.AddError("Error al consultar los estados.");
+            }
+            return result;
+        }
     }
 }
