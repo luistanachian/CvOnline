@@ -15,7 +15,7 @@ namespace Cv.Business.Class
             this.statesRepository = statesRepository;
         }
 
-        public ResultBus<List<StateModel>> GetAllByCountry(int id)
+        public ResultBus<List<StateModel>> GetAllByCountryId(int id)
         {
             var result = new ResultBus<List<StateModel>>();
             try
@@ -31,12 +31,12 @@ namespace Cv.Business.Class
             }
             return result;
         }
-        public ResultBus<StateModel> GetByIdState(int id)
+        public ResultBus<StateModel> GetByIdStateId(int id)
         {
             var result = new ResultBus<StateModel>();
             try
             {
-                result.Object = statesRepository.GetByIdState(id);
+                result.Object = statesRepository.GetByIdStateId(id);
 
                 if (result.Object == null)
                     result.AddError("No se encontro el estado.");

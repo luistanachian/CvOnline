@@ -31,7 +31,7 @@ namespace Cv.AppConsole
             //aca va todo lo que se necesita ejecutar
 
             var countries = countriesBusiness.GetAll();
-            var states = statesBusiness.GetAllByCountry(1);
+            var states = statesBusiness.GetAllByCountryId(1);
         }
         private static IHostBuilder CreateHostBuilder(string[] args)
         {

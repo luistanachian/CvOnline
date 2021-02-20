@@ -11,6 +11,21 @@ namespace Cv.Test
     public class Test_CountriesBusiness
     {
         [Test]
+        public void GetAll_Ok()
+        {
+            var list = new List<CountryModel>
+            {
+                new CountryModel{ id = 76253 },
+                new CountryModel{ id = 93892 }
+            };
+            var mockCountries = new Mock<ICountriesRepository>();
+            mockCountries.Setup(c => c.GetAll()).Returns(list);
+            var bus = new CountriesBusiness(mockCountries.Object);
+            var result = bus.GetAll();
+            Assert.AreEqual(true, result.Ok);
+            mockCountries.Verify(c => c.GetAll());
+        }
+        [Test]
         public void GetAll_Empty_False()
         {
             var mockCountries = new Mock<ICountriesRepository>();

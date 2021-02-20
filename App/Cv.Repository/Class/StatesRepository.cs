@@ -19,7 +19,7 @@ namespace Cv.Repository.Class
             return listModel.OrderBy(s => s.name).ToList();
         }
 
-        public StateModel GetByIdState(int id)
+        public StateModel GetByIdStateId(int id)
         {
             var model = statesDao.GetOneByFunc(e => e.id == id);
             return model;
