@@ -7,7 +7,7 @@ namespace Cv.Dao.Configurations
         //TODO que venga de la configuracion de la ui
         public const string ConectionString = "mongodb://localhost:27017";
         public const string BD_CvOnline = "CvOnline";
-
+        public const string ConectionStringAtlas = "mongodb+srv://prueba:fRWCQiIDIrmOI2gO@cluster0.b4a5c.mongodb.net";
         public static string GetNameCollection<T>() where T : class
         {
             return typeof(T).Name switch

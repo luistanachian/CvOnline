@@ -19,12 +19,12 @@ namespace Cv.Business.Class
             candidate.CandidateId = Guid.NewGuid().ToString();
             candidate.StarDate = DateTime.Now;
             candidate.LastUpdate = DateTime.Now;
-            if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
-            {
+            //if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
+            //{
                 candidatesRepository.Insert(candidate);
                 return true;
-            }
-            return false;
+            //}
+            //return false;
         }
         public bool Replace(CandidateModel candidate)
         {
