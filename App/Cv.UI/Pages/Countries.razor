@@ -1,0 +1,43 @@
+﻿@page "/countries"
+
+@using Cv.Models
+@using Cv.UI.Data
+@inject CountriesService countriesService
+
+<h1>Countries</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (countries == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var country in countries)
+            {
+                <tr>
+                    <td>@country.id</td>
+                    <td>@country.name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private CountryModel[] countries;
+
+    protected override async Task OnInitializedAsync()
+    {
+        countries = await countriesService.GetCountriesAsync();
+    }
+}

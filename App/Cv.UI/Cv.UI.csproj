@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Cv.Ioc\Cv.Ioc.csproj" />
+    <ProjectReference Include="..\Cv.Models\Cv.Models.csproj" />
+  </ItemGroup>
+
 </Project>
