@@ -13,16 +13,8 @@ namespace Cv.Repository.Class
         {
             this.statesDao = statesDao;
         }
-        public List<StateModel> GetAllByCountryId(int id)
-        {
-            var listModel = statesDao.GetListByFunc(s => s.country_id == id);
-            return listModel.OrderBy(s => s.name).ToList();
-        }
-
-        public StateModel GetByIdStateId(int id)
-        {
-            var model = statesDao.GetOneByFunc(e => e.id == id);
-            return model;
-        }
+        public List<StateModel> GetAllByCountryId(int id) => 
+            statesDao.GetListByFunc(s => s.country_id == id).OrderBy(s => s.name).ToList();
+        public StateModel GetByIdStateId(int id) => statesDao.GetOneByFunc(e => e.id == id);
     }
 }

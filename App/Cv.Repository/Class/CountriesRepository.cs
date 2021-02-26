@@ -14,16 +14,7 @@ namespace Cv.Repository.Class
             this.countriesDao = countriesDao;
         }
 
-        public List<CountryModel> GetAll()
-        {
-            var listModel = countriesDao.GetAll();
-            return listModel.OrderBy(c => c.name).ToList();
-        }
-
-        public CountryModel GetById(int id)
-        {
-            var model = countriesDao.GetOneByFunc(e => e.id == id);
-            return model;
-        }
+        public List<CountryModel> GetAll() => countriesDao.GetAll().OrderBy(c => c.name).ToList();
+        public CountryModel GetById(int id) => countriesDao.GetOneByFunc(e => e.id == id);
     }
 }
