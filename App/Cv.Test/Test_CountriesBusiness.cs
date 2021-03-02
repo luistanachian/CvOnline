@@ -3,7 +3,6 @@ using Cv.Models;
 using Cv.Repository.Interface;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
 namespace Cv.Test

@@ -3,7 +3,7 @@ using Cv.Models;
 
 namespace Cv.Dao.Interface
 {
-    public interface ICandidatesHistoryDao :
+    public interface ICandidatesHistoriesDao :
         IGetByDao<CandidateHistoryModel>,
         IInsertDao<CandidateHistoryModel>,
         IDeleteDao<CandidateHistoryModel>
