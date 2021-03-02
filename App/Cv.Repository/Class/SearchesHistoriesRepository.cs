@@ -8,19 +8,19 @@ using System.Linq;
 
 namespace Cv.Repository.Class
 {
-    public class CandidatesHistoriesRepository : ICandidatesHistoriesRepository
+    public class SearchesHistoriesRepository : ISearchesHistoriesRepository
     {
-        private readonly ICandidatesHistoriesDao candidatesHistoriesDao;
-        public CandidatesHistoriesRepository(ICandidatesHistoriesDao candidatesHistoriesDao)
+        private readonly ISearchesHistoriesDao searchesHistoriesDao;
+        public SearchesHistoriesRepository(ISearchesHistoriesDao searchesHistoriesDao)
         {
-            this.candidatesHistoriesDao = candidatesHistoriesDao;
+            this.searchesHistoriesDao = searchesHistoriesDao;
         }
 
-        public bool Insert(CandidateHistoryModel candidateHistoryModel)
+        public bool Insert(SearchHistoryModel entity)
         {
             try
             {
-                candidatesHistoriesDao.Insert(candidateHistoryModel);
+                searchesHistoriesDao.Insert(entity);
                 return true;
             }
             catch (Exception)
@@ -33,7 +33,7 @@ namespace Cv.Repository.Class
         {
             try
             {
-                return candidatesHistoriesDao.Delete(c => c.CandidateId == id) > 0;
+                return searchesHistoriesDao.Delete(c => c.SearchId == id) > 0;
             }
             catch (Exception)
             {
@@ -41,15 +41,15 @@ namespace Cv.Repository.Class
                 return false;
             }
         }
-        public List<CandidateHistoryModel> GetBy(string candidateId, int top)
+        public List<SearchHistoryModel> GetBy(string searchId, int top)
         {
             try
             {
-                return candidatesHistoriesDao
-                    .GetListByFunc(c => c.CandidateId == candidateId, top)
-                    .Select(c => new CandidateHistoryModel
-                    {
-                        CandidateId = c.CandidateId,
+                return searchesHistoriesDao
+                    .GetListByFunc(c => c.SearchId == searchId, top)
+                    .Select(c => new SearchHistoryModel 
+                    { 
+                        SearchId = c.SearchId,
                         History = c.History.OrderByDescending(h => h.Date).ToList()
                     })
                     .ToList();
