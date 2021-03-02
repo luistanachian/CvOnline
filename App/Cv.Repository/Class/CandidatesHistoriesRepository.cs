@@ -1,5 +1,6 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
+using Cv.Repository.Interface;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace Cv.Repository.Class
 {
-    public class CandidatesHistoriesRepository
+    public class CandidatesHistoriesRepository : ICandidatesHistoriesRepository
     {
         private readonly ICandidatesHistoriesDao candidatesHistoriesDao;
         public CandidatesHistoriesRepository(ICandidatesHistoriesDao candidatesHistoriesDao)
