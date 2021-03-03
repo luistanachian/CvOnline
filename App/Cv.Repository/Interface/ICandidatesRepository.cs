@@ -6,7 +6,7 @@ namespace Cv.Repository.Interface
 {
     public interface ICandidatesRepository
     {
-        bool Insert(CandidateModel entity);
+        void Insert(CandidateModel entity);
         bool Replace(CandidateModel entity);
         bool Delete(string id);
         CandidateModel GetBy(string companyId, string candidateId);

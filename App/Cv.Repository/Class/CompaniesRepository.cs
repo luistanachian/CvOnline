@@ -1,10 +1,7 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
 using Cv.Repository.Interface;
-using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Cv.Repository.Class
 {

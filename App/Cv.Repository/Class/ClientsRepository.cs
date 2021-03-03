@@ -2,7 +2,6 @@
 using Cv.Models;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,73 +15,19 @@ namespace Cv.Repository.Class
             this.clientsDao = clientsDao;
         }
 
-        public bool Insert(ClientModel entity)
-        {
-            try
-            {
-                clientsDao.Insert(entity);
-                return true;
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return false;
-            }
-        }
+        public void Insert(ClientModel entity) => clientsDao.Insert(entity);
 
-        public bool Replace(ClientModel entity)
-        {
-            try
-            {
-                return clientsDao.Replace(c => c.ClientId == entity.ClientId, entity) > 0;
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return false;
-            }
-        }
+        public bool Replace(ClientModel entity) => 
+            clientsDao.Replace(c => c.ClientId == entity.ClientId, entity) > 0;
 
-        public bool Delete(string clientId)
-        {
-            try
-            {
-                return clientsDao.Delete(c => c.ClientId == clientId) > 0;
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return false;
-            }
-        }
+        public bool Delete(string clientId) =>
+            clientsDao.Delete(c => c.ClientId == clientId) > 0;
 
-        public ClientModel GetBy(string clientId)
-        {
-            try
-            {
-                return clientsDao.GetOneByFunc(c => c.ClientId == clientId);
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return null;
-            }
-        }
+        public ClientModel GetBy(string clientId) => 
+            clientsDao.GetOneByFunc(c => c.ClientId == clientId);
 
-        public ClientModel GetBy(string companyId, string code)
-        {
-            try
-            {
-                return clientsDao.GetOneByFunc(c =>
-                c.CompanyId == companyId &&
-                c.Code == code);
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return null;
-            }
-        }
+        public ClientModel GetBy(string companyId, string code) => 
+            clientsDao.GetOneByFunc(c => c.CompanyId == companyId && c.Code == code);
 
         public List<ClientModel> GetBy(
             string companyId,
@@ -91,8 +36,6 @@ namespace Cv.Repository.Class
             int? countryId = null,
             int? stateId = null)
         {
-            try
-            {
                 name = name?.Trim();
 
                 return clientsDao.GetListByFunc(c =>
@@ -103,12 +46,6 @@ namespace Cv.Repository.Class
                 , top)
                     .OrderBy(c => c.Name)
                     .ToList();
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return null;
-            }
         }
 
         public long GetCount(
@@ -117,8 +54,6 @@ namespace Cv.Repository.Class
             int? countryId = null,
             int? stateId = null)
         {
-            try
-            {
                 name = name?.Trim();
 
                 return clientsDao.GetCount(c =>
@@ -126,12 +61,6 @@ namespace Cv.Repository.Class
                     (string.IsNullOrWhiteSpace(name) || c.Name.Contains(name)) &&
                     (countryId == null || c.CountryId == countryId) &&
                     (stateId == null || c.StateId == stateId));
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return 0;
-            }
         }
     }
 }

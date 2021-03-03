@@ -3,7 +3,6 @@ using Cv.Models;
 using Cv.Models.Enums;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,68 +15,24 @@ namespace Cv.Repository.Class
         {
             this.candidatesDao = candidatesDao;
         }
-        public bool Insert(CandidateModel entity)
-        {
-            try
-            {
-                candidatesDao.Insert(entity);
-                return true;
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return false;
-            }
-        }
-        public bool Replace(CandidateModel entity)
-        {
-            try
-            {
-                return candidatesDao.Replace(c => c.CandidateId == entity.CandidateId, entity) > 0;
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return false;
-            }
-        }
-        public bool Delete(string id)
-        {
-            try
-            {
-                return candidatesDao.Delete(c => c.CandidateId == id) > 0;
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return false;
-            }
-        }
-        public CandidateModel GetBy(string companyId, string candidateId)
-        {
-            try
-            {
-                return candidatesDao.GetOneByFunc(c =>
-                c.CompanyId == companyId &&
-                c.CandidateId == candidateId);
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return null;
-            }
-        }
+        public void Insert(CandidateModel entity) => candidatesDao.Insert(entity);
 
-        public List<CandidateModel> GetBy(
-            string companyId,
+        public bool Replace(CandidateModel entity) =>
+            candidatesDao.Replace(c => c.CandidateId == entity.CandidateId, entity) > 0;
+
+        public bool Delete(string id) => 
+            candidatesDao.Delete(c => c.CandidateId == id) > 0;
+
+        public CandidateModel GetBy(string companyId, string candidateId) => 
+            candidatesDao.GetOneByFunc(c => c.CompanyId == companyId && c.CandidateId == candidateId);
+
+        public List<CandidateModel> GetBy(string companyId,
             int top,
             string name = null,
             StatusCandiateEnum? status = null,
             int? countryId = null,
             int? stateId = null)
         {
-            try
-            {
                 name = name?.Trim();
                 
                 return candidatesDao.GetListByFunc(c =>
@@ -94,12 +49,6 @@ namespace Cv.Repository.Class
                     .OrderBy(c => c.LastName)
                     .ThenBy(c => c.Name)
                     .ToList();
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return null;
-            }
         }
         public List<CandidateModel> GetBy(
             string companyId,
@@ -109,8 +58,6 @@ namespace Cv.Repository.Class
             int? countryId = null,
             int? stateId = null)
         {
-            try
-            {
                 if (skills == null || skills.Count == 0)
                     return null;
 
@@ -124,12 +71,6 @@ namespace Cv.Repository.Class
                     .OrderBy(c => c.LastName)
                     .ThenBy(c => c.Name)
                     .ToList();
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return null;
-            }
         }
 
         public long GetCount(
@@ -139,8 +80,6 @@ namespace Cv.Repository.Class
             int? countryId = null,
             int? stateId = null)
         {
-            try
-            {
                 name = name?.Trim();
 
                 return candidatesDao.GetCount(c =>
@@ -153,12 +92,6 @@ namespace Cv.Repository.Class
                     $"{c.LastName} {c.Name}".Contains(name))) &&
                 (countryId == null || c.CountryId == countryId) &&
                 (stateId == null || c.StateId == stateId));
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return 0;
-            }
         }
         public long GetCount(
             string companyId,
@@ -167,8 +100,6 @@ namespace Cv.Repository.Class
             int? countryId = null,
             int? stateId = null)
         {
-            try
-            {
                 if (skills == null || skills.Count == 0)
                     return 0;
 
@@ -178,12 +109,6 @@ namespace Cv.Repository.Class
                 (c.ListSkills.Select(s => s.Skill.Trim()).All(s => skills.Any(sks => sks == s))) &&
                 (countryId == null || c.CountryId == countryId) &&
                 (stateId == null || c.StateId == stateId));
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return 0;
-            }
         }
     }
 }
