@@ -16,11 +16,11 @@ namespace Cv.Repository.Class
             this.clientsDao = clientsDao;
         }
 
-        public bool Insert(ClientModel client)
+        public bool Insert(ClientModel entity)
         {
             try
             {
-                clientsDao.Insert(client);
+                clientsDao.Insert(entity);
                 return true;
             }
             catch (Exception)
@@ -30,11 +30,11 @@ namespace Cv.Repository.Class
             }
         }
 
-        public bool Replace(ClientModel client)
+        public bool Replace(ClientModel entity)
         {
             try
             {
-                return clientsDao.Replace(c => c.ClientId == client.ClientId, client) > 0;
+                return clientsDao.Replace(c => c.ClientId == entity.ClientId, entity) > 0;
             }
             catch (Exception)
             {
@@ -43,11 +43,11 @@ namespace Cv.Repository.Class
             }
         }
 
-        public bool Delete(string id)
+        public bool Delete(string clientId)
         {
             try
             {
-                return clientsDao.Delete(c => c.ClientId == id) > 0;
+                return clientsDao.Delete(c => c.ClientId == clientId) > 0;
             }
             catch (Exception)
             {

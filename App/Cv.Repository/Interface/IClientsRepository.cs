@@ -5,9 +5,9 @@ namespace Cv.Repository.Interface
 {
     public interface IClientsRepository
     {
-        bool Insert(ClientModel client);
-        bool Replace(ClientModel client);
-        bool Delete(string id);
+        bool Insert(ClientModel entity);
+        bool Replace(ClientModel entity);
+        bool Delete(string clientId);
         ClientModel GetBy(string clientId);
         ClientModel GetBy(string companyId, string code);
         List<ClientModel> GetBy(string companyId, int top, string name = null, int? countryId = null, int? stateId = null);

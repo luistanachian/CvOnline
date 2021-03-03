@@ -16,11 +16,11 @@ namespace Cv.Repository.Class
         {
             this.candidatesDao = candidatesDao;
         }
-        public bool Insert(CandidateModel candidate)
+        public bool Insert(CandidateModel entity)
         {
             try
             {
-                candidatesDao.Insert(candidate);
+                candidatesDao.Insert(entity);
                 return true;
             }
             catch (Exception)
@@ -29,11 +29,11 @@ namespace Cv.Repository.Class
                 return false;
             }
         }
-        public bool Replace(CandidateModel candidate)
+        public bool Replace(CandidateModel entity)
         {
             try
             {
-                return candidatesDao.Replace(c => c.CandidateId == candidate.CandidateId, candidate) > 0;
+                return candidatesDao.Replace(c => c.CandidateId == entity.CandidateId, entity) > 0;
             }
             catch (Exception)
             {

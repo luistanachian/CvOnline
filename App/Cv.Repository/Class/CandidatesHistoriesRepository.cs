@@ -16,11 +16,11 @@ namespace Cv.Repository.Class
             this.candidatesHistoriesDao = candidatesHistoriesDao;
         }
 
-        public bool Insert(CandidateHistoryModel candidateHistoryModel)
+        public bool Insert(CandidateHistoryModel entity)
         {
             try
             {
-                candidatesHistoriesDao.Insert(candidateHistoryModel);
+                candidatesHistoriesDao.Insert(entity);
                 return true;
             }
             catch (Exception)
