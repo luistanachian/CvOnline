@@ -6,7 +6,7 @@ namespace Cv.Repository.Interface
     {
         void Insert(CompanyStatisticsModel entity);
         public bool Replace(CompanyStatisticsModel entity);
-        public bool Delete(string id);
+        public bool Delete(string companyId);
         public CompanyStatisticsModel GetBy(string companyId);
     }
 }

@@ -16,8 +16,8 @@ namespace Cv.Repository.Class
         public bool Replace(CompanyStatisticsModel entity) =>
             companiesStatisticsDao.Replace(c => c.CompanyId == entity.CompanyId, entity) > 0;
 
-        public bool Delete(string id) =>
-            companiesStatisticsDao.Delete(c => c.CompanyId == id) > 0;
+        public bool Delete(string companyId) =>
+            companiesStatisticsDao.Delete(c => c.CompanyId == companyId) > 0;
 
         public CompanyStatisticsModel GetBy(string companyId) =>
             companiesStatisticsDao.GetOneByFunc(c => c.CompanyId == companyId);
