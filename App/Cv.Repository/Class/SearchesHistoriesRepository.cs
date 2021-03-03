@@ -16,36 +16,12 @@ namespace Cv.Repository.Class
             this.searchesHistoriesDao = searchesHistoriesDao;
         }
 
-        public bool Insert(SearchHistoryModel entity)
-        {
-            try
-            {
-                searchesHistoriesDao.Insert(entity);
-                return true;
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return false;
-            }
-        }
-        public bool Delete(string id)
-        {
-            try
-            {
-                return searchesHistoriesDao.Delete(c => c.SearchId == id) > 0;
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return false;
-            }
-        }
-        public List<SearchHistoryModel> GetBy(string searchId, int top)
-        {
-            try
-            {
-                return searchesHistoriesDao
+        public void Insert(SearchHistoryModel entity) => searchesHistoriesDao.Insert(entity); 
+
+        public bool Delete(string id) => searchesHistoriesDao.Delete(c => c.SearchId == id) > 0;
+
+        public List<SearchHistoryModel> GetBy(string searchId, int top) => 
+            searchesHistoriesDao
                     .GetListByFunc(c => c.SearchId == searchId, top)
                     .Select(c => new SearchHistoryModel 
                     { 
@@ -53,13 +29,5 @@ namespace Cv.Repository.Class
                         History = c.History.OrderByDescending(h => h.Date).ToList()
                     })
                     .ToList();
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return null;
-            }
-        }
-
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
 using Cv.Repository.Interface;
-using System;
 
 namespace Cv.Repository.Class
 {
@@ -13,57 +12,16 @@ namespace Cv.Repository.Class
             this.companiesDao = companiesDao;
         }
 
-        public bool Insert(CompanyModel entity)
-        {
-            try
-            {
-                companiesDao.Insert(entity);
-                return true;
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return false;
-            }
-        }
+        public void Insert(CompanyModel entity) => 
+            companiesDao.Insert(entity);
 
-        public bool Replace(CompanyModel entity)
-        {
-            try
-            {
-                return companiesDao.Replace(c => c.CompanyId == entity.CompanyId, entity) > 0;
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return false;
-            }
-        }
+        public bool Replace(CompanyModel entity) => 
+            companiesDao.Replace(c => c.CompanyId == entity.CompanyId, entity) > 0; 
 
-        public bool Delete(string id)
-        {
-            try
-            {
-                return companiesDao.Delete(c => c.CompanyId == id) > 0;
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return false;
-            }
-        }
+        public bool Delete(string id) => 
+            companiesDao.Delete(c => c.CompanyId == id) > 0;
 
-        public CompanyModel GetBy(string id)
-        {
-            try
-            {
-                return companiesDao.GetOneByFunc(c => c.CompanyId == id);
-            }
-            catch (Exception)
-            {
-                //TODO loguear
-                return null;
-            }
-        }
+        public CompanyModel GetBy(string id) => 
+            companiesDao.GetOneByFunc(c => c.CompanyId == id);
     }
 }
