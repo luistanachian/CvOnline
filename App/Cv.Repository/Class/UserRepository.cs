@@ -1,5 +1,6 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
+using Cv.Models.Enums;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace Cv.Repository.Class
         public UserModel GetBy(string email, string password) =>
             usersDao.GetOneByFunc(c => c.Email == email && c.Password == password);
 
-        public List<UserModel> GetBy(string companyId, int top, string name = null)
+        public List<UserModel> GetBy(string companyId, LinesEnum lines, string name = null)
         {
                 name = name?.Trim();
 
@@ -40,7 +41,7 @@ namespace Cv.Repository.Class
                         c.LastName.Contains(name) ||
                         $"{c.Name} {c.LastName}".Contains(name) ||
                         $"{c.LastName} {c.Name}".Contains(name)))
-                , top)
+                , lines)
                     .OrderBy(c => c.Name)
                     .ThenBy(c => c.LastName)
                     .ToList();

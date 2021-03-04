@@ -21,7 +21,7 @@ namespace Cv.Test
             mockCountries.Setup(c => c.GetAll()).Returns(list);
             var bus = new CountriesBusiness(mockCountries.Object);
             var result = bus.GetAll();
-            Assert.AreEqual(true, result.Ok);
+            Assert.AreEqual(true, result != null && result.Count > 0);
             mockCountries.Verify(c => c.GetAll());
         }
         [Test]
@@ -31,7 +31,7 @@ namespace Cv.Test
             mockCountries.Setup(c => c.GetAll()).Returns(new List<CountryModel>());
             var bus = new CountriesBusiness(mockCountries.Object);
             var result = bus.GetAll();
-            Assert.AreEqual(false, result.Ok);
+            Assert.AreEqual(false, result != null && result.Count > 0);
             mockCountries.Verify(c => c.GetAll());
         }
         [Test]
@@ -42,7 +42,7 @@ namespace Cv.Test
             mockCountries.Setup(c => c.GetAll()).Returns(list);
             var bus = new CountriesBusiness(mockCountries.Object);
             var result = bus.GetAll();
-            Assert.AreEqual(false, result.Ok);
+            Assert.AreEqual(false, result != null && result.Count > 0);
             mockCountries.Verify(c => c.GetAll());
         }
         [Test]
@@ -52,7 +52,7 @@ namespace Cv.Test
             mockCountries.Setup(c => c.GetById(1)).Returns(new CountryModel());
             var bus = new CountriesBusiness(mockCountries.Object);
             var result = bus.GetById(1);
-            Assert.AreEqual(true, result.Ok);
+            Assert.AreEqual(true, result != null);
             mockCountries.Verify(c => c.GetById(1));
         }
         [Test]
@@ -63,7 +63,7 @@ namespace Cv.Test
             mockCountries.Setup(c => c.GetById(1)).Returns(country);
             var bus = new CountriesBusiness(mockCountries.Object);
             var result = bus.GetById(1);
-            Assert.AreEqual(false, result.Ok);
+            Assert.AreEqual(false, result != null);
             mockCountries.Verify(c => c.GetById(1));
         }
     }

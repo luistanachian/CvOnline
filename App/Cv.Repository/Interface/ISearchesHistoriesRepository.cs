@@ -1,4 +1,5 @@
 ﻿using Cv.Models;
+using Cv.Models.Enums;
 using System.Collections.Generic;
 
 namespace Cv.Repository.Interface
@@ -7,6 +8,6 @@ namespace Cv.Repository.Interface
     {
         void Insert(SearchHistoryModel entity);
         bool Delete(string id);
-        List<SearchHistoryModel> GetBy(string searchId, int top);
+        List<SearchHistoryModel> GetBy(string searchId, LinesEnum lines);
     }
 }

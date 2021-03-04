@@ -1,5 +1,6 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
+using Cv.Models.Enums;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace Cv.Repository.Class
 
         public List<ClientModel> GetBy(
             string companyId,
-            int top,
+            LinesEnum lines,
             string name = null,
             int? countryId = null,
             int? stateId = null)
@@ -43,7 +44,7 @@ namespace Cv.Repository.Class
                     (string.IsNullOrWhiteSpace(name) || c.Name.Contains(name)) &&
                     (countryId == null || c.CountryId == countryId) &&
                     (stateId == null || c.StateId == stateId)
-                , top)
+                , lines)
                     .OrderBy(c => c.Name)
                     .ToList();
         }

@@ -16,7 +16,6 @@ namespace Cv.Test.MockModel
                 Status = StatusCandiateEnum.ContractedOnClient,
                 ClientOrSearchId = Guid.NewGuid().ToString(),
                 StarDate = DateTime.Now.AddDays(-5),
-                LastUpdate = DateTime.Now,
                 TemporaryUser = new TemporaryUserItem
                 {
                     User = "ltanachian",

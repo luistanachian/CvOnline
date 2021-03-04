@@ -22,6 +22,9 @@ namespace Cv.Dao.Base.Class
         public List<T> GetAll() =>
             ConnectionsMongoDb<T>.GetCollection().Find(e => true).ToList();
 
+        public List<T> GetAll(Expression<Func<T, bool>> filter) =>
+            ConnectionsMongoDb<T>.GetCollection().Find(filter).ToList();
+
         public List<T> GetListByFunc(Expression<Func<T, bool>> filter, LinesEnum lines) =>
             ConnectionsMongoDb<T>.GetCollection().Find(filter).Limit((int)lines).ToList();
 

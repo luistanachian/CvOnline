@@ -21,7 +21,7 @@ namespace Cv.Test
             mock.Setup(c => c.GetAllByCountryId(1)).Returns(list);
             var bus = new StatesBusiness(mock.Object);
             var result = bus.GetAllByCountryId(1);
-            Assert.AreEqual(true, result.Ok);
+            Assert.AreEqual(true, result != null && result.Count > 0);
             mock.Verify(c => c.GetAllByCountryId(1));
         }
         [Test]
@@ -31,7 +31,7 @@ namespace Cv.Test
             mock.Setup(c => c.GetAllByCountryId(1)).Returns(new List<StateModel>());
             var bus = new StatesBusiness(mock.Object);
             var result = bus.GetAllByCountryId(1);
-            Assert.AreEqual(false, result.Ok);
+            Assert.AreEqual(false, result != null && result.Count > 0);
             mock.Verify(c => c.GetAllByCountryId(1));
         }
         [Test]
@@ -42,7 +42,7 @@ namespace Cv.Test
             mock.Setup(c => c.GetAllByCountryId(1)).Returns(list);
             var bus = new StatesBusiness(mock.Object);
             var result = bus.GetAllByCountryId(1);
-            Assert.AreEqual(false, result.Ok);
+            Assert.AreEqual(false, result != null && result.Count > 0);
             mock.Verify(c => c.GetAllByCountryId(1));
         }
         [Test]
@@ -52,7 +52,7 @@ namespace Cv.Test
             mock.Setup(c => c.GetByIdStateId(1)).Returns(new StateModel());
             var bus = new StatesBusiness(mock.Object);
             var result = bus.GetByIdStateId(1);
-            Assert.AreEqual(true, result.Ok);
+            Assert.AreEqual(true, result != null);
             mock.Verify(c => c.GetByIdStateId(1));
         }
         [Test]
@@ -63,7 +63,7 @@ namespace Cv.Test
             mock.Setup(c => c.GetByIdStateId(1)).Returns(state);
             var bus = new StatesBusiness(mock.Object);
             var result = bus.GetByIdStateId(1);
-            Assert.AreEqual(false, result.Ok);
+            Assert.AreEqual(false, result != null);
             mock.Verify(c => c.GetByIdStateId(1));
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
+using Cv.Models.Enums;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -19,9 +20,9 @@ namespace Cv.Repository.Class
 
         public bool Delete(string id) => searchesHistoriesDao.Delete(c => c.SearchId == id) > 0;
 
-        public List<SearchHistoryModel> GetBy(string searchId, int top) => 
+        public List<SearchHistoryModel> GetBy(string searchId, LinesEnum lines) => 
             searchesHistoriesDao
-                    .GetListByFunc(c => c.SearchId == searchId, top)
+                    .GetListByFunc(c => c.SearchId == searchId, lines)
                     .Select(c => new SearchHistoryModel 
                     { 
                         SearchId = c.SearchId,

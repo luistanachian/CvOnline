@@ -1,4 +1,5 @@
 ﻿using Cv.Models;
+using Cv.Models.Enums;
 using System.Collections.Generic;
 
 namespace Cv.Business.Interface
@@ -8,6 +9,11 @@ namespace Cv.Business.Interface
         bool Insert(CandidateModel candidated);
         bool Replace(CandidateModel candidate);
         bool Delete(string id);
-        List<CandidateModel> GetAllByCompanyId(string companyId, int top);
+        List<CandidateModel> GetBy(string companyId,
+            LinesEnum lines,
+            string name = null,
+            StatusCandiateEnum? status = null,
+            int? countryId = null,
+            int? stateId = null);
     }
 }

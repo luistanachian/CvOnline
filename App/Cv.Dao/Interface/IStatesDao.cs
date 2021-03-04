@@ -3,7 +3,8 @@ using Cv.Models;
 
 namespace Cv.Dao.Interface
 {
-    public interface IStatesDao : 
+    public interface IStatesDao :
+        IGetAllDao<StateModel>,
         IGetByDao<StateModel>
     {
     }

@@ -41,14 +41,14 @@ namespace Cv.Business.Class
             return false;
         }
         public List<CandidateModel> GetBy(string companyId,
-            int top,
+            LinesEnum lines,
             string name = null,
             StatusCandiateEnum? status = null,
             int? countryId = null,
             int? stateId = null)
         {
             if (Validator.Guid(companyId))
-                return candidatesRepository.GetBy(companyId, top, name, status, countryId, stateId);
+                return candidatesRepository.GetBy(companyId, lines, name, status, countryId, stateId);
 
             return null;
         }

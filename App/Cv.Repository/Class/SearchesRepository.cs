@@ -1,5 +1,6 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
+using Cv.Models.Enums;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -26,8 +27,8 @@ namespace Cv.Repository.Class
         public SearchModel GetBy(string searchId) =>
                 searchesDao.GetOneByFunc(c => c.SearchId == searchId);
 
-        public List<SearchModel> GetBy(string clientId, int top) =>
-                searchesDao.GetListByFunc(c => c.ClientId == clientId, top)
+        public List<SearchModel> GetBy(string clientId, LinesEnum lines) =>
+                searchesDao.GetListByFunc(c => c.ClientId == clientId, lines)
                     .OrderByDescending(c => c.DateCreated)
                     .ToList();
 
