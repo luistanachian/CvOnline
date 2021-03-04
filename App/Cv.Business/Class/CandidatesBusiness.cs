@@ -46,5 +46,12 @@ namespace Cv.Business.Class
 
             return null;
         }
+        public List<CandidateModel> GetAllByCompanyId(string companyId, int top)
+        {
+            if (Validator.Guid(companyId))
+                return candidatesRepository.GetBy(companyId, top);
+
+            return null;
+        }
     }
 }

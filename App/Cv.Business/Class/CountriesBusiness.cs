@@ -15,37 +15,27 @@ namespace Cv.Business.Class
             this.countriesRepository = countriesRepository;
         }
 
-        public ResultBus<List<CountryModel>> GetAll()
+        public List<CountryModel> GetAll()
         {
-            var result = new ResultBus<List<CountryModel>>();
             try
             {
-                result.Object = countriesRepository.GetAll();
-
-                if(result.Object == null || result.Object.Count == 0)
-                    result.AddError("No se encontraron paises.");
+                return countriesRepository.GetAll();
             }
             catch (Exception)
             {
-                result.AddError("Error al consultar los paises.");
+                return null;
             }
-            return result;
         }
-        public ResultBus<CountryModel> GetById(int id)
+        public CountryModel GetById(int id)
         {
-            var result = new ResultBus<CountryModel>();
             try
             {
-                result.Object = countriesRepository.GetById(id);
-
-                if (result.Object == null)
-                    result.AddError("No se encontro el pais.");
+                return countriesRepository.GetById(id);
             }
             catch (Exception)
             {
-                result.AddError("Error al consultar el pais.");
+                return null;
             }
-            return result;
         }
     }
 }
