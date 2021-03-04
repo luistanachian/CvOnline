@@ -15,7 +15,7 @@ namespace Cv.UI.Data
 
         public Task<CountryModel[]> GetCountriesAsync()
         {
-            return Task.FromResult(countriesBusiness.GetAll().Object.ToArray());
+            return Task.FromResult(countriesBusiness.GetAll().ToArray());
         }
     }
 }
