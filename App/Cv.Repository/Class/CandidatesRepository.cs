@@ -27,7 +27,7 @@ namespace Cv.Repository.Class
             candidatesDao.GetOneByFunc(c => c.CompanyId == companyId && c.CandidateId == candidateId);
 
         public List<CandidateModel> GetBy(string companyId,
-            int top,
+            LinesEnum lines,
             string name = null,
             StatusCandiateEnum? status = null,
             int? countryId = null,
@@ -45,14 +45,14 @@ namespace Cv.Repository.Class
                         $"{c.LastName} {c.Name}".Contains(name))) &&
                     (countryId == null || c.CountryId == countryId) &&
                     (stateId == null || c.StateId == stateId)
-                , top)
+                , lines)
                     .OrderBy(c => c.LastName)
                     .ThenBy(c => c.Name)
                     .ToList();
         }
         public List<CandidateModel> GetBy(
             string companyId,
-            int top,
+            LinesEnum lines,
             List<string> skills,
             StatusCandiateEnum? status = null,
             int? countryId = null,
@@ -67,7 +67,7 @@ namespace Cv.Repository.Class
                     (c.ListSkills.Select(s => s.Skill).All(s => skills.Any(sks => sks == s))) &&
                     (countryId == null || c.CountryId == countryId) &&
                     (stateId == null || c.StateId == stateId)
-                , top)
+                , lines)
                     .OrderBy(c => c.LastName)
                     .ThenBy(c => c.Name)
                     .ToList();

@@ -1,4 +1,5 @@
 ﻿using Cv.Models;
+using Cv.Models.Enums;
 using System.Collections.Generic;
 
 namespace Cv.Repository.Interface
@@ -7,6 +8,6 @@ namespace Cv.Repository.Interface
     {
         void Insert(CandidateHistoryModel entity);
         bool Delete(string id);
-        List<CandidateHistoryModel> GetBy(string candidateId, int top);
+        List<CandidateHistoryModel> GetBy(string candidateId, LinesEnum lines);
     }
 }

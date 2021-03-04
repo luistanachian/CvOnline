@@ -4,6 +4,7 @@ using Cv.Business.Validations;
 using Cv.Repository.Interface;
 using System.Collections.Generic;
 using System;
+using Cv.Models.Enums;
 
 namespace Cv.Business.Class
 {
@@ -32,17 +33,22 @@ namespace Cv.Business.Class
 
             return false;
         }
-        public bool Delete(string id)
+        public bool Delete(string companyId)
         {
-            if (Validator.Guid(id))
-                return candidatesRepository.Delete(id);
+            if (Validator.Guid(companyId))
+                return candidatesRepository.Delete(companyId);
 
             return false;
         }
-        public List<CandidateModel> GetAllByCompanyId(string companyId, int top)
+        public List<CandidateModel> GetBy(string companyId,
+            int top,
+            string name = null,
+            StatusCandiateEnum? status = null,
+            int? countryId = null,
+            int? stateId = null)
         {
             if (Validator.Guid(companyId))
-                return candidatesRepository.GetBy(companyId, top);
+                return candidatesRepository.GetBy(companyId, top, name, status, countryId, stateId);
 
             return null;
         }
