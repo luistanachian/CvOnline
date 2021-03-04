@@ -8,6 +8,6 @@ namespace Cv.Business.Interface
         bool Insert(CandidateModel candidated);
         bool Replace(CandidateModel candidate);
         bool Delete(string id);
-        List<CandidateModel> GetAllByCompanyId(string companyId);
+        List<CandidateModel> GetAllByCompanyId(string companyId, int top);
     }
 }

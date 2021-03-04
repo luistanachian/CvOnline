@@ -18,7 +18,6 @@ namespace Cv.Business.Class
         {
             candidate.CandidateId = Guid.NewGuid().ToString();
             candidate.StarDate = DateTime.Now;
-            candidate.LastUpdate = DateTime.Now;
             if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
             {
                 candidatesRepository.Insert(candidate);
@@ -28,7 +27,6 @@ namespace Cv.Business.Class
         }
         public bool Replace(CandidateModel candidate)
         {
-            candidate.LastUpdate = DateTime.Now;
             if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
                 return candidatesRepository.Replace(candidate);
 
@@ -41,13 +39,12 @@ namespace Cv.Business.Class
 
             return false;
         }
-        public List<CandidateModel> GetAllByCompanyId(string companyId)
+        public List<CandidateModel> GetAllByCompanyId(string companyId, int top)
         {
-            //if (Validator.Guid(companyId))
-            //    return candidatesRepository.GetAllByCompanyId(companyId);
+            if (Validator.Guid(companyId))
+                return candidatesRepository.GetBy(companyId, top);
 
             return null;
-
         }
     }
 }

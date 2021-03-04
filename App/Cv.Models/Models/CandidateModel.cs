@@ -14,8 +14,6 @@ namespace Cv.Models
         public string CompanyId { get; set; }
         public string UserId { get; set; }
         public DateTime StarDate { get; set; }
-        public DateTime LastUpdate { get; set; }
-        public string UserIdLastUpdate { get; set; }
         public StatusCandiateEnum Status { get; set; }
         public string ClientOrSearchId { get; set; }
         public TemporaryUserItem TemporaryUser { get; set; }
