@@ -1,12 +1,13 @@
 ﻿using Cv.Models;
+using System.Threading.Tasks;
 
 namespace Cv.Repository.Interface
 {
     public interface ICompaniesRepository
     {
-        void Insert(CompanyModel entity);
-        bool Replace(CompanyModel entity);
-        bool Delete(string id);
-        CompanyModel GetBy(string id);
+        Task Insert(CompanyModel entity);
+        Task<bool> Replace(CompanyModel entity);
+        Task<bool> Delete(string id);
+        Task<CompanyModel> GetBy(string id);
     }
 }
