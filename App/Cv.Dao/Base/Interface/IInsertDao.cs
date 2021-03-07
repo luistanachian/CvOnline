@@ -1,7 +1,9 @@
-﻿namespace Cv.Dao.Base.Interface
+﻿using System.Threading.Tasks;
+
+namespace Cv.Dao.Base.Interface
 {
     public interface IInsertDao<T> where T : class
     {
-        void Insert(T entity);
+        Task Insert(T entity);
     }
 }

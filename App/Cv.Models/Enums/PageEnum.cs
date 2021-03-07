@@ -2,8 +2,9 @@
 {
     public enum PageSizeEnum
     {
-        _25 = 25,
-        _50 = 50,
-        _100 = 100
+        All = 0,
+        Size_25 = 25,
+        Size_50 = 50,
+        Size_100 = 100
     }
 }
