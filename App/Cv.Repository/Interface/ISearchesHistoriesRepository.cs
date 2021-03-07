@@ -1,7 +1,6 @@
 ﻿using Cv.Models;
 using Cv.Models.Enums;
 using Cv.Models.Helpers;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Cv.Repository.Interface

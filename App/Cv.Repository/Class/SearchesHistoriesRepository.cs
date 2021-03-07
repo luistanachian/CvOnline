@@ -3,9 +3,6 @@ using Cv.Models;
 using Cv.Models.Enums;
 using Cv.Models.Helpers;
 using Cv.Repository.Interface;
-using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cv.Repository.Class

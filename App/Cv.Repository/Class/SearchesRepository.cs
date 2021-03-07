@@ -1,10 +1,9 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
 using Cv.Models.Enums;
+using Cv.Models.Helpers;
 using Cv.Repository.Interface;
-using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cv.Repository.Class
 {
@@ -16,23 +15,21 @@ namespace Cv.Repository.Class
             this.searchesDao = searchesDao;
         }
 
-        public void Insert(SearchModel entity) => searchesDao.Insert(entity);
+        public async Task Insert(SearchModel entity) => await searchesDao.Insert(entity);
 
-        public bool Replace(SearchModel entity) => 
-            searchesDao.Replace(c => c.SearchId == entity.SearchId, entity) > 0; 
+        public async Task<bool> Replace(SearchModel entity) => 
+            (await searchesDao.Replace(c => c.SearchId == entity.SearchId, entity)) > 0; 
 
-        public bool Delete(string searchId) =>
-            searchesDao.Delete(c => c.SearchId == searchId) > 0;
+        public async Task<bool> Delete(string searchId) =>
+            (await searchesDao.Delete(c => c.SearchId == searchId)) > 0;
 
-        public SearchModel GetBy(string searchId) =>
-                searchesDao.GetOneByFunc(c => c.SearchId == searchId);
+        public async Task<SearchModel> GetBy(string searchId) =>
+                await searchesDao.GetByFunc(c => c.SearchId == searchId);
 
-        public List<SearchModel> GetBy(string clientId, PageSizeEnum lines) =>
-                searchesDao.GetListByFunc(c => c.ClientId == clientId, lines)
-                    .OrderByDescending(c => c.DateCreated)
-                    .ToList();
+        public async Task<PagedListModel<SearchModel>> GetBy(string clientId, int page, PageSizeEnum pageSize) =>
+                await searchesDao.GetByFunc(c => c.ClientId == clientId, page, pageSize);
 
-        public long GetCount(string clientId) =>
-                searchesDao.GetCount(c => c.ClientId == clientId);
+        public async Task<long> Count(string clientId) =>
+                await searchesDao.Count(c => c.ClientId == clientId);
     }
 }
