@@ -1,7 +1,5 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
-using Cv.Models.Enums;
-using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +15,9 @@ namespace Cv.Repository.Class
             this.countriesDao = countriesDao;
         }
 
-        public List<CountryModel> GetAll() => countriesDao.GetAll().OrderBy(c => c.name).ToList();
-        public CountryModel GetById(int id) => countriesDao.GetOneByFunc(e => e.id == id);
+        public async Task<List<CountryModel>> GetAll() =>
+            (await countriesDao.GetAll()).OrderBy(c => c.name).ToList();
 
-
-        public async Task<PagedListModel<CountryModel>> Get(int page, PageSizeEnum pageSize) =>
-            await countriesDao.GetListByFuncAsync(x => true, page, pageSize);
+        public async Task<CountryModel> GetById(int id) => await countriesDao.GetByFunc(e => e.id == id);
     }
 }
