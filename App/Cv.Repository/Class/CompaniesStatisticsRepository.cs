@@ -1,6 +1,7 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
 using Cv.Repository.Interface;
+using System.Threading.Tasks;
 
 namespace Cv.Repository.Class
 {
@@ -11,16 +12,16 @@ namespace Cv.Repository.Class
         {
             this.companiesStatisticsDao = companiesStatisticsDao;
         }
-        public void Insert(CompanyStatisticsModel entity) => companiesStatisticsDao.Insert(entity);
+        public async Task Insert(CompanyStatisticsModel entity) => await companiesStatisticsDao.Insert(entity);
 
-        public bool Replace(CompanyStatisticsModel entity) =>
-            companiesStatisticsDao.Replace(c => c.CompanyId == entity.CompanyId, entity) > 0;
+        public async Task<bool> Replace(CompanyStatisticsModel entity) =>
+            (await companiesStatisticsDao.Replace(c => c.CompanyId == entity.CompanyId, entity)) > 0;
 
-        public bool Delete(string companyId) =>
-            companiesStatisticsDao.Delete(c => c.CompanyId == companyId) > 0;
+        public async Task<bool> Delete(string companyId) =>
+            (await companiesStatisticsDao.Delete(c => c.CompanyId == companyId)) > 0;
 
-        public CompanyStatisticsModel GetBy(string companyId) =>
-            companiesStatisticsDao.GetOneByFunc(c => c.CompanyId == companyId);
+        public async Task<CompanyStatisticsModel> GetBy(string companyId) =>
+            await companiesStatisticsDao.GetByFunc(c => c.CompanyId == companyId);
 
     }
 }
