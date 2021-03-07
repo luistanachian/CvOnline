@@ -8,8 +8,8 @@ namespace Cv.Dao.Base.Interface
 {
     public interface IGetByDao<T> where T : class
     {
-        Task<T> GetOneByFunc(Expression<Func<T, bool>> filter);
-        Task<long> GetCountAsync(Expression<Func<T, bool>> filter);
-        Task<PagedListModel<T>> GetListByFuncAsync(Expression<Func<T, bool>> filter, int page, PageSizeEnum pageSize);
+        Task<T> GetByFunc(Expression<Func<T, bool>> filter);
+        Task<long> Count(Expression<Func<T, bool>> filter);
+        Task<PagedListModel<T>> GetByFunc(Expression<Func<T, bool>> filter, int page, PageSizeEnum pageSize);
     }
 }

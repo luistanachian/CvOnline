@@ -1,10 +1,9 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
 using Cv.Models.Enums;
+using Cv.Models.Helpers;
 using Cv.Repository.Interface;
-using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cv.Repository.Class
 {
@@ -16,18 +15,11 @@ namespace Cv.Repository.Class
             this.candidatesHistoriesDao = candidatesHistoriesDao;
         }
 
-        public void Insert(CandidateHistoryModel entity) => candidatesHistoriesDao.Insert(entity);
+        public async Task Insert(CandidateHistoryModel entity) => await candidatesHistoriesDao.Insert(entity);
 
-        public bool Delete(string id) => candidatesHistoriesDao.Delete(c => c.CandidateId == id) > 0; 
+        public async Task<bool> Delete(string id) => (await candidatesHistoriesDao.Delete(c => c.CandidateId == id)) > 0;
 
-        public List<CandidateHistoryModel> GetBy(string candidateId, PageSizeEnum lines) =>
-            candidatesHistoriesDao
-                    .GetListByFunc(c => c.CandidateId == candidateId, lines)
-                    .Select(c => new CandidateHistoryModel
-                    {
-                        CandidateId = c.CandidateId,
-                        History = c.History.OrderByDescending(h => h.Date).ToList()
-                    })
-                    .ToList();
+        public async  Task<PagedListModel<CandidateHistoryModel>> GetBy(string candidateId, int page, PageSizeEnum pageSize) =>
+            await candidatesHistoriesDao.GetByFunc(c => c.CandidateId == candidateId, page, pageSize);
     }
 }

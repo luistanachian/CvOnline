@@ -1,10 +1,12 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
 using Cv.Models.Enums;
+using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cv.Repository.Class
 {
@@ -15,27 +17,28 @@ namespace Cv.Repository.Class
         {
             this.candidatesDao = candidatesDao;
         }
-        public void Insert(CandidateModel entity) => candidatesDao.Insert(entity);
+        public async Task Insert(CandidateModel entity) => await candidatesDao.Insert(entity);
 
-        public bool Replace(CandidateModel entity) =>
-            candidatesDao.Replace(c => c.CandidateId == entity.CandidateId, entity) > 0;
+        public async Task<bool> Replace(CandidateModel entity) =>
+            (await candidatesDao.Replace(c => c.CandidateId == entity.CandidateId, entity)) > 0;
 
-        public bool Delete(string id) => 
-            candidatesDao.Delete(c => c.CandidateId == id) > 0;
+        public async Task<bool> Delete(string id) => 
+            (await candidatesDao.Delete(c => c.CandidateId == id)) > 0;
 
-        public CandidateModel GetBy(string companyId, string candidateId) => 
-            candidatesDao.GetOneByFunc(c => c.CompanyId == companyId && c.CandidateId == candidateId);
+        public async Task<CandidateModel> GetBy(string companyId, string candidateId) => 
+            await candidatesDao.GetByFunc(c => c.CompanyId == companyId && c.CandidateId == candidateId);
 
-        public List<CandidateModel> GetBy(string companyId,
-            PageSizeEnum lines,
-            string name = null,
-            StatusCandiateEnum? status = null,
-            int? countryId = null,
-            int? stateId = null)
+        public async Task<PagedListModel<CandidateModel>> GetBy(string companyId,
+            int page,
+            PageSizeEnum pageSize,
+            string name,
+            int countryId,
+            int stateId,
+            StatusCandiateEnum? status = null)
         {
                 name = name?.Trim();
                 
-                return candidatesDao.GetListByFunc(c =>
+                return await candidatesDao.GetByFunc(c =>
                     c.CompanyId == companyId &&
                     (status == null || c.Status == status) &&
                     (string.IsNullOrWhiteSpace(name) ||
@@ -43,46 +46,43 @@ namespace Cv.Repository.Class
                         c.LastName.Contains(name) ||
                         $"{c.Name} {c.LastName}".Contains(name) ||
                         $"{c.LastName} {c.Name}".Contains(name))) &&
-                    (countryId == null || c.CountryId == countryId) &&
-                    (stateId == null || c.StateId == stateId)
-                , lines)
-                    .OrderBy(c => c.LastName)
-                    .ThenBy(c => c.Name)
-                    .ToList();
+                    (countryId < 1 || c.CountryId == countryId) &&
+                    (stateId < 1 || c.StateId == stateId),
+                    page,
+                    pageSize);
         }
-        public List<CandidateModel> GetBy(
+        public async Task<PagedListModel<CandidateModel>> GetBy(
             string companyId,
-            PageSizeEnum lines,
+            int page,
+            PageSizeEnum pageSize,
             List<string> skills,
-            StatusCandiateEnum? status = null,
-            int? countryId = null,
-            int? stateId = null)
+            int countryId,
+            int stateId,
+            StatusCandiateEnum? status = null)
         {
                 if (skills == null || skills.Count == 0)
                     return null;
 
-                return candidatesDao.GetListByFunc(c =>
+                return await candidatesDao.GetByFunc(c =>
                     c.CompanyId == companyId && 
                     (status == null || c.Status == status) &&
                     (c.ListSkills.Select(s => s.Skill).All(s => skills.Any(sks => sks == s))) &&
-                    (countryId == null || c.CountryId == countryId) &&
-                    (stateId == null || c.StateId == stateId)
-                , lines)
-                    .OrderBy(c => c.LastName)
-                    .ThenBy(c => c.Name)
-                    .ToList();
+                    (countryId < 1 || c.CountryId == countryId) &&
+                    (stateId < 1 || c.StateId == stateId),
+                    page
+                    , pageSize);
         }
 
-        public long GetCount(
+        public async Task<long> Count(
             string companyId,
-            string name = null,
-            StatusCandiateEnum? status = null,
-            int? countryId = null,
-            int? stateId = null)
+            string name,
+            int countryId,
+            int stateId,
+            StatusCandiateEnum? status = null)
         {
                 name = name?.Trim();
 
-                return candidatesDao.GetCount(c =>
+                return await candidatesDao.Count(c =>
                 c.CompanyId == companyId &&
                 (status == null || c.Status == status) &&
                 (string.IsNullOrWhiteSpace(name) ||
@@ -90,25 +90,27 @@ namespace Cv.Repository.Class
                     c.LastName.Contains(name) ||
                     $"{c.Name} {c.LastName}".Contains(name) ||
                     $"{c.LastName} {c.Name}".Contains(name))) &&
-                (countryId == null || c.CountryId == countryId) &&
-                (stateId == null || c.StateId == stateId));
+                (countryId < 1 || c.CountryId == countryId) &&
+                (stateId < 1 || c.StateId == stateId));
         }
-        public long GetCount(
+        public async Task<long> Count(
             string companyId,
+            int page,
+            PageSizeEnum pageSize,
             List<string> skills,
-            StatusCandiateEnum? status = null,
-            int? countryId = null,
-            int? stateId = null)
+            int countryId,
+            int stateId,
+            StatusCandiateEnum? status = null)
         {
                 if (skills == null || skills.Count == 0)
                     return 0;
 
-                return candidatesDao.GetCount(c =>
+                return await candidatesDao.Count(c =>
                 c.CompanyId == companyId &&
                 (status == null || c.Status == status) &&
                 (c.ListSkills.Select(s => s.Skill.Trim()).All(s => skills.Any(sks => sks == s))) &&
-                (countryId == null || c.CountryId == countryId) &&
-                (stateId == null || c.StateId == stateId));
+                (countryId < 1 || c.CountryId == countryId) &&
+                (stateId < 1 || c.StateId == stateId));
         }
     }
 }
