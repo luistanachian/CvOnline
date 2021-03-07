@@ -1,10 +1,9 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
 using Cv.Models.Enums;
+using Cv.Models.Helpers;
 using Cv.Repository.Interface;
-using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cv.Repository.Class
 {
@@ -16,52 +15,52 @@ namespace Cv.Repository.Class
             this.clientsDao = clientsDao;
         }
 
-        public void Insert(ClientModel entity) => clientsDao.Insert(entity);
+        public async Task Insert(ClientModel entity) => await clientsDao.Insert(entity);
 
-        public bool Replace(ClientModel entity) => 
-            clientsDao.Replace(c => c.ClientId == entity.ClientId, entity) > 0;
+        public async Task<bool> Replace(ClientModel entity) =>
+            (await clientsDao.Replace(c => c.ClientId == entity.ClientId, entity)) > 0;
 
-        public bool Delete(string clientId) =>
-            clientsDao.Delete(c => c.ClientId == clientId) > 0;
+        public async Task<bool> Delete(string clientId) =>
+            (await clientsDao.Delete(c => c.ClientId == clientId)) > 0;
 
-        public ClientModel GetBy(string clientId) => 
-            clientsDao.GetOneByFunc(c => c.ClientId == clientId);
+        public async Task<ClientModel> GetBy(string clientId) =>
+            await clientsDao.GetByFunc(c => c.ClientId == clientId);
 
-        public ClientModel GetBy(string companyId, string code) => 
-            clientsDao.GetOneByFunc(c => c.CompanyId == companyId && c.Code == code);
+        public async Task<ClientModel> GetBy(string companyId, string code) =>
+            await clientsDao.GetByFunc(c => c.CompanyId == companyId && c.Code == code);
 
-        public List<ClientModel> GetBy(
+        public async Task<PagedListModel<ClientModel>> GetBy(
             string companyId,
-            PageSizeEnum lines,
-            string name = null,
-            int? countryId = null,
-            int? stateId = null)
+            int page,
+            PageSizeEnum pageSize,
+            string name,
+            int countryId,
+            int stateId)
         {
-                name = name?.Trim();
+            name = name?.Trim();
 
-                return clientsDao.GetListByFunc(c =>
-                    c.CompanyId == companyId &&
-                    (string.IsNullOrWhiteSpace(name) || c.Name.Contains(name)) &&
-                    (countryId == null || c.CountryId == countryId) &&
-                    (stateId == null || c.StateId == stateId)
-                , lines)
-                    .OrderBy(c => c.Name)
-                    .ToList();
+            return await clientsDao.GetByFunc(c =>
+                c.CompanyId == companyId &&
+                (string.IsNullOrWhiteSpace(name) || c.Name.Contains(name)) &&
+                (countryId < 1 || c.CountryId == countryId) &&
+                (stateId < 1 || c.StateId == stateId)
+                , page
+                , pageSize);
         }
 
-        public long GetCount(
+        public async Task<long> Count(
             string companyId,
-            string name = null,
-            int? countryId = null,
-            int? stateId = null)
+            string name,
+            int countryId,
+            int stateId)
         {
-                name = name?.Trim();
+            name = name?.Trim();
 
-                return clientsDao.GetCount(c =>
-                    c.CompanyId == companyId &&
-                    (string.IsNullOrWhiteSpace(name) || c.Name.Contains(name)) &&
-                    (countryId == null || c.CountryId == countryId) &&
-                    (stateId == null || c.StateId == stateId));
+            return await clientsDao.Count(c =>
+                c.CompanyId == companyId &&
+                (string.IsNullOrWhiteSpace(name) || c.Name.Contains(name)) &&
+                (countryId < 1 || c.CountryId == countryId) &&
+                (stateId < 1 || c.StateId == stateId));
         }
     }
 }

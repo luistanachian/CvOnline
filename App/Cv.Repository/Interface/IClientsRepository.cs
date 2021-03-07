@@ -1,17 +1,18 @@
 ﻿using Cv.Models;
 using Cv.Models.Enums;
-using System.Collections.Generic;
+using Cv.Models.Helpers;
+using System.Threading.Tasks;
 
 namespace Cv.Repository.Interface
 {
     public interface IClientsRepository
     {
-        void Insert(ClientModel entity);
-        bool Replace(ClientModel entity);
-        bool Delete(string clientId);
-        ClientModel GetBy(string clientId);
-        ClientModel GetBy(string companyId, string code);
-        List<ClientModel> GetBy(string companyId, PageSizeEnum lines, string name = null, int? countryId = null, int? stateId = null);
-        long GetCount(string companyId, string name = null, int? countryId = null, int? stateId = null);
+        Task Insert(ClientModel entity);
+        Task<bool> Replace(ClientModel entity);
+        Task<bool> Delete(string clientId);
+        Task<ClientModel> GetBy(string clientId);
+        Task<ClientModel> GetBy(string companyId, string code);
+        Task<PagedListModel<ClientModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, int countryId, int stateId);
+        Task<long> Count(string companyId, string name, int countryId, int stateId);
     }
 }
