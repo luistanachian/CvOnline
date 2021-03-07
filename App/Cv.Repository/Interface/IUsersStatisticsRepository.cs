@@ -1,12 +1,13 @@
 ﻿using Cv.Models;
+using System.Threading.Tasks;
 
 namespace Cv.Repository.Interface
 {
     public interface IUsersStatisticsRepository
     {
-        void Insert(UserStatisticsModel entity);
-        public bool Replace(UserStatisticsModel entity);
-        public bool Delete(string userId);
-        public UserStatisticsModel GetBy(string userId);
+        Task Insert(UserStatisticsModel entity);
+        Task<bool> Replace(UserStatisticsModel entity);
+        Task<bool> Delete(string userId);
+        Task<UserStatisticsModel> GetBy(string userId);
     }
 }
