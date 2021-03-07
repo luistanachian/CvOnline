@@ -41,7 +41,7 @@ namespace Cv.Business.Class
             return false;
         }
         public List<CandidateModel> GetBy(string companyId,
-            LinesEnum lines,
+            PageSizeEnum lines,
             string name = null,
             StatusCandiateEnum? status = null,
             int? countryId = null,

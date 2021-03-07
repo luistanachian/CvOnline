@@ -10,7 +10,7 @@ namespace Cv.Business.Interface
         bool Replace(CandidateModel candidate);
         bool Delete(string id);
         List<CandidateModel> GetBy(string companyId,
-            LinesEnum lines,
+            PageSizeEnum lines,
             string name = null,
             StatusCandiateEnum? status = null,
             int? countryId = null,

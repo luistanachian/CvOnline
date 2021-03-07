@@ -11,7 +11,7 @@ namespace Cv.Repository.Interface
         public bool Delete(string userId);
         public UserModel GetBy(string userId);
         public UserModel GetBy(string email, string password);
-        public List<UserModel> GetBy(string companyId, LinesEnum lines, string name = null);
+        public List<UserModel> GetBy(string companyId, PageSizeEnum lines, string name = null);
         public long GetCount(string companyId, string name = null);
     }
 }

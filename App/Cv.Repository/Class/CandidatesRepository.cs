@@ -27,7 +27,7 @@ namespace Cv.Repository.Class
             candidatesDao.GetOneByFunc(c => c.CompanyId == companyId && c.CandidateId == candidateId);
 
         public List<CandidateModel> GetBy(string companyId,
-            LinesEnum lines,
+            PageSizeEnum lines,
             string name = null,
             StatusCandiateEnum? status = null,
             int? countryId = null,
@@ -52,7 +52,7 @@ namespace Cv.Repository.Class
         }
         public List<CandidateModel> GetBy(
             string companyId,
-            LinesEnum lines,
+            PageSizeEnum lines,
             List<string> skills,
             StatusCandiateEnum? status = null,
             int? countryId = null,

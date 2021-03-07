@@ -1,6 +1,6 @@
 ﻿namespace Cv.Models.Enums
 {
-    public enum LinesEnum
+    public enum PageSizeEnum
     {
         _25 = 25,
         _50 = 50,

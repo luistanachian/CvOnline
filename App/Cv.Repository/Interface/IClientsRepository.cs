@@ -11,7 +11,7 @@ namespace Cv.Repository.Interface
         bool Delete(string clientId);
         ClientModel GetBy(string clientId);
         ClientModel GetBy(string companyId, string code);
-        List<ClientModel> GetBy(string companyId, LinesEnum lines, string name = null, int? countryId = null, int? stateId = null);
+        List<ClientModel> GetBy(string companyId, PageSizeEnum lines, string name = null, int? countryId = null, int? stateId = null);
         long GetCount(string companyId, string name = null, int? countryId = null, int? stateId = null);
     }
 }

@@ -27,7 +27,7 @@ namespace Cv.Repository.Class
         public SearchModel GetBy(string searchId) =>
                 searchesDao.GetOneByFunc(c => c.SearchId == searchId);
 
-        public List<SearchModel> GetBy(string clientId, LinesEnum lines) =>
+        public List<SearchModel> GetBy(string clientId, PageSizeEnum lines) =>
                 searchesDao.GetListByFunc(c => c.ClientId == clientId, lines)
                     .OrderByDescending(c => c.DateCreated)
                     .ToList();

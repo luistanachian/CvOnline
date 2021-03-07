@@ -32,7 +32,7 @@ namespace Cv.Repository.Class
 
         public List<ClientModel> GetBy(
             string companyId,
-            LinesEnum lines,
+            PageSizeEnum lines,
             string name = null,
             int? countryId = null,
             int? stateId = null)

@@ -8,6 +8,6 @@ namespace Cv.Repository.Interface
     {
         void Insert(SearchHistoryModel entity);
         bool Delete(string id);
-        List<SearchHistoryModel> GetBy(string searchId, LinesEnum lines);
+        List<SearchHistoryModel> GetBy(string searchId, PageSizeEnum lines);
     }
 }

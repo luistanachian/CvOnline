@@ -20,7 +20,7 @@ namespace Cv.Repository.Class
 
         public bool Delete(string id) => candidatesHistoriesDao.Delete(c => c.CandidateId == id) > 0; 
 
-        public List<CandidateHistoryModel> GetBy(string candidateId, LinesEnum lines) =>
+        public List<CandidateHistoryModel> GetBy(string candidateId, PageSizeEnum lines) =>
             candidatesHistoriesDao
                     .GetListByFunc(c => c.CandidateId == candidateId, lines)
                     .Select(c => new CandidateHistoryModel

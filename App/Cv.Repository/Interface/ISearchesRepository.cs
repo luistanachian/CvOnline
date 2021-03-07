@@ -10,7 +10,7 @@ namespace Cv.Repository.Interface
         public bool Replace(SearchModel entity);
         public bool Delete(string searchId);
         public SearchModel GetBy(string searchId);
-        public List<SearchModel> GetBy(string clientId, LinesEnum lines);
+        public List<SearchModel> GetBy(string clientId, PageSizeEnum lines);
         public long GetCount(string clientId);
     }
 }

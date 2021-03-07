@@ -1,5 +1,8 @@
 ﻿using Cv.Models;
+using Cv.Models.Enums;
+using Cv.Models.Helpers;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cv.Business.Interface
 {
@@ -7,5 +10,6 @@ namespace Cv.Business.Interface
     {
         List<CountryModel> GetAll();
         CountryModel GetById(int id);
+        Task<PagedListModel<CountryModel>> Get(int page, PageSizeEnum pageSize);
     }
 }

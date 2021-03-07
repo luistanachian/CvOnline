@@ -30,7 +30,7 @@ namespace Cv.Repository.Class
         public UserModel GetBy(string email, string password) =>
             usersDao.GetOneByFunc(c => c.Email == email && c.Password == password);
 
-        public List<UserModel> GetBy(string companyId, LinesEnum lines, string name = null)
+        public List<UserModel> GetBy(string companyId, PageSizeEnum lines, string name = null)
         {
                 name = name?.Trim();
 

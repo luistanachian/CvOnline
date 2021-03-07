@@ -1,8 +1,11 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
+using Cv.Models.Enums;
+using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cv.Business.Class
 {
@@ -37,5 +40,7 @@ namespace Cv.Business.Class
                 return null;
             }
         }
+        public async Task<PagedListModel<CountryModel>> Get(int page, PageSizeEnum pageSize) =>
+            await countriesRepository.Get(page, pageSize);
     }
 }

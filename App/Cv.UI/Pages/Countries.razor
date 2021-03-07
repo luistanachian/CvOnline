@@ -1,6 +1,8 @@
 ﻿@page "/countries"
 
 @using Cv.Models
+@using Cv.Models.Enums
+@using Cv.Models.Helpers
 @using Cv.UI.Data
 @inject CountriesService countriesService
 
@@ -9,12 +11,30 @@
 
 <p>This component demonstrates fetching data from a service.</p>
 
+
+<p>
+    <input @bind="Page" /> Current value: @Page
+</p>
+
+<select @bind="PageSize">
+    <option selected="selected" value="@PageSizeEnum._25">@PageSizeEnum._25.ToString().Remove(0,1)</option>
+    <option selected="selected" value="@PageSizeEnum._50">@PageSizeEnum._50.ToString().Remove(0, 1)</option>
+    <option selected="selected" value="@PageSizeEnum._100">@PageSizeEnum._100.ToString().Remove(0, 1)</option>
+</select>
+
+<button class="btn btn-primary" @onclick="ObtenerPaises">Buscar</button>
+
+
 @if (countries == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
+
+<p>Count: @countries.Count</p>
+<p>Pages: @countries.Pages</p>
+
     <table class="table">
         <thead>
             <tr>
@@ -23,7 +43,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var country in countries)
+            @foreach (var country in countries.List)
             {
                 <tr>
                     <td>@country.id</td>
@@ -35,10 +55,12 @@ else
 }
 
 @code {
-    private CountryModel[] countries;
+    private PagedListModel<CountryModel> countries;
+    public int Page { get; set; } = 1;
+    public PageSizeEnum PageSize { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected async Task ObtenerPaises()
     {
-        countries = await countriesService.GetCountriesAsync();
+        countries = await countriesService.GetCountriesAsync(Page, PageSize);
     }
 }
