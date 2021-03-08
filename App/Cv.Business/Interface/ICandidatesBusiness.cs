@@ -9,8 +9,8 @@ namespace Cv.Business.Interface
     public interface ICandidatesBusiness
     {
         Task<bool> Insert(CandidateModel candidate);
-        Task<bool> Replace(CandidateModel candidate);
-        Task<bool> Delete(string companyId);
+        Task<bool> Replace(CandidateModel candidate, string userID);
+        Task<bool> Delete(string id);
         Task<CandidateModel> GetBy(string companyId, string candidateId);
         Task<PagedListModel<CandidateModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, int countryId, int stateId, StatusCandiateEnum? status = null);
         Task<PagedListModel<CandidateModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null);

@@ -7,15 +7,18 @@ using Cv.Models.Enums;
 using System.Threading.Tasks;
 using Cv.Models.Helpers;
 using System.Collections.Generic;
+using Cv.Models.Items;
 
 namespace Cv.Business.Class
 {
     public sealed class CandidatesBusiness : ICandidatesBusiness
     {
         private readonly ICandidatesRepository candidatesRepository;
-        public CandidatesBusiness(ICandidatesRepository candidatesRepository)
+        private readonly ICandidatesHistoriesBusiness candidatesHistoriesBusiness;
+        public CandidatesBusiness(ICandidatesRepository candidatesRepository, ICandidatesHistoriesBusiness candidatesHistoriesBusiness)
         {
             this.candidatesRepository = candidatesRepository;
+            this.candidatesHistoriesBusiness = candidatesHistoriesBusiness;
         }
         public async Task<bool> Insert(CandidateModel candidate)
         {
@@ -23,22 +26,47 @@ namespace Cv.Business.Class
             candidate.StarDate = DateTime.Now;
             if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
             {
-                await candidatesRepository.Insert(candidate);
+                var insert = candidatesRepository.Insert(candidate);
+                await candidatesHistoriesBusiness.Insert(
+                    candidate.CandidateId,
+                    new EventItem
+                    {
+                        UserId = candidate.UserId,
+                        Event = EventEnum.Insert,
+                        Date = DateTime.Now
+                    });
+                await insert;
                 return true;
             }
             return false;
         }
-        public async Task<bool> Replace(CandidateModel candidate)
+        public async Task<bool> Replace(CandidateModel candidate, string userID)
         {
             if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
-                return await candidatesRepository.Replace(candidate);
-
+            {
+                if(await candidatesRepository.Replace(candidate))
+                {
+                    await candidatesHistoriesBusiness.Add(candidate.CandidateId,
+                    new EventItem
+                    {
+                        UserId = userID,
+                        Event = EventEnum.Update,
+                        Date = DateTime.Now
+                    });
+                    return true;
+                }
+            }
             return false;
         }
-        public async Task<bool> Delete(string companyId)
+        public async Task<bool> Delete(string id)
         {
-            if (Validator.Guid(companyId))
-                return await candidatesRepository.Delete(companyId);
+            if (Validator.Guid(id))
+            {
+                var taskCan = candidatesRepository.Delete(id);
+                var taskHis = candidatesHistoriesBusiness.Delete(id);
+
+                return await taskCan && await taskHis;
+            }
 
             return false;
         }
