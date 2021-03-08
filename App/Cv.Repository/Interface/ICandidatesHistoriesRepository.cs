@@ -1,6 +1,4 @@
 ﻿using Cv.Models;
-using Cv.Models.Enums;
-using Cv.Models.Helpers;
 using System.Threading.Tasks;
 
 namespace Cv.Repository.Interface
@@ -9,6 +7,7 @@ namespace Cv.Repository.Interface
     {
         Task Insert(CandidateHistoryModel entity);
         Task<bool> Delete(string id);
-        Task<PagedListModel<CandidateHistoryModel>> GetBy(string candidateId, int page, PageSizeEnum pageSize);
+        Task<bool> Replace(CandidateHistoryModel entity);
+        Task<CandidateHistoryModel> GetBy(string candidateId);
     }
 }
