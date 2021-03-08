@@ -1,7 +1,6 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
-using Cv.Models.Enums;
-using Cv.Models.Helpers;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Cv.UI.Data
@@ -14,10 +13,6 @@ namespace Cv.UI.Data
             this.countriesBusiness = countriesBusiness;
         }
 
-
-        public async Task<PagedListModel<CountryModel>> GetCountriesAsync(int page, PageSizeEnum pageSize)
-        {
-            return await countriesBusiness.Get(page, pageSize);
-        }
+        public async Task<List<CountryModel>> GetCountriesAsync() => await countriesBusiness.GetAll();
     }
 }

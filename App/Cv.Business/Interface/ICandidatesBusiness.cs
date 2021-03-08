@@ -1,19 +1,15 @@
 ﻿using Cv.Models;
 using Cv.Models.Enums;
-using System.Collections.Generic;
+using Cv.Models.Helpers;
+using System.Threading.Tasks;
 
 namespace Cv.Business.Interface
 {
     public interface ICandidatesBusiness
     {
-        bool Insert(CandidateModel candidated);
-        bool Replace(CandidateModel candidate);
-        bool Delete(string id);
-        List<CandidateModel> GetBy(string companyId,
-            PageSizeEnum lines,
-            string name = null,
-            StatusCandiateEnum? status = null,
-            int? countryId = null,
-            int? stateId = null);
+        Task<bool> Insert(CandidateModel candidate);
+        Task<bool> Replace(CandidateModel candidate);
+        Task<bool> Delete(string companyId);
+        Task<PagedListModel<CandidateModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, int countryId, int stateId, StatusCandiateEnum? status = null);
     }
 }

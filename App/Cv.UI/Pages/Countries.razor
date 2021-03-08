@@ -12,7 +12,7 @@
 <p>This component demonstrates fetching data from a service.</p>
 
 
-<p>
+@*<p>
     <input @bind="Page" /> Current value: @Page
 </p>
 
@@ -20,20 +20,16 @@
     <option selected="selected" value="@PageSizeEnum._25">@PageSizeEnum._25.ToString().Remove(0,1)</option>
     <option selected="selected" value="@PageSizeEnum._50">@PageSizeEnum._50.ToString().Remove(0, 1)</option>
     <option selected="selected" value="@PageSizeEnum._100">@PageSizeEnum._100.ToString().Remove(0, 1)</option>
-</select>
+</select>*@
 
 <button class="btn btn-primary" @onclick="ObtenerPaises">Buscar</button>
 
 
-@if (countries == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
+@if (countries != null)
 {
 
-<p>Count: @countries.Count</p>
-<p>Pages: @countries.Pages</p>
+@*<p>Count: @countries.Count</p>
+<p>Pages: @countries.Pages</p>*@
 
     <table class="table">
         <thead>
@@ -43,7 +39,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var country in countries.List)
+            @foreach (var country in countries)//.List)
             {
                 <tr>
                     <td>@country.id</td>
@@ -55,12 +51,12 @@ else
 }
 
 @code {
-    private PagedListModel<CountryModel> countries;
-    public int Page { get; set; } = 1;
-    public PageSizeEnum PageSize { get; set; }
+    private List<CountryModel> countries;
+    //public int Page { get; set; } = 1;
+    //public PageSizeEnum PageSize { get; set; }
 
     protected async Task ObtenerPaises()
     {
-        countries = await countriesService.GetCountriesAsync(Page, PageSize);
+        countries = await countriesService.GetCountriesAsync();
     }
 }
