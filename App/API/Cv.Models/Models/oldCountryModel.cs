@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Cv.Models
 {
-    public class CountryModel
+    public class oldCountryModel
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

@@ -13,6 +13,7 @@ namespace Cv.Dao.Configurations
             return typeof(T).Name switch
             {
                 "CandidateModel" => "Candidates",
+                "CandidatesHistoriesModel" => "CandidatesHistories",
                 "CountryModel" => "Countries",
                 "StateModel" => "States",
                 _ => throw new Exception("The type of model, is not mapped."),

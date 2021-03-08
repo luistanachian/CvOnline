@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Cv.Models
 {
-    public class StateModel
+    public class oldStateModel
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
