@@ -80,8 +80,6 @@ namespace Cv.Repository.Class
             int stateId,
             StatusCandiateEnum? status = null)
         {
-                name = name?.Trim();
-
                 return await candidatesDao.Count(c =>
                 c.CompanyId == companyId &&
                 (status == null || c.Status == status) &&
