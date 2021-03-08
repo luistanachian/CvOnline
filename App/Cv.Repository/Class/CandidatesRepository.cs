@@ -95,8 +95,6 @@ namespace Cv.Repository.Class
         }
         public async Task<long> Count(
             string companyId,
-            int page,
-            PageSizeEnum pageSize,
             List<string> skills,
             int countryId,
             int stateId,
