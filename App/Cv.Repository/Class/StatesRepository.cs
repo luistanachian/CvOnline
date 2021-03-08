@@ -1,9 +1,7 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
-using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cv.Repository.Class

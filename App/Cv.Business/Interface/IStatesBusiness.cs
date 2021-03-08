@@ -1,11 +1,12 @@
 ﻿using Cv.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cv.Business.Interface
 {
     public interface IStatesBusiness
     {
-        List<StateModel> GetAllByCountryId(int id);
-        StateModel GetByIdStateId(int id);
+        Task<List<StateModel>> GetAllByCountryId(int id);
+        Task<StateModel> GetByIdStateId(int id);
     }
 }

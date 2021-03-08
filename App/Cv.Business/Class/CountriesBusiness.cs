@@ -1,7 +1,5 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
-using Cv.Models.Enums;
-using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -18,29 +16,27 @@ namespace Cv.Business.Class
             this.countriesRepository = countriesRepository;
         }
 
-        public List<CountryModel> GetAll()
+        public async Task<List<CountryModel>> GetAll()
         {
             try
             {
-                return countriesRepository.GetAll();
+                return await countriesRepository.GetAll();
             }
             catch (Exception)
             {
                 return null;
             }
         }
-        public CountryModel GetById(int id)
+        public async Task<CountryModel> GetById(int id)
         {
             try
             {
-                return countriesRepository.GetById(id);
+                return await countriesRepository.GetById(id);
             }
             catch (Exception)
             {
                 return null;
             }
         }
-        public async Task<PagedListModel<CountryModel>> Get(int page, PageSizeEnum pageSize) =>
-            await countriesRepository.Get(page, pageSize);
     }
 }
