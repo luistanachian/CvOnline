@@ -22,29 +22,38 @@ namespace Cv.Business.Class
         }
         public async Task<bool> Insert(CandidateModel candidate)
         {
-            candidate.CandidateId = Guid.NewGuid().ToString();
-            candidate.StarDate = DateTime.Now;
-            if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
+            try
             {
-                var insert = candidatesRepository.Insert(candidate);
-                await candidatesHistoriesBusiness.Insert(
-                    candidate.CandidateId,
-                    new EventItem
-                    {
-                        UserId = candidate.UserId,
-                        Event = EventEnum.Insert,
-                        Date = DateTime.Now
-                    });
-                await insert;
-                return true;
+                candidate.CandidateId = Guid.NewGuid().ToString();
+                candidate.StarDate = DateTime.Now;
+                if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
+                {
+                    var insert = candidatesRepository.Insert(candidate);
+                    var insertHis = await candidatesHistoriesBusiness.Insert(
+                        candidate.CandidateId,
+                        new EventItem
+                        {
+                            UserId = candidate.UserId,
+                            Event = EventEnum.Insert,
+                            Date = DateTime.Now
+                        });
+
+                    Task.WaitAll(insert);
+                    return true;
+                }
+                return false;
+
             }
-            return false;
+            catch (Exception)
+            {
+                return false;
+            }
         }
         public async Task<bool> Replace(CandidateModel candidate, string userID)
         {
             if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
             {
-                if(await candidatesRepository.Replace(candidate))
+                if (await candidatesRepository.Replace(candidate))
                 {
                     await candidatesHistoriesBusiness.Add(candidate.CandidateId,
                     new EventItem

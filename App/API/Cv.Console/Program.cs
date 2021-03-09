@@ -28,15 +28,15 @@ namespace Cv.AppConsole
             this.statesBusiness = statesBusiness;
         }
 
-        public static void Main(string[] args)
+        public async static Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            host.Services.GetRequiredService<Program>().Run();
+            await host.Services.GetRequiredService<Program>().Run();
         }
 
-        public void Run()
+        public async Task Run()
         {
-            candidatesBusiness.Insert(CandidateMock.CandidateOk);
+            await candidatesBusiness.Insert(CandidateMock.CandidateOk);
 
 
 
