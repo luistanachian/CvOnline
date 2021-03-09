@@ -36,10 +36,15 @@ namespace Cv.AppConsole
 
         public async Task Run()
         {
-            await candidatesBusiness.Insert(CandidateMock.CandidateOk);
+            //var can = CandidateMock.CandidateOk;
 
-
-
+            //await candidatesBusiness.Delete(can.CandidateId);
+            //await candidatesBusiness.Insert(can);
+            //can.Dni = "00000000";
+            //await candidatesBusiness.Replace(can, can.UserId);
+            //await candidatesBusiness.Replace(can, can.UserId);
+            //can.Dni = "00000001";
+            //await candidatesBusiness.Replace(can, can.UserId);
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args)

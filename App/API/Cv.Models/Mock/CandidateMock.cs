@@ -8,9 +8,9 @@ namespace Cv.Models.Mock
     {
         public static readonly CandidateModel CandidateOk = new CandidateModel
         {
-            CandidateId = Guid.NewGuid().ToString(),
+            CandidateId = "7a1e1935-e45a-4792-9c19-b0f3dbb43576",
             CompanyId ="7a1e1935-e45a-4792-9c19-b0f3dbb43576",
-            UserId = "c49b776a-278a-45d3-bf8e-4a4b3b50c942",
+            UserId = "7a1e1935-e45a-4792-9c19-b0f3dbb43576",
             StarDate = DateTime.Now.AddDays(-5),
             Status = StatusCandiateEnum.ContractedOnClient,
             ClientOrSearchId = Guid.NewGuid().ToString(),

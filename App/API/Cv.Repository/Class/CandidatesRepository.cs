@@ -4,8 +4,11 @@ using Cv.Models.Enums;
 using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
-using System.Collections.Generic;
+using MongoDB.Driver.Linq;
 using System.Linq;
+using System.Linq.Expressions;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Cv.Repository.Class
@@ -28,7 +31,8 @@ namespace Cv.Repository.Class
         public async Task<CandidateModel> GetBy(string companyId, string candidateId) =>
             await candidatesDao.GetByFunc(c => c.CompanyId == companyId && c.CandidateId == candidateId);
 
-        public async Task<PagedListModel<CandidateModel>> GetBy(string companyId,
+        public async Task<PagedListModel<CandidateModel>> GetBy(
+            string companyId,
             int page,
             PageSizeEnum pageSize,
             string name,
@@ -42,9 +46,12 @@ namespace Cv.Repository.Class
             return await candidatesDao.GetByFunc(c =>
                 c.CompanyId == companyId &&
                 (status == null || c.Status == status) &&
-                (skills == null || skills.Count == 0 || c.ListSkills.Select(s => s.Skill).All(s => skills.Any(sks => sks == s))) &&
-                (string.IsNullOrWhiteSpace(name) || c.Name.Contains(name) || c.LastName.Contains(name) ||
-                    $"{c.Name} {c.LastName}".Contains(name) || $"{c.LastName} {c.Name}".Contains(name)) &&
+
+                //(skills == null || skills.Count == 0 ||  skills.All(x => c.ListSkills.Select(s => s.Skill).Contains(x))) &&
+                //(string.IsNullOrWhiteSpace(name) || (c.Name.Contains(name) || c.LastName.Contains(name) ||
+                //    $"{c.Name} {c.LastName}".Contains(name) || $"{c.LastName} {c.Name}".Contains(name))) &&
+
+
                 (countryId < 1 || c.CountryId == countryId) &&
                 (stateId < 1 || c.StateId == stateId),
                 page,
@@ -59,14 +66,20 @@ namespace Cv.Repository.Class
             int stateId,
             StatusCandiateEnum? status = null)
         {
-            return await candidatesDao.Count(c =>
-            c.CompanyId == companyId &&
-            (status == null || c.Status == status) &&
-            (skills == null || skills.Count == 0 || c.ListSkills.Select(s => s.Skill).All(s => skills.Any(sks => sks == s))) &&
-            (string.IsNullOrWhiteSpace(name) || c.Name.Contains(name) || c.LastName.Contains(name) ||
-                $"{c.Name} {c.LastName}".Contains(name) || $"{c.LastName} {c.Name}".Contains(name)) &&
-            (countryId < 1 || c.CountryId == countryId) &&
-            (stateId < 1 || c.StateId == stateId));
+            name ??= string.Empty;
+            skills ??= new List<string>();
+
+            var b = Builders<CandidateModel>.Filter;
+            var filter = b.Where(c => c.CompanyId == companyId && (countryId < 1 || c.CountryId == countryId) && (stateId < 1 || c.StateId == stateId))
+                & b.Where(c => c.Name.Contains(name) || c.LastName.Contains(name));
+            // | (c.Name + " " + c.LastName).Contains(name) | (c.LastName + " " + c.Name).Contains(name));
+
+            if (skills.Count > 0)
+                filter = b.Where(c => c.CompanyId == companyId && (countryId < 1 || c.CountryId == countryId) && (stateId < 1 || c.StateId == stateId))
+                    & b.ElemMatch(e => e.ListSkills, Builders<SkillItem>.Filter.In(y => y.Skill, skills));
+
+
+            return await candidatesDao.Count(filter);
         }
     }
 }

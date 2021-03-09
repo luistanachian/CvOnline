@@ -48,6 +48,9 @@ namespace Cv.Dao.Base.Class
         public async Task<long> Count(Expression<Func<T, bool>> filter) =>
             await ConnectionsMongoDb<T>.GetCollection().CountDocumentsAsync(filter);
 
+        public async Task<long> Count(FilterDefinition<T> filter) =>
+            await ConnectionsMongoDb<T>.GetCollection().CountDocumentsAsync(filter);
+
         public async Task Insert(T entity) =>
             await ConnectionsMongoDb<T>.GetCollection().InsertOneAsync(entity);
 

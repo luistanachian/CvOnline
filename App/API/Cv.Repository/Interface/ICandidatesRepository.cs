@@ -1,11 +1,15 @@
 ﻿using Cv.Models;
 using Cv.Models.Enums;
 using Cv.Models.Helpers;
+using Cv.Repository.Class;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Serializers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Cv.Repository.Interface
 {
+
     public interface ICandidatesRepository
     {
         Task Insert(CandidateModel entity);

@@ -19,6 +19,7 @@ namespace Cv.API.Controllers
         }
 
         [HttpGet]
+        [Route("count")]
         public async Task<long> Count(CandidateSearch candidateSearch)
         {
             return await candidatesBusiness.Count(
@@ -31,6 +32,7 @@ namespace Cv.API.Controllers
         }
 
         [HttpGet]
+        [Route("list")]
         public async Task<PagedListModel<CandidateModel>> Get(CandidateSearch candidateSearch)
         {
             return await candidatesBusiness.GetBy(
@@ -45,9 +47,29 @@ namespace Cv.API.Controllers
         }
 
         [HttpGet]
+        [Route("{companyId}/{candidateId}")]
         public async Task<CandidateModel> GetOne(string companyId, string candidateId)
         {
             return await candidatesBusiness.GetBy(companyId, candidateId);
+        }
+
+
+        [HttpPut]
+        public async Task<bool> Insert(CandidateModel candidate)
+        {
+            return await candidatesBusiness.Insert(candidate);
+        }
+        [HttpPost]
+        public async Task<bool> Replace(string userId, CandidateModel candidate)
+        {
+            return await candidatesBusiness.Replace(candidate, userId);
+        }
+
+        [HttpDelete]
+        [Route("{candidateId}")]
+        public async Task<bool> Delete(string candidateId)
+        {
+            return await candidatesBusiness.Delete(candidateId);
         }
     }
 }
