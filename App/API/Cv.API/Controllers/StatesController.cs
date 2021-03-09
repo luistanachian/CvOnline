@@ -17,13 +17,13 @@ namespace Cv.API.Controllers
             this.statesBusiness = statesBusiness;
         }
 
-        [Route("states/{countryId}")]
         [HttpGet]
+        [Route("states/{countryId}")]
         public async Task<IEnumerable<ComboResponse>> GetList(int countryId) => await statesBusiness.GetAllByCountryId(countryId);
 
 
-        [Route("state/{id}")]
         [HttpGet]
+        [Route("state/{id}")]
         public async Task<StateModel> GetOne(int id) => await statesBusiness.GetByIdStateId(id);
     }
 }

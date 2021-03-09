@@ -1,58 +1,55 @@
-﻿using Cv.Models;
-using Cv.Models.Enums;
+﻿using Cv.Models.Enums;
 using System;
 using System.Collections.Generic;
 
-namespace Cv.Test.MockModel
+namespace Cv.Models.Mock
 {
-    public static class CandidateMockModel
+    public static class CandidateMock
     {
-        public static CandidateModel CandidateOk()
+        public static readonly CandidateModel CandidateOk = new CandidateModel
         {
-            return new CandidateModel
+            CandidateId = Guid.NewGuid().ToString(),
+            CompanyId = Guid.NewGuid().ToString(),
+            UserId = Guid.NewGuid().ToString(),
+            StarDate = DateTime.Now.AddDays(-5),
+            Status = StatusCandiateEnum.ContractedOnClient,
+            ClientOrSearchId = Guid.NewGuid().ToString(),
+            TemporaryUser = new TemporaryUserItem
             {
-                CandidateId = Guid.NewGuid().ToString(),
-                CompanyId = Guid.NewGuid().ToString(),
-                UserId = Guid.NewGuid().ToString(),
-                StarDate = DateTime.Now.AddDays(-5),
-                Status = StatusCandiateEnum.ContractedOnClient,
-                ClientOrSearchId = Guid.NewGuid().ToString(),
-                TemporaryUser = new TemporaryUserItem
-                {
-                    User = "ltanachian",
-                    Passeord = "12345678",
-                    EndDate = DateTime.Now.AddDays(3),
-                    EditPortfolios = true,
-                    EditPhoto = true
-                },
-                Photo = "C://photo.jpg",
-                Name = "Luis",
-                LastName = "Tanachian",
-                BirthDay = "1990-01-05",
-                Sex = "M",
-                Dni = "95900127",
-                Nacionality = "VE",
-                Occupation = "Tecnico en informatica",
-                Role = "Dev .net",
-                CountryId = 78,
-                StateId = 689,
-                AdressOne = "Bahia Blanca 317",
-                AdressTwo = "Piso 2, depto F",
-                PostalCode = "5000",
-                Seniority = SeniorityEnum.Senior,
-                Emails = new List<string> { "tanachian501@gmail.com" },
-                Phones = new List<string> { "+5493517730268" },
-                ListSocialNetworks = new List<string> { "https://www.facebook.com/artutanach/", "https://www.instagram.com/tanach5/" },
-                ListLanguages = new List<LanguageItem>
+                User = "ltanachian",
+                Passeord = "12345678",
+                EndDate = DateTime.Now.AddDays(3),
+                EditPortfolios = true,
+                EditPhoto = true
+            },
+            Photo = "C://photo.jpg",
+            Name = "Luis",
+            LastName = "Tanachian",
+            BirthDay = "1990-01-05",
+            Sex = "M",
+            Dni = "95900127",
+            Nacionality = "VE",
+            Occupation = "Tecnico en informatica",
+            Role = "Dev .net",
+            CountryId = 78,
+            StateId = 689,
+            AdressOne = "Bahia Blanca 317",
+            AdressTwo = "Piso 2, depto F",
+            PostalCode = "5000",
+            Seniority = SeniorityEnum.Senior,
+            Emails = new List<string> { "tanachian501@gmail.com" },
+            Phones = new List<string> { "+5493517730268" },
+            ListSocialNetworks = new List<string> { "https://www.facebook.com/artutanach/", "https://www.instagram.com/tanach5/" },
+            ListLanguages = new List<LanguageItem>
                 {
                     new LanguageItem { CodeLanguage = "ES", Level = LevelLanguageEnum.Native },
                     new LanguageItem { CodeLanguage = "EN", Level = LevelLanguageEnum.Basic }
                 },
-                ListPortfolios = new List<string> { "https://github.com/luistanachian" },
-                WorkMode = WorkModeEnum.Any,
-                Relocate = true,
-                DependentsOrPets = "Esposa e hijo",
-                ListEducations = new List<EducationItem>
+            ListPortfolios = new List<string> { "https://github.com/luistanachian" },
+            WorkMode = WorkModeEnum.Any,
+            Relocate = true,
+            DependentsOrPets = "Esposa e hijo",
+            ListEducations = new List<EducationItem>
                 {
                     new EducationItem
                     {
@@ -73,7 +70,7 @@ namespace Cv.Test.MockModel
                         Title = ".Net Core"
                     }
                 },
-                ListWorkExperiences = new List<WorkExperienceItem>
+            ListWorkExperiences = new List<WorkExperienceItem>
                 {
                     new WorkExperienceItem
                     {
@@ -99,7 +96,7 @@ namespace Cv.Test.MockModel
 
                     }
                 },
-                ListSkills = new List<SkillItem>
+            ListSkills = new List<SkillItem>
                 {
                     new SkillItem
                     {
@@ -120,7 +117,7 @@ namespace Cv.Test.MockModel
                         Years = 9
                     }
                 },
-                Comments = new List<CommentItem>
+            Comments = new List<CommentItem>
                 {
                     new CommentItem
                     {
@@ -129,7 +126,6 @@ namespace Cv.Test.MockModel
                         Comment = "Lo llame y no contesto"
                     }
                 }
-            };
-        }
+        };
     }
 }
