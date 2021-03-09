@@ -1,5 +1,6 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
+using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Cv.Business.Class
             this.statesRepository = statesRepository;
         }
 
-        public async Task<List<StateModel>> GetAllByCountryId(int id)
+        public async Task<List<ComboResponse>> GetAllByCountryId(int id)
         {
             try
             {

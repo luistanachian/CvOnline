@@ -1,5 +1,6 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
+using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,11 @@ namespace Cv.Repository.Class
             this.countriesDao = countriesDao;
         }
 
-        public async Task<List<CountryModel>> GetAll() =>
-            (await countriesDao.GetAll()).OrderBy(c => c.name).ToList();
+        public async Task<List<ComboResponse>> GetAll() =>
+            (await countriesDao.GetAll()).OrderBy(c => c.name)
+            .Select(x => new ComboResponse { id = x.id, value = x.name})
+            .OrderBy(x => x.value)
+            .ToList();
 
         public async Task<CountryModel> GetById(int id) => await countriesDao.GetByFunc(e => e.id == id);
     }

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Cv.API.Models;
 using Cv.Business.Interface;
 using Cv.Models;
-using Cv.Models.Enums;
-using Microsoft.AspNetCore.Http;
+using Cv.Models.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cv.API.Controllers
@@ -20,20 +18,36 @@ namespace Cv.API.Controllers
             this.candidatesBusiness = candidatesBusiness;
         }
 
-        [Route("{companyId}")]
-        [Route("{companyId}/{name}")]
-        [Route("{companyId}/{name}/{countryId}")]
-        [Route("{companyId}/{name}/{countryId}/{stateId}")]
-        [Route("{companyId}/{name}/{countryId}/{stateId}/{status}")]
         [HttpGet]
-        public async Task<long> Count(string companyId, string name = "", int countryId = 0, int stateId = 0, int? status = null)
+        public async Task<long> Count(CandidateSearch candidateSearch)
         {
-            StatusCandiateEnum? statusCandiateEnum = null; 
-            if(status != null)
-                statusCandiateEnum = (StatusCandiateEnum)status;
-
-            return await candidatesBusiness.Count(companyId, name, countryId, stateId, statusCandiateEnum);
+            return await candidatesBusiness.Count(
+                candidateSearch.companyId, 
+                candidateSearch.name, 
+                candidateSearch.skills?.ToList(), 
+                candidateSearch.countryId, 
+                candidateSearch.stateId,
+                candidateSearch.status);
         }
 
+        [HttpGet]
+        public async Task<PagedListModel<CandidateModel>> Get(CandidateSearch candidateSearch)
+        {
+            return await candidatesBusiness.GetBy(
+                candidateSearch.companyId,
+                candidateSearch.page,
+                candidateSearch.pageSize,
+                candidateSearch.name,
+                candidateSearch.skills?.ToList(),
+                candidateSearch.countryId,
+                candidateSearch.stateId,
+                candidateSearch.status);
+        }
+
+        [HttpGet]
+        public async Task<CandidateModel> GetOne(string companyId, string candidateId)
+        {
+            return await candidatesBusiness.GetBy(companyId, candidateId);
+        }
     }
 }

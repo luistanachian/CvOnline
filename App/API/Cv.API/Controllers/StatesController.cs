@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Cv.Business.Interface;
 using Cv.Models;
+using Cv.Models.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cv.API.Controllers
@@ -18,7 +19,7 @@ namespace Cv.API.Controllers
 
         [Route("states/{countryId}")]
         [HttpGet]
-        public async Task<IEnumerable<StateModel>> GetList(int countryId) => await statesBusiness.GetAllByCountryId(countryId);
+        public async Task<IEnumerable<ComboResponse>> GetList(int countryId) => await statesBusiness.GetAllByCountryId(countryId);
 
 
         [Route("state/{id}")]
