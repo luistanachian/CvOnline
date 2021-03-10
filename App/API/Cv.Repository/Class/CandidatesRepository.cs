@@ -12,6 +12,7 @@ namespace Cv.Repository.Class
     public sealed class CandidatesRepository : ICandidatesRepository
     {
         private readonly ICandidatesDao candidatesDao;
+        private readonly FilterDefinitionBuilder<CandidateModel> fd;
         public CandidatesRepository(ICandidatesDao candidatesDao)
         {
             this.candidatesDao = candidatesDao;
@@ -19,13 +20,13 @@ namespace Cv.Repository.Class
         public async Task Insert(CandidateModel entity) => await candidatesDao.Insert(entity);
 
         public async Task<bool> Replace(CandidateModel entity) =>
-            (await candidatesDao.Replace(Builders<CandidateModel>.Filter.Where(c => c.CandidateId == entity.CandidateId), entity)) > 0;
+            (await candidatesDao.Replace(fd.Where(c => c.CandidateId == entity.CandidateId), entity)) > 0;
 
         public async Task<bool> Delete(string id) =>
-            (await candidatesDao.Delete(Builders<CandidateModel>.Filter.Eq(c => c.CandidateId, id))) > 0;
+            (await candidatesDao.Delete(fd.Eq(c => c.CandidateId, id))) > 0;
 
         public async Task<CandidateModel> GetBy(string companyId, string candidateId) =>
-            await candidatesDao.GetByFunc(Builders<CandidateModel>.Filter.Where(c => c.CompanyId == companyId && c.CandidateId == candidateId));
+            await candidatesDao.GetByFunc(fd.Where(c => c.CompanyId == companyId && c.CandidateId == candidateId));
 
         public async Task<PagedListModel<CandidateModel>> GetBy(
             string companyId,
@@ -60,14 +61,13 @@ namespace Cv.Repository.Class
             name ??= string.Empty;
             skills ??= new List<string>();
 
-            var b = Builders<CandidateModel>.Filter;
-            var filter = b.Where(c => c.CompanyId == companyId && (countryId < 1 || c.CountryId == countryId) && (stateId < 1 || c.StateId == stateId))
-                & b.Where(c => c.Name.Contains(name) || c.LastName.Contains(name));
+            var filter = fd.Where(c => c.CompanyId == companyId && (countryId < 1 || c.CountryId == countryId) && (stateId < 1 || c.StateId == stateId))
+                & fd.Where(c => c.Name.Contains(name) || c.LastName.Contains(name));
             // | (c.Name + " " + c.LastName).Contains(name) | (c.LastName + " " + c.Name).Contains(name));
 
             if (skills.Count > 0)
-                filter = b.Where(c => c.CompanyId == companyId && (countryId < 1 || c.CountryId == countryId) && (stateId < 1 || c.StateId == stateId))
-                    & b.ElemMatch(e => e.ListSkills, Builders<SkillItem>.Filter.In(y => y.Skill, skills));
+                filter = fd.Where(c => c.CompanyId == companyId && (countryId < 1 || c.CountryId == countryId) && (stateId < 1 || c.StateId == stateId))
+                    & fd.ElemMatch(e => e.ListSkills, Builders<SkillItem>.Filter.In(y => y.Skill, skills));
 
 
             return filter;
