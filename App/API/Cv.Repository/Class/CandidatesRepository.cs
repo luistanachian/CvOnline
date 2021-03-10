@@ -19,13 +19,13 @@ namespace Cv.Repository.Class
         public async Task Insert(CandidateModel entity) => await candidatesDao.Insert(entity);
 
         public async Task<bool> Replace(CandidateModel entity) =>
-            (await candidatesDao.Replace(c => c.CandidateId == entity.CandidateId, entity)) > 0;
+            (await candidatesDao.Replace(Builders<CandidateModel>.Filter.Where(c => c.CandidateId == entity.CandidateId), entity)) > 0;
 
         public async Task<bool> Delete(string id) =>
-            (await candidatesDao.Delete(c => c.CandidateId == id)) > 0;
+            (await candidatesDao.Delete(Builders<CandidateModel>.Filter.Eq(c => c.CandidateId, id))) > 0;
 
         public async Task<CandidateModel> GetBy(string companyId, string candidateId) =>
-            await candidatesDao.GetByFunc(c => c.CompanyId == companyId && c.CandidateId == candidateId);
+            await candidatesDao.GetByFunc(Builders<CandidateModel>.Filter.Where(c => c.CompanyId == companyId && c.CandidateId == candidateId));
 
         public async Task<PagedListModel<CandidateModel>> GetBy(
             string companyId,
