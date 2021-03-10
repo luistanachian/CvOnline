@@ -20,13 +20,16 @@ namespace Cv.Business.Class
             this.candidatesRepository = candidatesRepository;
             this.candidatesHistoriesBusiness = candidatesHistoriesBusiness;
         }
-        public async Task<bool> Insert(CandidateModel candidate)
+        public async Task<ResultBus<bool>> Insert(CandidateModel candidate)
         {
+            var result = new ResultBus<bool>();
             try
             {
                 candidate.CandidateId = Guid.NewGuid().ToString();
                 candidate.StarDate = DateTime.Now;
-                if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
+                var errores = new List<string>();
+
+                if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates, out errores))
                 {
                     var insert = candidatesRepository.Insert(candidate);
                     var insertHis = await candidatesHistoriesBusiness.Insert(
@@ -39,15 +42,18 @@ namespace Cv.Business.Class
                         });
 
                     Task.WaitAll(insert);
-                    return true;
+                    result.Ok = true; ;
                 }
-                return false;
-
+                else
+                {
+                    result.AddError(errores);
+                }
             }
             catch (Exception)
             {
-                return false;
+                result.AddError("Error");
             }
+            return result;
         }
         public async Task<bool> Replace(CandidateModel candidate, string userID)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -6,11 +7,11 @@ namespace Cv.Business.Validations
 {
     public static class Validator
     {
-        public static bool ValidatePredicates<T>(T model, params Predicate<T>[] validations) where T : class
-            => validations.ToList().Where(v =>
-            {
-                return !v(model);
-            }).Count() == 0;
+        public static bool ValidatePredicates<T>(T model, Vali<T>[] validations, out List<string> errores) where T : class
+        {
+            errores = validations.ToList().Where(v => !v.Validate(model)).Select(x => x.Error).ToList();
+            return errores.Count > 0;
+        }
 
         public static bool Object(object obj) => obj != null;
 
