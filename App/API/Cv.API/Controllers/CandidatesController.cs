@@ -33,7 +33,7 @@ namespace Cv.API.Controllers
 
         [HttpGet]
         [Route("list")]
-        public async Task<PagedListModel<CandidateModel>> Get(CandidateSearch candidateSearch)
+        public async Task<PagedListModel<CandidateReduced>> Get(CandidateSearch candidateSearch)
         {
             return await candidatesBusiness.GetBy(
                 candidateSearch.companyId,

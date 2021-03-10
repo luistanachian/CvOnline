@@ -86,7 +86,7 @@ namespace Cv.Business.Class
 
             return null;
         }
-        public async Task<PagedListModel<CandidateModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
+        public async Task<PagedListModel<CandidateReduced>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
         {
             if (Validator.Guid(companyId))
                 return await candidatesRepository.GetBy(companyId, page, pageSize, name, skills, countryId, stateId, status);

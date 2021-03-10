@@ -5,6 +5,7 @@ using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cv.Repository.Class
@@ -28,7 +29,7 @@ namespace Cv.Repository.Class
         public async Task<CandidateModel> GetBy(string companyId, string candidateId) =>
             await candidatesDao.GetByFunc(fd.Where(c => c.CompanyId == companyId && c.CandidateId == candidateId));
 
-        public async Task<PagedListModel<CandidateModel>> GetBy(
+        public async Task<PagedListModel<CandidateReduced>> GetBy(
             string companyId,
             int page,
             PageSizeEnum pageSize,
@@ -38,7 +39,25 @@ namespace Cv.Repository.Class
             int stateId,
             StatusCandiateEnum? status = null)
         {
-            return await candidatesDao.GetByFunc(Filter(companyId, name, skills, countryId, stateId, status), page, pageSize);
+            var pglCandidate = await candidatesDao.GetByFunc(Filter(companyId, name, skills, countryId, stateId, status), page, pageSize);
+            PagedListModel<CandidateReduced> pagedListModel = new PagedListModel<CandidateReduced>
+            {
+                Count = pglCandidate.Count,
+                Pages = pglCandidate.Pages,
+                List = pglCandidate.List.Select(
+                    x => new CandidateReduced 
+                    {
+                        CandidateId = x.CandidateId,
+                        ClientOrSearchId = x.ClientOrSearchId,
+                        LastName = x.LastName,
+                        Name = x.Name,
+                        Photo = x.Photo,
+                        Role = x.Role,
+                        Seniority = x.Seniority,
+                        Status = x.Status
+                    }).OrderBy(x => x.LastName).ThenBy(x => x.Name).ToList()
+            };
+            return pagedListModel;
         }
 
         public async Task<long> Count(
