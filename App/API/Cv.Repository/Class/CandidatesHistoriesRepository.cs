@@ -9,7 +9,7 @@ namespace Cv.Repository.Class
     public class CandidatesHistoriesRepository : ICandidatesHistoriesRepository
     {
         private readonly ICandidatesHistoriesDao candidatesHistoriesDao;
-        private readonly FilterDefinitionBuilder<CandidateHistoryModel> fd;
+        private readonly FilterDefinitionBuilder<CandidateHistoryModel> fd = Builders<CandidateHistoryModel>.Filter;
         public CandidatesHistoriesRepository(ICandidatesHistoriesDao candidatesHistoriesDao)
         {
             this.candidatesHistoriesDao = candidatesHistoriesDao;

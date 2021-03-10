@@ -2,6 +2,7 @@
 using Cv.Models;
 using Cv.Models.Helpers;
 using Cv.Repository.Interface;
+using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Cv.Repository.Class
     public sealed class CountriesRepository : ICountriesRepository
     {
         private readonly ICountriesDao countriesDao;
+        private readonly FilterDefinitionBuilder<CountryModel> fd = Builders<CountryModel>.Filter;
         public CountriesRepository(ICountriesDao countriesDao)
         {
             this.countriesDao = countriesDao;
@@ -22,6 +24,7 @@ namespace Cv.Repository.Class
             .OrderBy(x => x.value)
             .ToList();
 
-        public async Task<CountryModel> GetById(int id) => await countriesDao.GetByFunc(e => e.id == id);
+        public async Task<CountryModel> GetById(int id) => 
+            await countriesDao.GetByFunc(fd.Eq(e => e.id, id));
     }
 }

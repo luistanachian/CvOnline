@@ -12,7 +12,7 @@ namespace Cv.Repository.Class
     public sealed class CandidatesRepository : ICandidatesRepository
     {
         private readonly ICandidatesDao candidatesDao;
-        private readonly FilterDefinitionBuilder<CandidateModel> fd;
+        private readonly FilterDefinitionBuilder<CandidateModel> fd = Builders<CandidateModel>.Filter;
         public CandidatesRepository(ICandidatesDao candidatesDao)
         {
             this.candidatesDao = candidatesDao;
@@ -50,7 +50,7 @@ namespace Cv.Repository.Class
             StatusCandiateEnum? status = null) =>
             await candidatesDao.Count(Filter(companyId, name, skills, countryId, stateId, status));
 
-        public FilterDefinition<CandidateModel> Filter(
+        private FilterDefinition<CandidateModel> Filter(
             string companyId,
             string name,
             List<string> skills,
@@ -59,18 +59,28 @@ namespace Cv.Repository.Class
             StatusCandiateEnum? status = null)
         {
             name ??= string.Empty;
+            name = name.Trim();
             skills ??= new List<string>();
+            skills.ForEach(s => s.Trim());
 
-            var filter = fd.Where(c => c.CompanyId == companyId && (countryId < 1 || c.CountryId == countryId) && (stateId < 1 || c.StateId == stateId))
-                & fd.Where(c => c.Name.Contains(name) || c.LastName.Contains(name));
-            // | (c.Name + " " + c.LastName).Contains(name) | (c.LastName + " " + c.Name).Contains(name));
+            var filterDefinitions = new List<FilterDefinition<CandidateModel>>
+            {
+                fd.Eq(c => c.CompanyId, companyId)
+            };
+
+            if (countryId < 1)
+                filterDefinitions.Add(fd.Eq(c => c.CountryId, countryId));
+
+            if (stateId < 1)
+                filterDefinitions.Add(fd.Eq(c => c.StateId, stateId));
+
+            if (!string.IsNullOrWhiteSpace(name))
+                filterDefinitions.Add(fd.Where(c => c.Name.Contains(name) || c.LastName.Contains(name)));
 
             if (skills.Count > 0)
-                filter = fd.Where(c => c.CompanyId == companyId && (countryId < 1 || c.CountryId == countryId) && (stateId < 1 || c.StateId == stateId))
-                    & fd.ElemMatch(e => e.ListSkills, Builders<SkillItem>.Filter.In(y => y.Skill, skills));
+                filterDefinitions.Add(fd.ElemMatch(e => e.ListSkills, Builders<SkillItem>.Filter.In(y => y.Skill, skills)));
 
-
-            return filter;
+            return fd.And(filterDefinitions);
         }
     }
 }
