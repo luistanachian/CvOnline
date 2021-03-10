@@ -68,10 +68,10 @@ namespace Cv.Repository.Class
                 fd.Eq(c => c.CompanyId, companyId)
             };
 
-            if (countryId < 1)
+            if (countryId > 0)
                 filterDefinitions.Add(fd.Eq(c => c.CountryId, countryId));
 
-            if (stateId < 1)
+            if (stateId > 0)
                 filterDefinitions.Add(fd.Eq(c => c.StateId, stateId));
 
             if (!string.IsNullOrWhiteSpace(name))
