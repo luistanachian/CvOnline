@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using MongoDB.Driver;
 using System.Threading.Tasks;
 
 namespace Cv.Dao.Base.Interface
 {
     public interface IDeleteDao<T> where T : class
     {
-        Task<long> Delete(Expression<Func<T, bool>> filter);
+        Task<long> Delete(FilterDefinition<T> filter);
     }
 }

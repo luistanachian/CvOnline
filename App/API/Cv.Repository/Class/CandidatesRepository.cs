@@ -4,10 +4,6 @@ using Cv.Models.Enums;
 using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
-using MongoDB.Driver.Linq;
-using System.Linq;
-using System.Linq.Expressions;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -41,24 +37,19 @@ namespace Cv.Repository.Class
             int stateId,
             StatusCandiateEnum? status = null)
         {
-            name = name?.Trim();
-
-            return await candidatesDao.GetByFunc(c =>
-                c.CompanyId == companyId &&
-                (status == null || c.Status == status) &&
-
-                //(skills == null || skills.Count == 0 ||  skills.All(x => c.ListSkills.Select(s => s.Skill).Contains(x))) &&
-                //(string.IsNullOrWhiteSpace(name) || (c.Name.Contains(name) || c.LastName.Contains(name) ||
-                //    $"{c.Name} {c.LastName}".Contains(name) || $"{c.LastName} {c.Name}".Contains(name))) &&
-
-
-                (countryId < 1 || c.CountryId == countryId) &&
-                (stateId < 1 || c.StateId == stateId),
-                page,
-                pageSize);
+            return await candidatesDao.GetByFunc(Filter(companyId, name, skills, countryId, stateId, status), page, pageSize);
         }
 
         public async Task<long> Count(
+            string companyId,
+            string name,
+            List<string> skills,
+            int countryId,
+            int stateId,
+            StatusCandiateEnum? status = null) =>
+            await candidatesDao.Count(Filter(companyId, name, skills, countryId, stateId, status));
+
+        public FilterDefinition<CandidateModel> Filter(
             string companyId,
             string name,
             List<string> skills,
@@ -79,7 +70,7 @@ namespace Cv.Repository.Class
                     & b.ElemMatch(e => e.ListSkills, Builders<SkillItem>.Filter.In(y => y.Skill, skills));
 
 
-            return await candidatesDao.Count(filter);
+            return filter;
         }
     }
 }

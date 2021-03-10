@@ -2,14 +2,7 @@
 using Cv.Ioc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Cv.Models.Enums;
-using Cv.Models;
-using System;
-using System.Collections.Generic;
-using Cv.Dao.Configurations;
-using MongoDB.Driver;
 using System.Threading.Tasks;
-using Cv.Models.Mock;
 
 namespace Cv.AppConsole
 {
