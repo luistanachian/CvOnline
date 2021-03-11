@@ -25,18 +25,18 @@ namespace Cv.API.Controllers
         public async Task<long> Count(CandidateSearch candidateSearch)
         {
             return await candidatesBusiness.Count(
-                candidateSearch.companyId, 
-                candidateSearch.name, 
-                candidateSearch.skills?.ToList(), 
-                candidateSearch.countryId, 
+                candidateSearch.companyId,
+                candidateSearch.name,
+                candidateSearch.skills?.ToList(),
+                candidateSearch.countryId,
                 candidateSearch.stateId,
                 candidateSearch.status);
         }
 
         [HttpGet]
         [Route("list")]
-        public async Task<IActionResult> Get(CandidateSearch candidateSearch) => 
-            Content(JsonConvert.SerializeObject(await candidatesBusiness.GetBy(
+        public async Task<PagedListModel<CandidateModel>> Get(CandidateSearch candidateSearch) =>
+            await candidatesBusiness.GetBy(
                 candidateSearch.companyId,
                 candidateSearch.page,
                 candidateSearch.pageSize,
@@ -44,7 +44,7 @@ namespace Cv.API.Controllers
                 candidateSearch.skills?.ToList(),
                 candidateSearch.countryId,
                 candidateSearch.stateId,
-                candidateSearch.status)));
+                candidateSearch.status);
 
         [HttpGet]
         [Route("{companyId}/{candidateId}")]
