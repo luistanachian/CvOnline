@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cv.API.Models;
 using Cv.Business.Interface;
 using Cv.Models;
 using Cv.Models.Helpers;
@@ -25,7 +26,6 @@ namespace Cv.API.Controllers
 
         [Route("{id}")]
         [HttpGet]
-        public async Task<JsonResult> Get(int id) =>
-            Json(JsonConvert.SerializeObject(await countriesBusiness.GetById(id)));
+        public async Task<CountryModel> Get(int id) => await countriesBusiness.GetById(id);
     }
 }

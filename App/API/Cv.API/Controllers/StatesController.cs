@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cv.API.Models;
 using Cv.Business.Interface;
 using Cv.Models;
 using Cv.Models.Helpers;
@@ -21,13 +22,12 @@ namespace Cv.API.Controllers
 
         [HttpGet]
         [Route("states/{countryId}")]
-        public async Task<IActionResult> GetList(int countryId) =>
-            Json(JsonConvert.SerializeObject(
-                (await statesBusiness.GetAllByCountryId(countryId)).Select(x => new { x.id, x.name }).ToList()));
+        public async Task<List<ComboResponse>> GetList(int countryId) =>
+            (await statesBusiness.GetAllByCountryId(countryId))
+            .Select(x => new ComboResponse { id = x.id, value = x.name }).ToList();
 
         [HttpGet]
         [Route("state/{id}")]
-        public async Task<IActionResult> GetOne(int id) => 
-            Json(JsonConvert.SerializeObject(await statesBusiness.GetByIdStateId(id)));
+        public async Task<StateModel> GetOne(int id) => await statesBusiness.GetByIdStateId(id);
     }
 }
