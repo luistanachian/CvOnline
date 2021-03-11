@@ -6,8 +6,6 @@ using Cv.Business.Interface;
 using Cv.Models;
 using Cv.Models.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft;
-using Newtonsoft.Json;
 
 namespace Cv.API.Controllers
 {
