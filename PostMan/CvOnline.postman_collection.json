@@ -1,0 +1,286 @@
+{
+	"info": {
+		"_postman_id": "33ab95bc-584b-4809-9e6e-0d8b7b291d12",
+		"name": "CvOnline",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Countries",
+			"item": [
+				{
+					"name": "All Countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44306/countries",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Country",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44306/countries/239",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"countries",
+								"239"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "States",
+			"item": [
+				{
+					"name": "All States by CountryId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44306/states/239",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"states",
+								"239"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "State",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44306/state/2047",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"state",
+								"2047"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Candidates",
+			"item": [
+				{
+					"name": "Insert",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CandidateId\": \"\",\r\n    \"CompanyId\": \"7a1e1935-e45a-4792-9c19-b0f3dbb43576\",\r\n    \"UserId\": \"7a1e1935-e45a-4792-9c19-b0f3dbb43576\",\r\n    \"StarDate\": \"2021-03-09T14:05:14.142Z\",\r\n    \"Status\": 3,\r\n    \"ClientOrSearchId\": \"f6091001-78fb-4037-860c-edd86b68a551\",\r\n    \"TemporaryUser\": {\r\n        \"User\": \"ltanachian\",\r\n        \"Passeord\": \"12345678\",\r\n        \"EndDate\" : \"2021-03-12T14:05:13.250Z\",\r\n        \"ErrorCounter\": 0,\r\n        \"EditPhoto\": true,\r\n        \"EditPersonalData\": false,\r\n        \"EditRelocate\": false,\r\n        \"EditLanguages\": false,\r\n        \"EditPortfolios\": true,\r\n        \"EditEducations\": false,\r\n        \"EditWorkExperiences\": false,\r\n        \"EditSkills\": false\r\n    },\r\n    \"Photo\": \"C://photo.jpg\",\r\n    \"Name\": \"Luis\",\r\n    \"LastName\": \"Tanachian\",\r\n    \"BirthDay\": \"1990-01-05\",\r\n    \"Sex\": \"M\",\r\n    \"Dni\": \"00000001\",\r\n    \"Nacionality\": \"VE\",\r\n    \"CountryId\": 78,\r\n    \"StateId\": 689,\r\n    \"AdressOne\": \"Bahia Blanca 317\",\r\n    \"AdressTwo\": \"Piso 2, depto F\",\r\n    \"PostalCode\": \"5000\",\r\n    \"Emails\": [\r\n        \"tanachian501@gmail.com\"\r\n    ],\r\n    \"Phones\": [\r\n        \"+5493517730268\"\r\n    ],\r\n    \"ListSocialNetworks\": [\r\n        \"https://www.facebook.com/artutanach/\",\r\n        \"https://www.instagram.com/tanach5/\"\r\n    ],\r\n    \"Occupation\": \"Tecnico en informatica\",\r\n    \"Role\": \"Dev .net\",\r\n    \"Seniority\": 2,\r\n    \"ListLanguages\": [\r\n        {\r\n            \"CodeLanguage\": \"ES\",\r\n            \"Level\": 4\r\n        },\r\n        {\r\n            \"CodeLanguage\": \"EN\",\r\n            \"Level\": 0\r\n        }\r\n    ],\r\n    \"ListPortfolios\": [\r\n        \"https://github.com/luistanachian\"\r\n    ],\r\n    \"WorkMode\": 3,\r\n    \"Relocate\": true,\r\n    \"DependentsOrPets\": \"Esposa e hijo\",\r\n    \"ListEducations\": [\r\n        {\r\n            \"Institute\": \"Upta Federico Brito Figueroa\",\r\n            \"EdutationType\": 3,\r\n            \"YearEnd\": \"2011\",\r\n            \"Current\": false,\r\n            \"Title\": \"TSU en Informatica\",\r\n            \"CountryId\": 123\r\n        },\r\n        {\r\n            \"Institute\": \"Kinetic corp\",\r\n            \"EdutationType\": 0,\r\n            \"YearEnd\": \"2020\",\r\n            \"Current\": false,\r\n            \"Title\": \".Net Core\",\r\n            \"CountryId\": 345\r\n        }\r\n    ],\r\n    \"ListWorkExperiences\": [\r\n        {\r\n            \"Role\": \"Developer .net\",\r\n            \"Company\": \"Bancor\",\r\n            \"StartDate\": \"2018-05-28\",\r\n            \"EndDate\": null,\r\n            \"Current\": true,\r\n            \"ListReferences\": [\r\n                {\r\n                    \"Name\": \"Fulanito\",\r\n                    \"LastName\": \"De Tal\",\r\n                    \"Phone\": \"+543511234567\",\r\n                    \"Email\": \"fulanito@gmail.com\",\r\n                    \"Role\": \"PM\",\r\n                    \"WorkRelationship\": 2,\r\n                    \"ReferenceAnswer\": \"Se dormia en el laburo\"\r\n                }\r\n            ],\r\n            \"Comment\": \"Trabajó para una consultora que le presta servicios a bancor\"\r\n        }\r\n    ],\r\n    \"ListSkills\": [\r\n        {\r\n            \"Skill\": \"C#\",\r\n            \"Score\": 9,\r\n            \"FrequencyUsed\": 4,\r\n            \"Months\": 11,\r\n            \"Years\": 9,\r\n            \"LastUsed\": null\r\n        },\r\n        {\r\n            \"Skill\": \"SQL\",\r\n            \"Score\": 10,\r\n            \"FrequencyUsed\": 4,\r\n            \"Months\": 0,\r\n            \"Years\": 9,\r\n            \"LastUsed\": \"2021-02-08\"\r\n        }\r\n    ],\r\n    \"Comments\": [\r\n        {\r\n            \"Date\": \"2021-03-09T14:05:13.254Z\",\r\n            \"User\": \"ltanachian\",\r\n            \"Comment\": \"Lo llame y no contesto\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44306/candidates",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"candidates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyId\": \"7a1e1935-e45a-4792-9c19-b0f3dbb43576\",\r\n    \"page\": 1,\r\n    \"pageSize\": 25,\r\n    \"countryId\": 0,\r\n    \"stateId\": 0,\r\n    \"status\": null,\r\n    \"name\": null,\r\n    \"skills\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44306/candidates/count",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"candidates",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyId\": \"7a1e1935-e45a-4792-9c19-b0f3dbb43576\",\r\n    \"page\": 1,\r\n    \"pageSize\": 25,\r\n    \"countryId\": 0,\r\n    \"stateId\": 0,\r\n    \"status\": null,\r\n    \"name\": null,\r\n    \"skills\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44306/candidates/list",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"candidates",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CandidateId\": \"02138667-01fa-4de1-b978-d62a27dcc800\",\r\n    \"CompanyId\": \"7a1e1935-e45a-4792-9c19-b0f3dbb43576\",\r\n    \"UserId\": \"7a1e1935-e45a-4792-9c19-b0f3dbb43576\",\r\n    \"StarDate\": \"2021-03-09T14:05:14.142Z\",\r\n    \"Status\": 3,\r\n    \"ClientOrSearchId\": \"f6091001-78fb-4037-860c-edd86b68a551\",\r\n    \"TemporaryUser\": {\r\n        \"User\": \"ltanachianaa\",\r\n        \"Passeord\": \"12345678\",\r\n        \"EndDate\" : \"2021-03-12T14:05:13.250Z\",\r\n        \"ErrorCounter\": 0,\r\n        \"EditPhoto\": true,\r\n        \"EditPersonalData\": false,\r\n        \"EditRelocate\": false,\r\n        \"EditLanguages\": false,\r\n        \"EditPortfolios\": true,\r\n        \"EditEducations\": false,\r\n        \"EditWorkExperiences\": false,\r\n        \"EditSkills\": false\r\n    },\r\n    \"Photo\": \"C://photo.jpg\",\r\n    \"Name\": \"Luis\",\r\n    \"LastName\": \"Tanachian\",\r\n    \"BirthDay\": \"1990-01-05\",\r\n    \"Sex\": \"M\",\r\n    \"Dni\": \"00000001\",\r\n    \"Nacionality\": \"VE\",\r\n    \"CountryId\": 78,\r\n    \"StateId\": 689,\r\n    \"AdressOne\": \"Bahia Blanca 317\",\r\n    \"AdressTwo\": \"Piso 2, depto F\",\r\n    \"PostalCode\": \"5000\",\r\n    \"Emails\": [\r\n        \"tanachian501@gmail.com\"\r\n    ],\r\n    \"Phones\": [\r\n        \"+5493517730268\"\r\n    ],\r\n    \"ListSocialNetworks\": [\r\n        \"https://www.facebook.com/artutanach/\",\r\n        \"https://www.instagram.com/tanach5/\"\r\n    ],\r\n    \"Occupation\": \"Tecnico en informatica\",\r\n    \"Role\": \"Dev .net\",\r\n    \"Seniority\": 2,\r\n    \"ListLanguages\": [\r\n        {\r\n            \"CodeLanguage\": \"ES\",\r\n            \"Level\": 4\r\n        },\r\n        {\r\n            \"CodeLanguage\": \"EN\",\r\n            \"Level\": 0\r\n        }\r\n    ],\r\n    \"ListPortfolios\": [\r\n        \"https://github.com/luistanachian\"\r\n    ],\r\n    \"WorkMode\": 3,\r\n    \"Relocate\": true,\r\n    \"DependentsOrPets\": \"Esposa e hijo\",\r\n    \"ListEducations\": [\r\n        {\r\n            \"Institute\": \"Upta Federico Brito Figueroa\",\r\n            \"EdutationType\": 3,\r\n            \"YearEnd\": \"2011\",\r\n            \"Current\": false,\r\n            \"Title\": \"TSU en Informatica\",\r\n            \"CountryId\": 123\r\n        },\r\n        {\r\n            \"Institute\": \"Kinetic corp\",\r\n            \"EdutationType\": 0,\r\n            \"YearEnd\": \"2020\",\r\n            \"Current\": false,\r\n            \"Title\": \".Net Core\",\r\n            \"CountryId\": 345\r\n        }\r\n    ],\r\n    \"ListWorkExperiences\": [\r\n        {\r\n            \"Role\": \"Developer .net\",\r\n            \"Company\": \"Bancor\",\r\n            \"StartDate\": \"2018-05-28\",\r\n            \"EndDate\": null,\r\n            \"Current\": true,\r\n            \"ListReferences\": [\r\n                {\r\n                    \"Name\": \"Fulanito\",\r\n                    \"LastName\": \"De Tal\",\r\n                    \"Phone\": \"+543511234567\",\r\n                    \"Email\": \"fulanito@gmail.com\",\r\n                    \"Role\": \"PM\",\r\n                    \"WorkRelationship\": 2,\r\n                    \"ReferenceAnswer\": \"Se dormia en el laburo\"\r\n                }\r\n            ],\r\n            \"Comment\": \"Trabajó para una consultora que le presta servicios a bancor\"\r\n        }\r\n    ],\r\n    \"ListSkills\": [\r\n        {\r\n            \"Skill\": \"C#\",\r\n            \"Score\": 9,\r\n            \"FrequencyUsed\": 4,\r\n            \"Months\": 11,\r\n            \"Years\": 9,\r\n            \"LastUsed\": null\r\n        },\r\n        {\r\n            \"Skill\": \"SQL\",\r\n            \"Score\": 10,\r\n            \"FrequencyUsed\": 4,\r\n            \"Months\": 0,\r\n            \"Years\": 9,\r\n            \"LastUsed\": \"2021-02-08\"\r\n        }\r\n    ],\r\n    \"Comments\": [\r\n        {\r\n            \"Date\": \"2021-03-09T14:05:13.254Z\",\r\n            \"User\": \"ltanachian\",\r\n            \"Comment\": \"Lo llame y no contesto\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44306/candidates?userId=hola2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"candidates"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "hola2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44306/candidates/a2eafd19-d8c2-4dd2-95f5-4c6fc47b7bb9",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"candidates",
+								"a2eafd19-d8c2-4dd2-95f5-4c6fc47b7bb9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Candidates Histories",
+			"item": [
+				{
+					"name": "History",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyId\": \"7a1e1935-e45a-4792-9c19-b0f3dbb43576\",\r\n    \"page\": 1,\r\n    \"pageSize\": 25,\r\n    \"countryId\": 0,\r\n    \"stateId\": 0,\r\n    \"status\": null,\r\n    \"name\": null,\r\n    \"skills\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44306/candidatesHistories/02138667-01fa-4de1-b978-d62a27dcc800",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"candidatesHistories",
+								"02138667-01fa-4de1-b978-d62a27dcc800"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
