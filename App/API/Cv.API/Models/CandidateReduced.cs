@@ -1,6 +1,6 @@
 ﻿using Cv.Models.Enums;
 
-namespace Cv.Models
+namespace Cv.API.Models
 {
     public class CandidateReduced
     {

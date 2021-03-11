@@ -5,6 +5,8 @@ using Cv.Business.Interface;
 using Cv.Models;
 using Cv.Models.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft;
+using Newtonsoft.Json;
 
 namespace Cv.API.Controllers
 {
@@ -33,9 +35,8 @@ namespace Cv.API.Controllers
 
         [HttpGet]
         [Route("list")]
-        public async Task<PagedListModel<CandidateReduced>> Get(CandidateSearch candidateSearch)
-        {
-            return await candidatesBusiness.GetBy(
+        public async Task<IActionResult> Get(CandidateSearch candidateSearch) => 
+            Content(JsonConvert.SerializeObject(await candidatesBusiness.GetBy(
                 candidateSearch.companyId,
                 candidateSearch.page,
                 candidateSearch.pageSize,
@@ -43,8 +44,7 @@ namespace Cv.API.Controllers
                 candidateSearch.skills?.ToList(),
                 candidateSearch.countryId,
                 candidateSearch.stateId,
-                candidateSearch.status);
-        }
+                candidateSearch.status)));
 
         [HttpGet]
         [Route("{companyId}/{candidateId}")]

@@ -17,7 +17,7 @@ namespace Cv.Business.Class
             this.countriesRepository = countriesRepository;
         }
 
-        public async Task<List<ComboResponse>> GetAll()
+        public async Task<List<CountryModel>> GetAll()
         {
             try
             {

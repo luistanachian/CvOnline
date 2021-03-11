@@ -20,57 +20,58 @@ namespace Cv.Business.Class
             this.candidatesRepository = candidatesRepository;
             this.candidatesHistoriesBusiness = candidatesHistoriesBusiness;
         }
-        public async Task<ResultBus<bool>> Insert(CandidateModel candidate)
+        public async Task<bool> Insert(CandidateModel candidate)
         {
-            var result = new ResultBus<bool>();
-            try
-            {
-                candidate.CandidateId = Guid.NewGuid().ToString();
-                candidate.StarDate = DateTime.Now;
-                var errores = new List<string>();
+            //var result = new ResultBus<bool>();
+            //try
+            //{
+            //    candidate.CandidateId = Guid.NewGuid().ToString();
+            //    candidate.StarDate = DateTime.Now;
+            //    var errores = new List<string>();
 
-                if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates, out errores))
-                {
-                    var insert = candidatesRepository.Insert(candidate);
-                    var insertHis = await candidatesHistoriesBusiness.Insert(
-                        candidate.CandidateId,
-                        new EventItem
-                        {
-                            UserId = candidate.UserId,
-                            Event = EventEnum.Insert,
-                            Date = DateTime.Now
-                        });
+            //    if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates, out errores))
+            //    {
+            //        var insert = candidatesRepository.Insert(candidate);
+            //        var insertHis = await candidatesHistoriesBusiness.Insert(
+            //            candidate.CandidateId,
+            //            new EventItem
+            //            {
+            //                UserId = candidate.UserId,
+            //                Event = EventEnum.Insert,
+            //                Date = DateTime.Now
+            //            });
 
-                    Task.WaitAll(insert);
-                    result.Ok = true; ;
-                }
-                else
-                {
-                    result.AddError(errores);
-                }
-            }
-            catch (Exception)
-            {
-                result.AddError("Error");
-            }
-            return result;
+            //        Task.WaitAll(insert);
+            //        result.Ok = true; ;
+            //    }
+            //    else
+            //    {
+            //        result.AddError(errores);
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    result.AddError("Error");
+            //}
+            //return result;
+            return true;
         }
         public async Task<bool> Replace(CandidateModel candidate, string userID)
         {
-            if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
-            {
-                if (await candidatesRepository.Replace(candidate))
-                {
-                    await candidatesHistoriesBusiness.Add(candidate.CandidateId,
-                    new EventItem
-                    {
-                        UserId = userID,
-                        Event = EventEnum.Update,
-                        Date = DateTime.Now
-                    });
-                    return true;
-                }
-            }
+            //if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates))
+            //{
+            //    if (await candidatesRepository.Replace(candidate))
+            //    {
+            //        await candidatesHistoriesBusiness.Add(candidate.CandidateId,
+            //        new EventItem
+            //        {
+            //            UserId = userID,
+            //            Event = EventEnum.Update,
+            //            Date = DateTime.Now
+            //        });
+            //        return true;
+            //    }
+            //}
             return false;
         }
         public async Task<bool> Delete(string id)
@@ -92,7 +93,7 @@ namespace Cv.Business.Class
 
             return null;
         }
-        public async Task<PagedListModel<CandidateReduced>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
+        public async Task<PagedListModel<CandidateModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
         {
             if (Validator.Guid(companyId))
                 return await candidatesRepository.GetBy(companyId, page, pageSize, name, skills, countryId, stateId, status);

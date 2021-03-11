@@ -18,11 +18,8 @@ namespace Cv.Repository.Class
             this.countriesDao = countriesDao;
         }
 
-        public async Task<List<ComboResponse>> GetAll() =>
-            (await countriesDao.GetAll()).OrderBy(c => c.name)
-            .Select(x => new ComboResponse { id = x.id, value = x.name})
-            .OrderBy(x => x.value)
-            .ToList();
+        public async Task<List<CountryModel>> GetAll() =>
+            (await countriesDao.GetAll()).OrderBy(c => c.name).OrderBy(x => x.name).ToList();
 
         public async Task<CountryModel> GetById(int id) => 
             await countriesDao.GetByFunc(fd.Eq(e => e.id, id));

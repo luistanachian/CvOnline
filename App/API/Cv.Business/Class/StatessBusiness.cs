@@ -17,7 +17,7 @@ namespace Cv.Business.Class
             this.statesRepository = statesRepository;
         }
 
-        public async Task<List<ComboResponse>> GetAllByCountryId(int id)
+        public async Task<List<StateModel>> GetAllByCountryId(int id)
         {
             try
             {

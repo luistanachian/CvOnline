@@ -7,7 +7,7 @@ namespace Cv.Repository.Interface
 {
     public interface ICountriesRepository
     {
-        Task<List<ComboResponse>> GetAll();
+        Task<List<CountryModel>> GetAll();
         Task<CountryModel> GetById(int id);
     }
 }

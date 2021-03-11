@@ -1,4 +1,5 @@
-﻿namespace Cv.Models.Helpers
+﻿
+namespace Cv.API.Models
 {
     public class ComboResponse
     {

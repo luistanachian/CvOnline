@@ -7,7 +7,7 @@ namespace Cv.Business.Interface
 {
     public interface IStatesBusiness
     {
-        Task<List<ComboResponse>> GetAllByCountryId(int id);
+        Task<List<StateModel>> GetAllByCountryId(int id);
         Task<StateModel> GetByIdStateId(int id);
     }
 }
