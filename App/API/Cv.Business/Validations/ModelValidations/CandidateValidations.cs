@@ -10,6 +10,7 @@ namespace Cv.Business.Validations
         public static readonly Vali<CandidateModel>[] Predicates =
         {
             new Vali<CandidateModel>{ Validate = (c) => Validator.Guid(c.CandidateId), Error = "CandidateId" },
+
             new Vali<CandidateModel>{ Validate = (c) => Validator.Guid(c.CompanyId), Error = "CompanyId" },
             new Vali<CandidateModel>{ Validate = (c) => ((c.Status == StatusCandiateEnum.ContractedOnClient || c.Status == StatusCandiateEnum.Taken) && Validator.Guid(c.ClientOrSearchId) ||
                    (c.Status != StatusCandiateEnum.ContractedOnClient && c.Status != StatusCandiateEnum.Taken && c.ClientOrSearchId == null)), Error = "ClientOrSearchId" },

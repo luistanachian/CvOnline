@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Cv.API.Models;
+using Cv.Business;
 using Cv.Business.Interface;
 using Cv.Models;
 using Cv.Models.Helpers;
@@ -55,12 +56,12 @@ namespace Cv.API.Controllers
 
 
         [HttpPut]
-        public async Task<bool> Insert(CandidateModel candidate)
+        public async Task<ResultBus<bool>> Insert(CandidateModel candidate)
         {
             return await candidatesBusiness.Insert(candidate);
         }
         [HttpPost]
-        public async Task<bool> Replace(string userId, CandidateModel candidate)
+        public async Task<ResultBus<bool>> Replace(string userId, CandidateModel candidate)
         {
             return await candidatesBusiness.Replace(candidate, userId);
         }

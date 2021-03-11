@@ -9,8 +9,8 @@ namespace Cv.Business.Validations
     {
         public static bool ValidatePredicates<T>(T model, Vali<T>[] validations, out List<string> errores) where T : class
         {
-            errores = validations.ToList().Where(v => !v.Validate(model)).Select(x => x.Error).ToList();
-            return errores.Count > 0;
+            errores = validations.Where(v => !v.Validate(model)).Select(x => x.Error).ToList();
+            return errores.Count == 0;
         }
 
         public static bool Object(object obj) => obj != null;
