@@ -88,38 +88,38 @@ namespace Cv.Business.Class
             result.Result = result.Ok;
             return result;
         }
-public async Task<bool> Delete(string id)
-{
-    if (Validator.Guid(id))
-    {
-        var taskCan = candidatesRepository.Delete(id);
-        var taskHis = candidatesHistoriesBusiness.Delete(id);
+        public async Task<bool> Delete(string id)
+        {
+            if (Validator.Guid(id))
+            {
+                var taskCan = candidatesRepository.Delete(id);
+                var taskHis = candidatesHistoriesBusiness.Delete(id);
 
-        return await taskCan && await taskHis;
-    }
+                return await taskCan && await taskHis;
+            }
 
-    return false;
-}
-public async Task<CandidateModel> GetBy(string companyId, string candidateId)
-{
-    if (Validator.Guid(companyId) && Validator.Guid(candidateId))
-        return await candidatesRepository.GetBy(companyId, candidateId);
+            return false;
+        }
+        public async Task<CandidateModel> GetBy(string companyId, string candidateId)
+        {
+            if (Validator.Guid(companyId) && Validator.Guid(candidateId))
+                return await candidatesRepository.GetBy(companyId, candidateId);
 
-    return null;
-}
-public async Task<PagedListModel<CandidateModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
-{
-    if (Validator.Guid(companyId))
-        return await candidatesRepository.GetBy(companyId, page, pageSize, name, skills, countryId, stateId, status);
+            return null;
+        }
+        public async Task<PagedListModel<CandidateModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
+        {
+            if (Validator.Guid(companyId))
+                return await candidatesRepository.GetBy(companyId, page, pageSize, name, skills, countryId, stateId, status);
 
-    return null;
-}
-public async Task<long> Count(string companyId, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
-{
-    if (Validator.Guid(companyId))
-        return await candidatesRepository.Count(companyId, name, skills, countryId, stateId, status);
+            return null;
+        }
+        public async Task<long> Count(string companyId, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
+        {
+            if (Validator.Guid(companyId))
+                return await candidatesRepository.Count(companyId, name, skills, countryId, stateId, status);
 
-    return 0;
-}
+            return 0;
+        }
     }
 }
