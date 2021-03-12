@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Cv.API.Models;
 using Cv.Business;
 using Cv.Business.Interface;
