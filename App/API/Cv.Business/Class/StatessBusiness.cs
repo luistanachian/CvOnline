@@ -1,6 +1,5 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
-using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using System;
 using System.Collections.Generic;

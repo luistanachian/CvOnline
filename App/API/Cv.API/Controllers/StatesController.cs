@@ -4,9 +4,7 @@ using System.Threading.Tasks;
 using Cv.API.Models;
 using Cv.Business.Interface;
 using Cv.Models;
-using Cv.Models.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace Cv.API.Controllers
 {
