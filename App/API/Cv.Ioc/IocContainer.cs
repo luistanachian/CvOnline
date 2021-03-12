@@ -28,6 +28,10 @@ namespace Cv.Ioc
             services.AddSingleton<ICandidatesRepository, CandidatesRepository>();
             services.AddSingleton<ICandidatesBusiness, CandidatesBusiness>();
 
+            services.AddSingleton<IClientsDao, ClientsDao>();
+            services.AddSingleton<IClientsRepository, ClientsRepository>();
+            services.AddSingleton<IClientsBusiness, ClientsBusiness>();
+
         }
     }
 }
