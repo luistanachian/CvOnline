@@ -7,11 +7,10 @@ using Cv.Models.Enums;
 using System.Threading.Tasks;
 using Cv.Models.Helpers;
 using System.Collections.Generic;
-using Cv.Models.Items;
 
 namespace Cv.Business.Class
 {
-    public sealed class ClientsBusiness //: IClientsBusiness
+    public sealed class ClientsBusiness : IClientsBusiness
     {
         private readonly IClientsRepository clientsRepository;
         public ClientsBusiness(IClientsRepository clientsRepository)
@@ -29,23 +28,11 @@ namespace Cv.Business.Class
 
                 if (Validator.ValidatePredicates(entity, ClientValidate.Predicates, out errores))
                 {
-                    var insert = clientsRepository.Insert(candidate);
-                    var insertHis = await clientsRepository.Insert(
-                        candidate.CandidateId,
-                        new EventItem
-                        {
-                            UserId = candidate.UserId,
-                            Event = EventEnum.Insert,
-                            Date = DateTime.Now
-                        });
-
-                    Task.WaitAll(insert);
+                    await clientsRepository.Insert(entity);
                     result.Ok = true;
                 }
                 else
-                {
                     result.AddError(errores);
-                }
             }
             catch (Exception)
             {
@@ -54,30 +41,19 @@ namespace Cv.Business.Class
             result.Result = result.Ok;
             return result;
         }
-        public async Task<ResultBus<bool>> Replace(CandidateModel candidate, string userID)
+        public async Task<ResultBus<bool>> Replace(ClientModel entity)
         {
             var result = new ResultBus<bool>();
             try
             {
                 var errores = new List<string>();
-                if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates, out errores))
+                if (Validator.ValidatePredicates(entity, ClientValidate.Predicates, out errores))
                 {
-                    if (await candidatesRepository.Replace(candidate))
-                    {
-                        await candidatesHistoriesBusiness.Add(candidate.CandidateId,
-                        new EventItem
-                        {
-                            UserId = userID,
-                            Event = EventEnum.Update,
-                            Date = DateTime.Now
-                        });
-                        result.Ok = true;
-                    }
+                    await clientsRepository.Replace(entity);
+                    result.Ok = true;
                 }
                 else
-                {
                     result.AddError(errores);
-                }
             }
             catch (Exception)
             {
@@ -89,33 +65,35 @@ namespace Cv.Business.Class
         public async Task<bool> Delete(string id)
         {
             if (Validator.Guid(id))
-            {
-                var taskCan = candidatesRepository.Delete(id);
-                var taskHis = candidatesHistoriesBusiness.Delete(id);
-
-                return await taskCan && await taskHis;
-            }
+                return await clientsRepository.Delete(id);
 
             return false;
         }
-        public async Task<CandidateModel> GetBy(string companyId, string candidateId)
+        public async Task<ClientModel> GetBy(string clientId)
         {
-            if (Validator.Guid(companyId) && Validator.Guid(candidateId))
-                return await candidatesRepository.GetBy(companyId, candidateId);
+            if (Validator.Guid(clientId))
+                return await clientsRepository.GetBy(clientId);
 
             return null;
         }
-        public async Task<PagedListModel<CandidateModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
+        public async Task<ClientModel> GetBy(string companyId, string code)
         {
             if (Validator.Guid(companyId))
-                return await candidatesRepository.GetBy(companyId, page, pageSize, name, skills, countryId, stateId, status);
+                return await clientsRepository.GetBy(companyId, code);
 
             return null;
         }
-        public async Task<long> Count(string companyId, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
+        public async Task<PagedListModel<ClientModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, int countryId, int stateId)
         {
             if (Validator.Guid(companyId))
-                return await candidatesRepository.Count(companyId, name, skills, countryId, stateId, status);
+                return await clientsRepository.GetBy(companyId, page, pageSize, name, countryId, stateId);
+
+            return null;
+        }
+        public async Task<long> Count(string companyId, string name, int countryId, int stateId)
+        {
+            if (Validator.Guid(companyId))
+                return await clientsRepository.Count(companyId, name, countryId, stateId);
 
             return 0;
         }
