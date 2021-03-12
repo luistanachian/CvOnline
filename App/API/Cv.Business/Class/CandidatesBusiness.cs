@@ -20,19 +20,17 @@ namespace Cv.Business.Class
             this.candidatesRepository = candidatesRepository;
             this.candidatesHistoriesBusiness = candidatesHistoriesBusiness;
         }
-        public async Task<ResultBus<bool>> Insert(CandidateModel candidate)
+        public async Task<ResultBus> Insert(CandidateModel candidate)
         {
-            var result = new ResultBus<bool>();
+            var result = new ResultBus();
             try
             {
                 candidate.CandidateId = Guid.NewGuid().ToString();
                 candidate.StarDate = DateTime.Now;
-                var errores = new List<string>();
-
-                if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates, out errores))
+                if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates, ref result))
                 {
                     var insert = candidatesRepository.Insert(candidate);
-                    var insertHis = await candidatesHistoriesBusiness.Insert(
+                    await candidatesHistoriesBusiness.Insert(
                         candidate.CandidateId,
                         new EventItem
                         {
@@ -43,27 +41,20 @@ namespace Cv.Business.Class
 
                     Task.WaitAll(insert);
                 }
-                else
-                    result.AddError(errores);
             }
-            catch (Exception)
-            {
-                result.AddError("Error");
-            }
-            result.Result = result.Ok;
+            catch (Exception) { result.AddError("Error"); }
+
             return result;
         }
-        public async Task<ResultBus<bool>> Replace(CandidateModel candidate, string userID)
+        public async Task<ResultBus> Replace(CandidateModel candidate, string userID)
         {
-            var result = new ResultBus<bool>();
+            var result = new ResultBus();
             try
             {
-                var errores = new List<string>();
-                if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates, out errores))
+                if (Validator.ValidatePredicates(candidate, CandidateValidate.Predicates, ref result))
                 {
                     if (await candidatesRepository.Replace(candidate))
                     {
-                        result.Result = true;
                         await candidatesHistoriesBusiness.Add(
                             candidate.CandidateId,
                             new EventItem
@@ -73,27 +64,27 @@ namespace Cv.Business.Class
                                 Date = DateTime.Now
                             });
                     }
+                    else
+                        result.AddError("No se guardo");
                 }
-                else
-                    result.AddError(errores);
             }
-            catch (Exception)
-            {
-                result.AddError("Error");
-            }
+            catch (Exception) { result.AddError("Error"); }
+
             return result;
         }
-        public async Task<bool> Delete(string id)
+        public async Task<ResultBus> Delete(string id)
         {
-            if (Validator.Guid(id))
+            var result = new ResultBus();
+            try
             {
-                var taskCan = candidatesRepository.Delete(id);
-                var taskHis = candidatesHistoriesBusiness.Delete(id);
-
-                return await taskCan && await taskHis;
+                if (!Validator.Guid(id) &&
+                    !await candidatesRepository.Delete(id) && 
+                    !await candidatesHistoriesBusiness.Delete(id))
+                        result.AddError("No se Elimino");
             }
+            catch (Exception) { result.AddError("Error"); }
 
-            return false;
+            return result;
         }
         public async Task<CandidateModel> GetBy(string companyId, string candidateId)
         {

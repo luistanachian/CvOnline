@@ -58,7 +58,7 @@ namespace Cv.Business.Class
             var result = new ResultBus();
             try
             {
-                if (Validator.Guid(id) && await clientsRepository.Delete(id))
+                if (!Validator.Guid(id) && !await clientsRepository.Delete(id))
                     result.AddError("No se elimino");
             }
             catch (Exception) { result.AddError("Error"); }

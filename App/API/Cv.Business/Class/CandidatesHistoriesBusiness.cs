@@ -16,23 +16,24 @@ namespace Cv.Business.Class
             this.candidatesHistoriesRepository = candidatesHistoriesRepository;
         }
 
-        public async Task<bool> Add(string candidateId, EventItem eventItem)
+        public async Task<ResultBus> Add(string candidateId, EventItem eventItem)
         {
+            var result = new ResultBus();
             try
             {
                 var his = await candidatesHistoriesRepository.GetBy(candidateId);
                 if (his != null && his.CandidateId == candidateId)
                 {
                     his.History.Add(eventItem);
-                    return await candidatesHistoriesRepository.Replace(his);
+                    if(await candidatesHistoriesRepository.Replace(his))
+                        result.AddError("");
                 }
-                return true;
+                else
+                    result.AddError("No se encontro el Candidato");
             }
-            catch (Exception)
-            {
-                return false;
-            }
+            catch (Exception) { result.AddError(""); }
 
+            return result;
         }
         public async Task<bool> Insert(string candidateID, EventItem eventItem)
         {
