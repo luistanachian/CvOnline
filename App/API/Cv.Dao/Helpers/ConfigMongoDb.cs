@@ -16,6 +16,7 @@ namespace Cv.Dao.Configurations
                 "CandidateHistoryModel" => "CandidatesHistories",
                 "CountryModel" => "Countries",
                 "StateModel" => "States",
+                "ClientModel" => "Clients",
                 _ => throw new Exception("The type of model, is not mapped."),
             };
         }

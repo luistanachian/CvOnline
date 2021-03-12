@@ -3,6 +3,7 @@ using Cv.Ioc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using Cv.Models.Mock;
 
 namespace Cv.AppConsole
 {
@@ -10,15 +11,18 @@ namespace Cv.AppConsole
     {
         private readonly ICountriesBusiness countriesBusiness;
         private readonly ICandidatesBusiness candidatesBusiness;
+        private readonly IClientsBusiness clientsBusiness;
         private readonly IStatesBusiness statesBusiness;
         public Program(
             ICountriesBusiness countriesBusiness,
             ICandidatesBusiness candidatesBusiness,
-            IStatesBusiness statesBusiness)
+            IStatesBusiness statesBusiness,
+            IClientsBusiness clientsBusiness)
         {
             this.countriesBusiness = countriesBusiness;
             this.candidatesBusiness = candidatesBusiness;
             this.statesBusiness = statesBusiness;
+            this.clientsBusiness = clientsBusiness;
         }
 
         public async static Task Main(string[] args)
@@ -29,15 +33,12 @@ namespace Cv.AppConsole
 
         public async Task Run()
         {
-            //var can = CandidateMock.CandidateOk;
+            var can = ClientMock.ClientOk;
 
-            //await candidatesBusiness.Delete(can.CandidateId);
-            //await candidatesBusiness.Insert(can);
-            //can.Dni = "00000000";
-            //await candidatesBusiness.Replace(can, can.UserId);
-            //await candidatesBusiness.Replace(can, can.UserId);
-            //can.Dni = "00000001";
-            //await candidatesBusiness.Replace(can, can.UserId);
+            await clientsBusiness.Delete(can.ClientId);
+            await clientsBusiness.Insert(can);
+            can.Document = "00000000";
+            await clientsBusiness.Replace(can);
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args)
