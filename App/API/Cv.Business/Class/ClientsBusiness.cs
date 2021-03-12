@@ -17,60 +17,53 @@ namespace Cv.Business.Class
         {
             this.clientsRepository = clientsRepository;
         }
-        public async Task<ResultBus<bool>> Insert(ClientModel entity)
+        public async Task<ResultBus> Insert(ClientModel entity)
         {
-            var result = new ResultBus<bool>();
+            var result = new ResultBus();
             try
             {
                 entity.ClientId = Guid.NewGuid().ToString();
                 entity.StarDate = DateTime.Now;
-                var errores = new List<string>();
-
-                if (Validator.ValidatePredicates(entity, ClientValidate.Predicates, out errores))
+                if (Validator.ValidatePredicates(entity, ClientValidate.Predicates, ref result))
                 {
                     if (await clientsRepository.CodeExists(entity.CompanyId, entity.ClientId, entity.Code))
                         result.AddError("El codigo ya existe");
                     else
                         await clientsRepository.Insert(entity);
                 }
-                else
-                    result.AddError(errores);
             }
-            catch (Exception)
-            {
-                result.AddError("Error");
-            }
-            result.Result = result.Ok;
+            catch (Exception) { result.AddError("Error"); }
+
             return result;
         }
-        public async Task<ResultBus<bool>> Replace(ClientModel entity)
+        public async Task<ResultBus> Replace(ClientModel entity)
         {
-            var result = new ResultBus<bool>();
+            var result = new ResultBus();
             try
             {
-                var errores = new List<string>();
-                if (Validator.ValidatePredicates(entity, ClientValidate.Predicates, out errores))
+                if (Validator.ValidatePredicates(entity, ClientValidate.Predicates, ref result))
                 {
                     if (await clientsRepository.CodeExists(entity.CompanyId, entity.ClientId, entity.Code))
                         result.AddError("El codigo ya existe");
-                    else
-                        result.Result = await clientsRepository.Replace(entity);
+                    else if (!await clientsRepository.Replace(entity))
+                        result.AddError("No se guardo");
                 }
-                else
-                    result.AddError(errores);
             }
-            catch (Exception)
-            {
-                result.AddError("Error");
-            }
+            catch (Exception) { result.AddError("Error"); }
+
             return result;
         }
-        public async Task<bool> Delete(string id)
+        public async Task<ResultBus> Delete(string id)
         {
-            if (Validator.Guid(id))
-                return await clientsRepository.Delete(id);
+            var result = new ResultBus();
+            try
+            {
+                if (Validator.Guid(id) && await clientsRepository.Delete(id))
+                    result.AddError("No se elimino");
+            }
+            catch (Exception) { result.AddError("Error"); }
 
-            return false;
+            return result;
         }
         public async Task<ClientModel> GetBy(string clientId)
         {

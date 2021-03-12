@@ -6,10 +6,14 @@ namespace Cv.Business.Validations
 {
     public static class Validator
     {
-        public static bool ValidatePredicates<T>(T model, Vali<T>[] validations, out List<string> errores) where T : class
+        public static bool ValidatePredicates<T>(T model, Vali<T>[] validations, ref ResultBus result) where T : class
         {
-            errores = validations.Where(v => !v.Validate(model)).Select(x => x.Error).ToList();
-            return errores.Count == 0;
+            var errores = validations.Where(v => !v.Validate(model)).Select(x => x.Error).ToList();
+
+            if (errores != null && errores.Count > 0)
+                result.AddError(errores);
+
+            return result.Ok;
         }
 
         public static bool Object(object obj) => obj != null;
