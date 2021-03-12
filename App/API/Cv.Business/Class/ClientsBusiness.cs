@@ -27,7 +27,12 @@ namespace Cv.Business.Class
                 var errores = new List<string>();
 
                 if (Validator.ValidatePredicates(entity, ClientValidate.Predicates, out errores))
-                    await clientsRepository.Insert(entity);
+                {
+                    if (await clientsRepository.CodeExists(entity.CompanyId, entity.ClientId, entity.Code))
+                        result.AddError("El codigo ya existe");
+                    else
+                        await clientsRepository.Insert(entity);
+                }
                 else
                     result.AddError(errores);
             }
@@ -45,7 +50,12 @@ namespace Cv.Business.Class
             {
                 var errores = new List<string>();
                 if (Validator.ValidatePredicates(entity, ClientValidate.Predicates, out errores))
-                    result.Result = await clientsRepository.Replace(entity);
+                {
+                    if (await clientsRepository.CodeExists(entity.CompanyId, entity.ClientId, entity.Code))
+                        result.AddError("El codigo ya existe");
+                    else
+                        result.Result = await clientsRepository.Replace(entity);
+                }
                 else
                     result.AddError(errores);
             }

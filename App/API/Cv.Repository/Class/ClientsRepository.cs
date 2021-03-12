@@ -32,6 +32,9 @@ namespace Cv.Repository.Class
         public async Task<ClientModel> GetBy(string companyId, string code) =>
             await clientsDao.GetByFunc(fd.Where(c => c.CompanyId == companyId && c.Code == code));
 
+        public async Task<bool> CodeExists(string companyId, string clientId, string code) =>
+            (await clientsDao.Count(fd.Where(c => c.CompanyId == companyId && c.ClientId != clientId && c.Code == code))) > 0;
+
         public async Task<PagedListModel<ClientModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, int countryId, int stateId) => 
             await clientsDao.GetByFunc(Filter(companyId, name, countryId, stateId), page, pageSize);
 
