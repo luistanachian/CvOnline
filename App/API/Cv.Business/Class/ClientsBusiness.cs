@@ -27,10 +27,7 @@ namespace Cv.Business.Class
                 var errores = new List<string>();
 
                 if (Validator.ValidatePredicates(entity, ClientValidate.Predicates, out errores))
-                {
                     await clientsRepository.Insert(entity);
-                    result.Ok = true;
-                }
                 else
                     result.AddError(errores);
             }
@@ -48,10 +45,7 @@ namespace Cv.Business.Class
             {
                 var errores = new List<string>();
                 if (Validator.ValidatePredicates(entity, ClientValidate.Predicates, out errores))
-                {
-                    await clientsRepository.Replace(entity);
-                    result.Ok = true;
-                }
+                    result.Result = await clientsRepository.Replace(entity);
                 else
                     result.AddError(errores);
             }
@@ -59,7 +53,6 @@ namespace Cv.Business.Class
             {
                 result.AddError("Error");
             }
-            result.Result = result.Ok;
             return result;
         }
         public async Task<bool> Delete(string id)

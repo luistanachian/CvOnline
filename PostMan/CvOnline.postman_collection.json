@@ -281,6 +281,151 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Insert",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ClientId\": \"\",\r\n    \"CompanyId\": \"7a1e1935-e45a-4792-9c19-b0f3dbb43576\",\r\n    \"StarDate\":\"2021-03-12T01:42:10.566Z\",\r\n    \"LastUpdate\":\"2021-03-12T01:42:09.631Z\",\r\n    \"BlackList\": false,\r\n    \"Code\": \"holaRamon\",\r\n    \"Name\": \"Ramona c.a\",\r\n    \"Document\": \"00000000\",\r\n    \"CountryId\": 1,\r\n    \"StateId\": 1,\r\n    \"AdressOne\": \"alvear 45\",\r\n    \"AdressTwo\": \"piso 2 depto f\",\r\n    \"PostalCode\": \"5000\",\r\n    \"Contacts\": [{\r\n        \"Name\": \"loka penelope\",\r\n        \"LastName\": \"bla bla\",\r\n        \"Role\": \"TL\",\r\n        \"Email\": \"lokapenelope@bla.com\",\r\n        \"Phone\": \"+543216549877\"\r\n    }],\r\n    \"SitesList\": [\"https://github.com/luistanachian\"],\r\n    \"Comments\": [{\r\n        \"Date\": \"2021-03-12T01:42:09.632Z\",\r\n        \"User\": \"ltanachian\",\r\n        \"Comment\": \"Lo llame y no contesto\"\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44306/client",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyId\": \"7a1e1935-e45a-4792-9c19-b0f3dbb43576\",\r\n    \"page\": 1,\r\n    \"pageSize\": 25,\r\n    \"countryId\": 0,\r\n    \"stateId\": 0,\r\n    \"status\": null,\r\n    \"name\": null,\r\n    \"skills\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44306/client/count",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"client",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyId\": \"7a1e1935-e45a-4792-9c19-b0f3dbb43576\",\r\n    \"page\": 1,\r\n    \"pageSize\": 25,\r\n    \"countryId\": 0,\r\n    \"stateId\": 0,\r\n    \"status\": null,\r\n    \"name\": null,\r\n    \"skills\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44306/client/list",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"client",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ClientId\": \"2c9735c4-daa2-4faf-83df-511003e9824a\",\r\n    \"CompanyId\": \"7a1e1935-e45a-4792-9c19-b0f3dbb43576\",\r\n    \"StarDate\":\"2021-03-12T01:42:10.566Z\",\r\n    \"LastUpdate\":\"2021-03-12T01:42:09.631Z\",\r\n    \"BlackList\": false,\r\n    \"Code\": \"holaRamons\",\r\n    \"Name\": \"Ramona c.a\",\r\n    \"Document\": \"00000000\",\r\n    \"CountryId\": 1,\r\n    \"StateId\": 1,\r\n    \"AdressOne\": \"alvear 45\",\r\n    \"AdressTwo\": \"piso 2 depto f\",\r\n    \"PostalCode\": \"5000\",\r\n    \"Contacts\": [{\r\n        \"Name\": \"loka penelope\",\r\n        \"LastName\": \"bla bla\",\r\n        \"Role\": \"TL\",\r\n        \"Email\": \"lokapenelope@bla.com\",\r\n        \"Phone\": \"+543216549877\"\r\n    }],\r\n    \"SitesList\": [\"https://github.com/luistanachian\"],\r\n    \"Comments\": [{\r\n        \"Date\": \"2021-03-12T01:42:09.632Z\",\r\n        \"User\": \"ltanachian\",\r\n        \"Comment\": \"Lo llame y no contesto\"\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44306/client",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44306/client/2c9735c4-daa2-4faf-83df-511003e9824a",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44306",
+							"path": [
+								"client",
+								"2c9735c4-daa2-4faf-83df-511003e9824a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

@@ -42,12 +42,9 @@ namespace Cv.Business.Class
                         });
 
                     Task.WaitAll(insert);
-                    result.Ok = true;
                 }
                 else
-                {
                     result.AddError(errores);
-                }
             }
             catch (Exception)
             {
@@ -66,26 +63,24 @@ namespace Cv.Business.Class
                 {
                     if (await candidatesRepository.Replace(candidate))
                     {
-                        await candidatesHistoriesBusiness.Add(candidate.CandidateId,
-                        new EventItem
-                        {
-                            UserId = userID,
-                            Event = EventEnum.Update,
-                            Date = DateTime.Now
-                        });
-                        result.Ok = true;
+                        result.Result = true;
+                        await candidatesHistoriesBusiness.Add(
+                            candidate.CandidateId,
+                            new EventItem
+                            {
+                                UserId = userID,
+                                Event = EventEnum.Update,
+                                Date = DateTime.Now
+                            });
                     }
                 }
                 else
-                {
                     result.AddError(errores);
-                }
             }
             catch (Exception)
             {
                 result.AddError("Error");
             }
-            result.Result = result.Ok;
             return result;
         }
         public async Task<bool> Delete(string id)

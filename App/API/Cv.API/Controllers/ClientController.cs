@@ -25,7 +25,7 @@ namespace Cv.API.Controllers
         public async Task<ResultBus<bool>> Replace(ClientModel entity) => await clientsBusiness.Replace(entity);
 
         [HttpDelete]
-        [Route("{candidateId}")]
+        [Route("{clientId}")]
         public async Task<bool> Delete(string clientId) => await clientsBusiness.Delete(clientId);
 
         [HttpGet]
