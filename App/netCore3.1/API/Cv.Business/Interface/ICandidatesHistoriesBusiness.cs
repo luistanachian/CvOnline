@@ -6,7 +6,7 @@ namespace Cv.Business.Interface
 {
     public interface ICandidatesHistoriesBusiness
     {
-        Task<bool> Add(string candidateId, EventItem eventItem);
+        Task<ResultBus> Add(string candidateId, EventItem eventItem);
         Task<bool> Insert(string candidateID, EventItem eventItem);
         Task<bool> Delete(string id);
         Task<CandidateHistoryModel> GetBy(string candidateId);

@@ -54,19 +54,19 @@ namespace Cv.API.Controllers
 
 
         [HttpPut]
-        public async Task<ResultBus<bool>> Insert(CandidateModel candidate)
+        public async Task<ResultBus> Insert(CandidateModel candidate)
         {
             return await candidatesBusiness.Insert(candidate);
         }
         [HttpPost]
-        public async Task<ResultBus<bool>> Replace(string userId, CandidateModel candidate)
+        public async Task<ResultBus> Replace(string userId, CandidateModel candidate)
         {
             return await candidatesBusiness.Replace(candidate, userId);
         }
 
         [HttpDelete]
         [Route("{candidateId}")]
-        public async Task<bool> Delete(string candidateId)
+        public async Task<ResultBus> Delete(string candidateId)
         {
             return await candidatesBusiness.Delete(candidateId);
         }

@@ -19,14 +19,14 @@ namespace Cv.API.Controllers
         }
 
         [HttpPut]
-        public async Task<ResultBus<bool>> Insert(ClientModel entity) => await clientsBusiness.Insert(entity);
+        public async Task<ResultBus> Insert(ClientModel entity) => await clientsBusiness.Insert(entity);
 
         [HttpPost]
-        public async Task<ResultBus<bool>> Replace(ClientModel entity) => await clientsBusiness.Replace(entity);
+        public async Task<ResultBus> Replace(ClientModel entity) => await clientsBusiness.Replace(entity);
 
         [HttpDelete]
         [Route("{clientId}")]
-        public async Task<bool> Delete(string clientId) => await clientsBusiness.Delete(clientId);
+        public async Task<ResultBus> Delete(string clientId) => await clientsBusiness.Delete(clientId);
 
         [HttpGet]
         [Route("count")]
