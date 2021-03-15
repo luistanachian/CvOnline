@@ -1,11 +1,4 @@
-﻿using Cv.Models;
-using Cv.Repository.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cv.Business.Class
+﻿namespace Cv.Business.Class
 {
     public class CompaniesBusiness //: ICompaniesBusiness
     {

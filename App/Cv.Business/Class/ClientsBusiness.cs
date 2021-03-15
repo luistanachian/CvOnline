@@ -6,7 +6,6 @@ using System;
 using Cv.Models.Enums;
 using System.Threading.Tasks;
 using Cv.Models.Helpers;
-using System.Collections.Generic;
 
 namespace Cv.Business.Class
 {

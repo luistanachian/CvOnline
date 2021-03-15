@@ -1,11 +1,4 @@
-﻿using Cv.Business.Class;
-using Cv.Models;
-using Cv.Repository.Interface;
-using Moq;
-using NUnit.Framework;
-using System.Collections.Generic;
-
-namespace Cv.Test
+﻿namespace Cv.Test
 {
     public class Test_StatesBusiness
     {

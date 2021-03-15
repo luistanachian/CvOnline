@@ -1,10 +1,3 @@
-using Cv.Business.Class;
-using Cv.Models;
-using Cv.Repository.Interface;
-using Moq;
-using NUnit.Framework;
-using System;
-
 namespace Cv.Test
 {
     public class Test_CandidateBusiness
