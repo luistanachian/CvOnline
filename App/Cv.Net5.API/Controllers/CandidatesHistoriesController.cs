@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cv.Net5.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CandidatesHistoriesController : ControllerBase
     {
