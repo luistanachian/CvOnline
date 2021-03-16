@@ -2,10 +2,10 @@
 {
     public enum WorkRelationshipEnum
     {
+        Other,
         Subordinate,
         Coworker,
         Supervisor,
-        Boss,
-        Other
+        Boss
     }
 }

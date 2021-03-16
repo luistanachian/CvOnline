@@ -1,4 +1,5 @@
-﻿using Cv.Models.Items;
+﻿using Cv.Commons;
+using Cv.Models.Items;
 using System;
 using System.Collections.Generic;
 
@@ -37,7 +38,6 @@ namespace Cv.Models.Mock
                 {
                     new CommentItem
                     {
-                        Date = DateTime.Now,
                         User = "ltanachian",
                         Comment = "Lo llame y no contesto"
                     }

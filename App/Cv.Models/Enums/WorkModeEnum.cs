@@ -2,6 +2,7 @@
 {
     public enum WorkModeEnum
     {
+        None,
         Remote,
         OnSite,
         Mixed,

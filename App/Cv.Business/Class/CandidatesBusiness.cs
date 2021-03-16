@@ -26,7 +26,7 @@ namespace Cv.Business.Class
             {
                 candidate.CandidateId = Guid.NewGuid().ToString();
                 candidate.Status = (int)StatusCandiateEnum.Available;
-                candidate.Sex = candidate.Sex == null ? string.Empty : candidate.Sex.ToLower();
+                candidate.Sex = candidate.Sex?.ToLower();
 
                 var insert = candidatesRepository.Insert(candidate);
                 await candidatesHistoriesBusiness.Insert(

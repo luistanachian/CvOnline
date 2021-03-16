@@ -51,55 +51,54 @@ namespace Cv.Models
         [Range(0, 4892)]
         public int StateId { get; set; }
 
-        //[MaxLength(100)]
-        //public string AdressOne { get; set; }
+        [MaxLength(100)]
+        public string AdressOne { get; set; }
 
-        //[MaxLength(100)]
-        //public string AdressTwo { get; set; }
+        [MaxLength(100)]
+        public string AdressTwo { get; set; }
 
-        //[MaxLength(10)]
-        //public string PostalCode { get; set; }
+        [MaxLength(10)]
+        public string PostalCode { get; set; }
 
-        //[Required]
-        //[EmailAddress]
-        //public string Email { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Mail { get; set; }
 
-        //[Required]
-        //[Phone]
-        //public string Phone { get; set; }
+        [Phone]
+        [MinLength(7)]
+        public string Phone { get; set; }
 
-        //[MaxLength(50)]
-        //public string Occupation { get; set; }
+        [MaxLength(50)]
+        public string Occupation { get; set; }
 
-        //[MaxLength(50)]
-        //public string Role { get; set; }
+        [MaxLength(50)]
+        public string Role { get; set; }
 
-        //[EnumDataType(typeof(SeniorityEnum))]
-        //public int Seniority { get; set; }
+        [EnumDataType(typeof(SeniorityEnum))]
+        public int Seniority { get; set; }
 
-        //[EnumDataType(typeof(WorkModeEnum))]
-        //public int WorkMode { get; set; }
+        [EnumDataType(typeof(WorkModeEnum))]
+        public int WorkMode { get; set; }
 
-        //[Required]
-        //public bool Relocate { get; set; }
+        public bool Relocate { get; set; }
 
-        //[MaxLength(100)]
-        //public string DependentsOrPets { get; set; }
+        [MaxLength(100)]
+        public string DependentsOrPets { get; set; }
 
 
         //// listas
 
-        //[MaxLength(5)]
-        //[LinksAttribute]
-        //public List<string> ListSocialNetworks { get; set; }
+        [MaxLength(5)]
+        [Links]
+        public List<string> SocialNetworks { get; set; }
+
+        [MaxLength(5)]
+        [Links]
+        public List<string> Portfolios { get; set; }
 
         //[Required]
         //[MaxLength(5)]
         //public List<LanguageItem> ListLanguages { get; set; }
-
-        //[MaxLength(5)]
-        //[LinksAttribute]
-        //public List<string> ListPortfolios { get; set; }
 
         //[MaxLength(20)]
         //public List<EducationItem> ListEducations { get; set; }
@@ -111,8 +110,7 @@ namespace Cv.Models
         //[MaxLength(100)]
         //public List<SkillItem> ListSkills { get; set; }
 
-        //[MaxLength(100)]
-        //[CommentAttribute]
-        //public List<CommentItem> Comments { get; set; }
+
+        public List<CommentItem> Comments { get; set; }
     }
 }

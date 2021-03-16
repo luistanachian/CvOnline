@@ -2,6 +2,7 @@
 {
     public enum EducationTypeEnum
     {
+        None,
         Course,
         Certificate,
         HighSchool,

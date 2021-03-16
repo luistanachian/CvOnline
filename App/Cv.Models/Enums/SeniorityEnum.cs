@@ -2,6 +2,7 @@
 {
     public enum SeniorityEnum
     {
+        None,
         Junior,
         SemiSenior,
         Senior
