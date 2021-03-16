@@ -24,7 +24,7 @@ namespace Cv.Models
         [Required]
         public bool Current { get; set; }
 
-        [MaxLength(3)]
+        [MaxLength(5)]
         public List<ReferenceItem> ListReferences { get; set; }
 
         [MaxLength(200)]

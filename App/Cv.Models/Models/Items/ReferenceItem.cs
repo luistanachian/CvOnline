@@ -1,4 +1,5 @@
 ﻿using Cv.Models.Enums;
+using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace Cv.Models
@@ -7,7 +8,7 @@ namespace Cv.Models
     {
         [Required]
         [MaxLength(50)]
-        public string Name { get; set; }
+        public string FullName { get; set; }
 
         [Phone]
         public string Phone { get; set; }

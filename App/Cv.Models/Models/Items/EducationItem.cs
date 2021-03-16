@@ -1,4 +1,4 @@
-﻿using Cv.Commons;
+﻿using Cv.Models.Attributes;
 using Cv.Models.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -14,11 +14,9 @@ namespace Cv.Models
         [EnumDataType(typeof(EducationTypeEnum))]
         public int EdutationType { get; set; }
 
-        [Required]
-        [RegularExpression(RegexConst.Date_YYYY)]
+        [YearAttribute]
         public int YearEnd { get; set; }
 
-        [Required]
         public bool Current { get; set; }
 
         [Required]

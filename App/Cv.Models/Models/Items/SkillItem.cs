@@ -1,4 +1,5 @@
 ﻿using Cv.Commons;
+using Cv.Models.Attributes;
 using Cv.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 
@@ -26,8 +27,10 @@ namespace Cv.Models
         [Range(0, 40)]
         public int Years { get; set; }
 
+        public bool Current { get; set; }
+
         [Required]
-        [RegularExpression(RegexConst.Date_YYYYMM)]
-        public string LastUsed { get; set; }
+        [YearAttribute]
+        public int LastYearUsed { get; set; }
     }
 }

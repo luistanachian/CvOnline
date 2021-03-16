@@ -1,6 +1,5 @@
 ﻿using Cv.Commons;
 using Cv.Models.Attributes;
-using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,6 +8,7 @@ namespace Cv.Models
     public class CommentItem
     {
         [Required]
+        [FullDateAttribute]
         public DateTime Date { get; set; }
 
         [Required]

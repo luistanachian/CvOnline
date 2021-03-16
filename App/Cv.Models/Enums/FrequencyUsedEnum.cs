@@ -2,7 +2,6 @@
 {
     public enum  FrequencyUsedEnum
     {
-        None,
         VeryLittle,
         Little,
         Medium,

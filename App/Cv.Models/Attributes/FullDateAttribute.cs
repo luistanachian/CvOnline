@@ -1,9 +1,5 @@
-﻿using Cv.Commons;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace Cv.Models.Attributes
 {
@@ -11,8 +7,8 @@ namespace Cv.Models.Attributes
     {
         public override bool IsValid(object value)
         {
-            var fecha = value as string;
-            return DateTime.TryParseExact(fecha, ValuesReadonly.FormatDate_yyyyMMdd_hhmmss, null, System.Globalization.DateTimeStyles.None, out DateTime date);
+            var date = value as DateTime?;
+            return date != null && date <= DateTime.Now;
         }
     }
 }

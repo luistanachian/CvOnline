@@ -1,6 +1,5 @@
 ﻿using Cv.Models.Enums;
 using System;
-using System.Collections.Generic;
 
 namespace Cv.Models.Mock
 {
