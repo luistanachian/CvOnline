@@ -2,8 +2,8 @@
 {
     public enum EventEnum
     {
-        Insert = 0,
-        Update = 1,
-        Delete = 2,
+        Insert,
+        Update,
+        Delete,
     }
 }

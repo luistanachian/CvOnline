@@ -6,7 +6,7 @@ namespace Cv.Net5.API.Models
     {
         public string companyId { get; set; }
         public int page { get; set; }
-        public PageSizeEnum pageSize { get; set; }
+        public int pageSize { get; set; }
         public int countryId { get; set; }
         public int stateId { get; set; }
         public StatusCandiateEnum? status { get; set; }

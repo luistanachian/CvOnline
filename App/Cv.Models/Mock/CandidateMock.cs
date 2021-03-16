@@ -6,29 +6,18 @@ namespace Cv.Models.Mock
 {
     public static class CandidateMock
     {
-        public static readonly CandidateModel CandidateOk = new CandidateModel
+        public static readonly CandidateModel CandidateOk = new()
         {
             CandidateId = "7a1e1935-e45a-4792-9c19-b0f3dbb43576",
             CompanyId ="7a1e1935-e45a-4792-9c19-b0f3dbb43576",
-            UserId = "7a1e1935-e45a-4792-9c19-b0f3dbb43576",
-            StarDate = DateTime.Now.AddDays(-5),
-            Status = StatusCandiateEnum.ContractedOnClient,
+            Status = (int)StatusCandiateEnum.ContractedOnClient,
             ClientOrSearchId = Guid.NewGuid().ToString(),
-            TemporaryUser = new TemporaryUserItem
-            {
-                User = "ltanachian",
-                Passeord = "12345678",
-                EndDate = DateTime.Now.AddDays(3),
-                EditPortfolios = true,
-                EditPhoto = true
-            },
-            Photo = "C://photo.jpg",
             Name = "Luis",
             LastName = "Tanachian",
             BirthDay = "1990-01-05",
             Sex = "M",
             Dni = "95900127",
-            Nacionality = "VE",
+            Nacionality = 239,
             Occupation = "Tecnico en informatica",
             Role = "Dev .net",
             CountryId = 78,
@@ -36,7 +25,7 @@ namespace Cv.Models.Mock
             AdressOne = "Bahia Blanca 317",
             AdressTwo = "Piso 2, depto F",
             PostalCode = "5000",
-            Seniority = SeniorityEnum.Senior,
+            Seniority = (int)SeniorityEnum.Senior,
             Email = "tanachian501@gmail.com",
             Phone =  "+5493517730268",
             ListSocialNetworks = new List<string> { "https://www.facebook.com/artutanach/", "https://www.instagram.com/tanach5/" },
@@ -46,7 +35,7 @@ namespace Cv.Models.Mock
                     new LanguageItem { CodeLanguage = "EN", Level = LevelLanguageEnum.Basic }
                 },
             ListPortfolios = new List<string> { "https://github.com/luistanachian" },
-            WorkMode = WorkModeEnum.Any,
+            WorkMode = (int)WorkModeEnum.Any,
             Relocate = true,
             DependentsOrPets = "Esposa e hijo",
             ListEducations = new List<EducationItem>
@@ -54,18 +43,18 @@ namespace Cv.Models.Mock
                     new EducationItem
                     {
                         CountryId = 123,
-                        EdutationType = EducationTypeEnum.Technician,
+                        EdutationType = (int)EducationTypeEnum.Technician,
                         Institute = "Upta Federico Brito Figueroa",
-                        YearEnd = "2011",
+                        YearEnd = 2011,
                         Current = false,
                         Title = "TSU en Informatica"
                     },
                     new EducationItem
                     {
                         CountryId = 345,
-                        EdutationType = EducationTypeEnum.Course,
+                        EdutationType = (int)EducationTypeEnum.Course,
                         Institute = "Kinetic corp",
-                        YearEnd = "2020",
+                        YearEnd = 2020,
                         Current = false,
                         Title = ".Net Core"
                     }
@@ -83,12 +72,11 @@ namespace Cv.Models.Mock
                         {
                             new ReferenceItem
                             {
-                                Name = "Fulanito",
-                                LastName = "De Tal",
+                                Name = "Fulanito de tal",
                                 Email = "fulanito@gmail.com",
                                 Phone = "+543511234567",
                                 Role = "PM",
-                                WorkRelationship = WorkRelationshipEnum.Supervisor,
+                                WorkRelationship = (int)WorkRelationshipEnum.Supervisor,
                                 ReferenceAnswer = "Se dormia en el laburo"
                             }
                         },
@@ -101,18 +89,18 @@ namespace Cv.Models.Mock
                     new SkillItem
                     {
                         Skill = "C#",
-                        FrequencyUsed = FrequencyUsedEnum.EveryEay,
+                        FrequencyUsed = (int)FrequencyUsedEnum.EveryEay,
                         LastUsed = null,
-                        Score = 9,
+                        SelfEvaluation = 9,
                         Months = 11,
                         Years = 9
                     },
                     new SkillItem
                     {
                         Skill = "SQL",
-                        FrequencyUsed = FrequencyUsedEnum.EveryEay,
+                        FrequencyUsed = (int)FrequencyUsedEnum.EveryEay,
                         LastUsed = "2021-02-08",
-                        Score = 10,
+                        SelfEvaluation = 10,
                         Months = 0,
                         Years = 9
                     }

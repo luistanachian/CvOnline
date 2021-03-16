@@ -2,10 +2,6 @@
 {
     public enum StatusAssignedCandidateEnum
     {
-        InterviewRecruiter = 0,
-        Test = 1,
-        InterviewClient = 2,
-        Hired = 3,
-        Rejected = 4
+        InterviewRecruiter, Test, InterviewClient, Hired, Rejected
     }
 }

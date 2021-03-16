@@ -2,9 +2,9 @@
 {
     public enum WorkModeEnum
     {
-        Remote = 0,
-        OnSite = 1,
-        Mixed = 2,
-        Any = 3
+        Remote,
+        OnSite,
+        Mixed,
+        Any
     }
 }

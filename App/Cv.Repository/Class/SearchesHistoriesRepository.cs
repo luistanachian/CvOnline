@@ -1,6 +1,5 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
-using Cv.Models.Enums;
 using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
@@ -21,7 +20,7 @@ namespace Cv.Repository.Class
 
         public async Task<bool> Delete(string id) => (await searchesHistoriesDao.Delete(fd.Eq(c => c.SearchId, id))) > 0;
 
-        public async Task<PagedListModel<SearchHistoryModel>> GetBy(string searchId, int page, PageSizeEnum pageSize) => 
+        public async Task<PagedListModel<SearchHistoryModel>> GetBy(string searchId, int page, int pageSize) => 
             await searchesHistoriesDao.GetByFunc(fd.Eq(c => c.SearchId, searchId), page, pageSize);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
-using Cv.Models.Enums;
 using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
@@ -32,7 +31,7 @@ namespace Cv.Repository.Class
         public async Task<UserModel> GetBy(string email, string password) =>
             await usersDao.GetByFunc(fd.Where(c => c.Email == email && c.Password == password));
 
-        public async Task<PagedListModel<UserModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name) => 
+        public async Task<PagedListModel<UserModel>> GetBy(string companyId, int page, int pageSize, string name) => 
             await usersDao.GetByFunc(Filter(companyId, name), page, pageSize);
 
         public async Task<long> Count(string companyId, string name) => 

@@ -31,7 +31,7 @@ namespace Cv.Repository.Class
         public async Task<PagedListModel<CandidateModel>> GetBy(
             string companyId,
             int page,
-            PageSizeEnum pageSize,
+            int pageSize,
             string name,
             List<string> skills,
             int countryId,

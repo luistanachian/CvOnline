@@ -1,6 +1,5 @@
 ﻿using Cv.Dao.Base.Interface;
 using Cv.Dao.Configurations;
-using Cv.Models.Enums;
 using Cv.Models.Helpers;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -28,7 +27,7 @@ namespace Cv.Dao.Base.Class
         public async Task<T> GetByFunc(FilterDefinition<T> filter) => 
             (await ConnectionsMongoDb<T>.GetCollection().Find(filter).Limit(1).ToListAsync())?[0];
 
-        public async Task<PagedListModel<T>> GetByFunc(FilterDefinition<T> filter, int page, PageSizeEnum pageSize)
+        public async Task<PagedListModel<T>> GetByFunc(FilterDefinition<T> filter, int page, int pageSize)
         {
             var count = ConnectionsMongoDb<T>.GetCollection().CountDocumentsAsync(filter);
             var data = ConnectionsMongoDb<T>.GetCollection().Find(filter)
@@ -40,7 +39,7 @@ namespace Cv.Dao.Base.Class
             {
                 Count = await count,
                 List = await data,
-                Pages = pageSize == PageSizeEnum.All ? 1 : ((await count + (long)pageSize - 1) / (long)pageSize)
+                Pages = pageSize == 0 ? 1 : ((await count + (long)pageSize - 1) / (long)pageSize)
             };
         }
         public async Task<long> Count(FilterDefinition<T> filter) =>

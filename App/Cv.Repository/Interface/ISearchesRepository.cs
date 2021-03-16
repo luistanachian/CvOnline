@@ -1,5 +1,4 @@
 ﻿using Cv.Models;
-using Cv.Models.Enums;
 using Cv.Models.Helpers;
 using System.Threading.Tasks;
 
@@ -11,7 +10,7 @@ namespace Cv.Repository.Interface
         Task<bool> Replace(SearchModel entity);
         Task<bool> Delete(string searchId);
         Task<SearchModel> GetBy(string searchId);
-        Task<PagedListModel<SearchModel>> GetBy(string clientId, int page, PageSizeEnum pageSize);
+        Task<PagedListModel<SearchModel>> GetBy(string clientId, int page, int pageSize);
         Task<long> Count(string clientId);
     }
 }

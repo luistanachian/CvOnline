@@ -1,10 +1,6 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cv.Net5.API.Controllers

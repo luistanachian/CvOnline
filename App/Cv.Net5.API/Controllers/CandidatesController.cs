@@ -3,10 +3,7 @@ using Cv.Business.Interface;
 using Cv.Models;
 using Cv.Models.Helpers;
 using Cv.Net5.API.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -49,8 +46,8 @@ namespace Cv.Net5.API.Controllers
             await candidatesBusiness.GetBy(companyId, candidateId);
 
         [HttpPut]
-        public async Task<ResultBus> Insert(CandidateModel candidate) =>
-            await candidatesBusiness.Insert(candidate);
+        public async Task<ResultBus> Insert(string userId, CandidateModel candidate) =>
+            await candidatesBusiness.Insert(candidate, userId);
 
         [HttpPost]
         public async Task<ResultBus> Replace(string userId, CandidateModel candidate) =>

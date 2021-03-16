@@ -13,7 +13,7 @@ namespace Cv.Repository.Interface
         Task<bool> Replace(CandidateModel entity);
         Task<bool> Delete(string id);
         Task<CandidateModel> GetBy(string companyId, string candidateId);
-        Task<PagedListModel<CandidateModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null);
+        Task<PagedListModel<CandidateModel>> GetBy(string companyId, int page, int pageSize, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null);
         Task<long> Count(string companyId, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null);
     }
 }

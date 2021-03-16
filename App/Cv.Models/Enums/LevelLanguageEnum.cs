@@ -2,10 +2,10 @@
 {
     public enum LevelLanguageEnum
     {
-        Basic = 0,
-        Intermediate = 1,
-        Advance = 2,
-        Fluent = 3,
-        Native = 4
+        Basic,
+        Intermediate,
+        Advance,
+        Fluent,
+        Native
     }
 }

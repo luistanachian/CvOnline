@@ -1,6 +1,5 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
-using Cv.Models.Enums;
 using Cv.Models.Helpers;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
@@ -35,7 +34,7 @@ namespace Cv.Repository.Class
         public async Task<bool> CodeExists(string companyId, string clientId, string code) =>
             (await clientsDao.Count(fd.Where(c => c.CompanyId == companyId && c.ClientId != clientId && c.Code == code))) > 0;
 
-        public async Task<PagedListModel<ClientModel>> GetBy(string companyId, int page, PageSizeEnum pageSize, string name, int countryId, int stateId) => 
+        public async Task<PagedListModel<ClientModel>> GetBy(string companyId, int page, int pageSize, string name, int countryId, int stateId) => 
             await clientsDao.GetByFunc(Filter(companyId, name, countryId, stateId), page, pageSize);
 
         public async Task<long> Count(string companyId, string name, int countryId, int stateId) => 
