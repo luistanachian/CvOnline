@@ -37,8 +37,8 @@ namespace Cv.Models.Mock
             AdressTwo = "Piso 2, depto F",
             PostalCode = "5000",
             Seniority = SeniorityEnum.Senior,
-            Emails = new List<string> { "tanachian501@gmail.com" },
-            Phones = new List<string> { "+5493517730268" },
+            Email = "tanachian501@gmail.com",
+            Phone =  "+5493517730268",
             ListSocialNetworks = new List<string> { "https://www.facebook.com/artutanach/", "https://www.instagram.com/tanach5/" },
             ListLanguages = new List<LanguageItem>
                 {
