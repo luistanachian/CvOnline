@@ -67,17 +67,17 @@ namespace Cv.Repository.Class
                 fd.Eq(c => c.CompanyId, companyId)
             };
 
-            if (countryId > 0)
-                filterDefinitions.Add(fd.Eq(c => c.CountryId, countryId));
+            //if (countryId > 0)
+            //    filterDefinitions.Add(fd.Eq(c => c.CountryId, countryId));
 
-            if (stateId > 0)
-                filterDefinitions.Add(fd.Eq(c => c.StateId, stateId));
+            //if (stateId > 0)
+            //    filterDefinitions.Add(fd.Eq(c => c.StateId, stateId));
 
-            if (!string.IsNullOrWhiteSpace(name))
-                filterDefinitions.Add(fd.Where(c => c.Name.Contains(name) || c.LastName.Contains(name)));
+            //if (!string.IsNullOrWhiteSpace(name))
+            //    filterDefinitions.Add(fd.Where(c => c.Name.Contains(name) || c.LastName.Contains(name)));
 
-            if (skills.Count > 0)
-                filterDefinitions.Add(fd.ElemMatch(e => e.ListSkills, Builders<SkillItem>.Filter.In(y => y.Skill, skills)));
+            //if (skills.Count > 0)
+            //    filterDefinitions.Add(fd.ElemMatch(e => e.ListSkills, Builders<SkillItem>.Filter.In(y => y.Skill, skills)));
 
             return fd.And(filterDefinitions);
         }

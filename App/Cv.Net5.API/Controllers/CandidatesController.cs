@@ -20,7 +20,7 @@ namespace Cv.Net5.API.Controllers
         }
 
         [HttpGet("count")]
-        public async Task<long> Count(CandidateSearch candidateSearch) => 
+        public async Task<long> Count(CandidateSearch candidateSearch) =>
             await candidatesBusiness.Count(
                 candidateSearch.companyId,
                 candidateSearch.name,
@@ -46,12 +46,19 @@ namespace Cv.Net5.API.Controllers
             await candidatesBusiness.GetBy(companyId, candidateId);
 
         [HttpPut]
-        public async Task<ResultBus> Insert(string userId, CandidateModel candidate) =>
-            await candidatesBusiness.Insert(candidate, userId);
+        public async Task<IActionResult> Insert(string userId, CandidateModel candidate)
+        {
+            var result = await candidatesBusiness.Insert(candidate, userId);
+
+            if (result.Ok)
+                return Ok();
+            else
+                return Conflict(result.Errores);
+        }
 
         [HttpPost]
         public async Task<ResultBus> Replace(string userId, CandidateModel candidate) =>
-            await candidatesBusiness.Replace(candidate, userId); 
+            await candidatesBusiness.Replace(candidate, userId);
 
         [HttpDelete("{candidateId}")]
         public async Task<ResultBus> Delete(string candidateId) =>
