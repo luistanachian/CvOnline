@@ -1,6 +1,6 @@
 ﻿using Cv.Models.Enums;
 
-namespace Cv.Net5.API.Models
+namespace Cv.Models.Search
 {
     public class CandidateSearch
     {

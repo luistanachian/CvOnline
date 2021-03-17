@@ -1,5 +1,4 @@
-﻿using Cv.Commons;
-using Cv.Models.Attributes;
+﻿using Cv.Models.Attributes;
 using Cv.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 

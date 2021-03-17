@@ -1,12 +1,10 @@
-﻿using Cv.Business;
-using Cv.Business.Interface;
+﻿using Cv.Business.Interface;
 using Cv.Commons;
 using Cv.Models;
 using Cv.Models.Helpers;
-using Cv.Net5.API.Models;
+using Cv.Models.Search;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Cv.Net5.API.Controllers
@@ -52,27 +50,12 @@ namespace Cv.Net5.API.Controllers
             return await candidatesBusiness.GetBy(companyId, candidateId);
         }
         [HttpPut("{userId}")]
-        public async Task<IActionResult> Insert([FromRoute] string userId, [FromBody] CandidateModel candidate)
+        public async Task<IActionResult> Save([FromRoute] string userId, [FromBody] CandidateModel candidate)
         {
             if (!Validate.Guids(userId))
                 return BadRequest();
 
-            if (await candidatesBusiness.Insert(userId, candidate))
-                return Ok();
-
-            return StatusCode((int)HttpStatusCode.InternalServerError);
-        }
-
-        [HttpPost("{userId}")]
-        public async Task<IActionResult> Replace([FromRoute] string userId, [FromBody] CandidateModel candidate)
-        {
-            if (!Validate.Guids(userId))
-                return BadRequest();
-
-            if (await candidatesBusiness.Replace(userId, candidate))
-                return Ok();
-
-            return StatusCode((int)HttpStatusCode.InternalServerError);
+            return StatusCode((int)await candidatesBusiness.Save(userId, candidate));
         }
 
         [HttpDelete("{candidateId}")]
@@ -81,10 +64,7 @@ namespace Cv.Net5.API.Controllers
             if (!Validate.Guids(candidateId, candidateId))
                 return BadRequest();
 
-            if(await candidatesBusiness.Delete(companyId, candidateId))
-                return Ok();
-
-            return StatusCode((int)HttpStatusCode.InternalServerError);
+            return StatusCode((int)await candidatesBusiness.Delete(companyId, candidateId));
         }
     }
 }

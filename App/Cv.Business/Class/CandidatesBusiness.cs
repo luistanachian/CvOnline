@@ -8,6 +8,7 @@ using Cv.Models.Helpers;
 using System.Collections.Generic;
 using Cv.Models.Items;
 using Cv.Commons;
+using System.Net;
 
 namespace Cv.Business.Class
 {
@@ -20,7 +21,7 @@ namespace Cv.Business.Class
             this.candidatesRepository = candidatesRepository;
             this.candidatesHistoriesBusiness = candidatesHistoriesBusiness;
         }
-        public async Task<bool> Save(string userId, CandidateModel candidate)
+        public async Task<HttpStatusCode> Save(string userId, CandidateModel candidate)
         {
             try
             {
@@ -38,37 +39,37 @@ namespace Cv.Business.Class
                     var insert = candidatesRepository.Insert(candidate);
                     await candidatesHistoriesBusiness.Add(candidate.CandidateId, new EventItem(userId, EventEnum.Insert));
                     Task.WaitAll(insert);
-                    return true;
+                    return HttpStatusCode.OK;
                 }
                 else
                 {
                     if (await candidatesRepository.Replace(candidate))
                     {
                         try { await candidatesHistoriesBusiness.Add(candidate.CandidateId, new EventItem(userId, EventEnum.Update)); } catch (Exception) { }
-                        return true;
+                        return HttpStatusCode.OK;
                     }
-                    return false;
+                    return HttpStatusCode.NotFound;
                 }
             }
             catch (Exception)
             {
-                return false;
+                return HttpStatusCode.InternalServerError;
             }
         }
-        public async Task<bool> Delete(string companyId, string candidateId)
+        public async Task<HttpStatusCode> Delete(string companyId, string candidateId)
         {
             try
             {
                 if (await candidatesRepository.Delete(companyId, candidateId))
                 {
                     try { await candidatesHistoriesBusiness.Delete(candidateId); } catch (Exception) { }
-                    return true;
+                    return HttpStatusCode.OK;
                 }
-                return false;
+                return HttpStatusCode.NotFound;
             }
             catch (Exception)
             {
-                return false;
+                return HttpStatusCode.InternalServerError;
             }
         }
         public async Task<CandidateModel> GetBy(string companyId, string candidateId)
