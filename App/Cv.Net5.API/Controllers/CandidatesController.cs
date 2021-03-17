@@ -49,7 +49,7 @@ namespace Cv.Net5.API.Controllers
 
             return await candidatesBusiness.GetBy(companyId, candidateId);
         }
-        [HttpPut("{userId}")]
+        [HttpPost("{userId}")]
         public async Task<IActionResult> Save([FromRoute] string userId, [FromBody] CandidateModel candidate)
         {
             if (!Validate.Guids(userId))

@@ -52,7 +52,7 @@ namespace Cv.Business.Class
                         try { await candidatesHistoriesBusiness.Add(candidate.CandidateId, new EventItem(userId, EventEnum.Update)); } catch (Exception) { }
                         return HttpStatusCode.OK;
                     }
-                    return HttpStatusCode.NotFound;
+                    return HttpStatusCode.NotModified;
                 }
             }
             catch (Exception)
