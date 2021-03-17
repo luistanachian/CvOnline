@@ -26,20 +26,24 @@ namespace Cv.Business.Class
             try
             {
                 CandidateModel candidateTemp = null;
-                
+
                 if (Validate.Guids(candidate.CandidateId))
                     candidateTemp = await GetBy(candidate.CompanyId, candidate.CandidateId);
 
                 if (candidateTemp == null)
                 {
-                    candidate.CandidateId = Guid.NewGuid().ToString();
-                    candidate.Status = (int)StatusCandiateEnum.Available;
-                    candidate.Sex = candidate.Sex?.ToLower();
+                    if (string.IsNullOrWhiteSpace(candidate.CandidateId))
+                    {
+                        candidate.CandidateId = Guid.NewGuid().ToString();
+                        candidate.Status = (int)StatusCandiateEnum.Available;
+                        candidate.Sex = candidate.Sex?.ToLower();
 
-                    var insert = candidatesRepository.Insert(candidate);
-                    await candidatesHistoriesBusiness.Add(candidate.CandidateId, new EventItem(userId, EventEnum.Insert));
-                    Task.WaitAll(insert);
-                    return HttpStatusCode.OK;
+                        var insert = candidatesRepository.Insert(candidate);
+                        await candidatesHistoriesBusiness.Add(candidate.CandidateId, new EventItem(userId, EventEnum.Insert));
+                        Task.WaitAll(insert);
+                        return HttpStatusCode.OK;
+                    }
+                    return HttpStatusCode.NotFound;
                 }
                 else
                 {
