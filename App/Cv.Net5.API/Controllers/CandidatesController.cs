@@ -1,10 +1,12 @@
 ﻿using Cv.Business;
 using Cv.Business.Interface;
+using Cv.Commons;
 using Cv.Models;
 using Cv.Models.Helpers;
 using Cv.Net5.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Cv.Net5.API.Controllers
@@ -20,7 +22,7 @@ namespace Cv.Net5.API.Controllers
         }
 
         [HttpGet("count")]
-        public async Task<long> Count(CandidateSearch candidateSearch) =>
+        public async Task<long> Count([FromBody] CandidateSearch candidateSearch) =>
             await candidatesBusiness.Count(
                 candidateSearch.companyId,
                 candidateSearch.name,
@@ -30,7 +32,7 @@ namespace Cv.Net5.API.Controllers
                 candidateSearch.status);
 
         [HttpGet("list")]
-        public async Task<PagedListModel<CandidateModel>> Get(CandidateSearch candidateSearch) =>
+        public async Task<PagedListModel<CandidateModel>> Get([FromBody] CandidateSearch candidateSearch) =>
             await candidatesBusiness.GetBy(
                 candidateSearch.companyId,
                 candidateSearch.page,
@@ -42,26 +44,47 @@ namespace Cv.Net5.API.Controllers
                 candidateSearch.status);
 
         [HttpGet("{companyId}/{candidateId}")]
-        public async Task<CandidateModel> GetOne(string companyId, string candidateId) =>
-            await candidatesBusiness.GetBy(companyId, candidateId);
-
-        [HttpPut]
-        public async Task<IActionResult> Insert(string userId, CandidateModel candidate)
+        public async Task<ActionResult<CandidateModel>> GetOne([FromRoute] string companyId, [FromRoute] string candidateId)
         {
-            var result = await candidatesBusiness.Insert(candidate, userId);
+            if (!Validate.Guids(companyId, candidateId))
+                return BadRequest();
 
-            if (result.Ok)
+            return await candidatesBusiness.GetBy(companyId, candidateId);
+        }
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> Insert([FromRoute] string userId, [FromBody] CandidateModel candidate)
+        {
+            if (!Validate.Guids(userId))
+                return BadRequest();
+
+            if (await candidatesBusiness.Insert(userId, candidate))
                 return Ok();
-            else
-                return Conflict(result.Errores);
+
+            return StatusCode((int)HttpStatusCode.InternalServerError);
         }
 
-        [HttpPost]
-        public async Task<ResultBus> Replace(string userId, CandidateModel candidate) =>
-            await candidatesBusiness.Replace(candidate, userId);
+        [HttpPost("{userId}")]
+        public async Task<IActionResult> Replace([FromRoute] string userId, [FromBody] CandidateModel candidate)
+        {
+            if (!Validate.Guids(userId))
+                return BadRequest();
+
+            if (await candidatesBusiness.Replace(userId, candidate))
+                return Ok();
+
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
 
         [HttpDelete("{candidateId}")]
-        public async Task<ResultBus> Delete(string candidateId) =>
-            await candidatesBusiness.Delete(candidateId);
+        public async Task<IActionResult> Delete([FromRoute] string companyId, [FromRoute] string candidateId)
+        {
+            if (!Validate.Guids(candidateId, candidateId))
+                return BadRequest();
+
+            if(await candidatesBusiness.Delete(companyId, candidateId))
+                return Ok();
+
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
     }
 }

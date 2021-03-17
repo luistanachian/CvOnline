@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Cv.Models.Helpers;
 using System.Collections.Generic;
 using Cv.Models.Items;
+using Cv.Commons;
 
 namespace Cv.Business.Class
 {
@@ -19,65 +20,56 @@ namespace Cv.Business.Class
             this.candidatesRepository = candidatesRepository;
             this.candidatesHistoriesBusiness = candidatesHistoriesBusiness;
         }
-        public async Task<ResultBus> Insert(CandidateModel candidate, string userId)
+        public async Task<bool> Save(string userId, CandidateModel candidate)
         {
-            var result = new ResultBus();
             try
             {
-                candidate.CandidateId = Guid.NewGuid().ToString();
-                candidate.Status = (int)StatusCandiateEnum.Available;
-                candidate.Sex = candidate.Sex?.ToLower();
+                CandidateModel candidateTemp = null;
+                
+                if (Validate.Guids(candidate.CandidateId))
+                    candidateTemp = await GetBy(candidate.CompanyId, candidate.CandidateId);
 
-                var insert = candidatesRepository.Insert(candidate);
-                await candidatesHistoriesBusiness.Insert(
-                    candidate.CandidateId,
-                    new EventItem
-                    {
-                        UserId = userId,
-                        Event = EventEnum.Insert,
-                        Date = DateTime.Now
-                    });
-
-                Task.WaitAll(insert);
-            }
-            catch (Exception) { result.AddError("Error"); }
-
-            return result;
-        }
-        public async Task<ResultBus> Replace(CandidateModel candidate, string userId)
-        {
-            var result = new ResultBus();
-            try
-            {
-                if (await candidatesRepository.Replace(candidate))
+                if (candidateTemp == null)
                 {
-                    await candidatesHistoriesBusiness.Add(
-                        candidate.CandidateId,
-                        new EventItem
-                        {
-                            UserId = userId,
-                            Event = EventEnum.Update,
-                            Date = DateTime.Now
-                        });
+                    candidate.CandidateId = Guid.NewGuid().ToString();
+                    candidate.Status = (int)StatusCandiateEnum.Available;
+                    candidate.Sex = candidate.Sex?.ToLower();
+
+                    var insert = candidatesRepository.Insert(candidate);
+                    await candidatesHistoriesBusiness.Add(candidate.CandidateId, new EventItem(userId, EventEnum.Insert));
+                    Task.WaitAll(insert);
+                    return true;
                 }
                 else
-                    result.AddError("No se guardo");
+                {
+                    if (await candidatesRepository.Replace(candidate))
+                    {
+                        try { await candidatesHistoriesBusiness.Add(candidate.CandidateId, new EventItem(userId, EventEnum.Update)); } catch (Exception) { }
+                        return true;
+                    }
+                    return false;
+                }
             }
-            catch (Exception) { result.AddError("Error"); }
-
-            return result;
+            catch (Exception)
+            {
+                return false;
+            }
         }
-        public async Task<ResultBus> Delete(string id)
+        public async Task<bool> Delete(string companyId, string candidateId)
         {
-            var result = new ResultBus();
             try
             {
-                if (!await candidatesRepository.Delete(id) && !await candidatesHistoriesBusiness.Delete(id))
-                    result.AddError("No se Elimino");
+                if (await candidatesRepository.Delete(companyId, candidateId))
+                {
+                    try { await candidatesHistoriesBusiness.Delete(candidateId); } catch (Exception) { }
+                    return true;
+                }
+                return false;
             }
-            catch (Exception) { result.AddError("Error"); }
-
-            return result;
+            catch (Exception)
+            {
+                return false;
+            }
         }
         public async Task<CandidateModel> GetBy(string companyId, string candidateId)
         {

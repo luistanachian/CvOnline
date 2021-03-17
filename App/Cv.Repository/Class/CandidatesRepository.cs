@@ -22,8 +22,8 @@ namespace Cv.Repository.Class
         public async Task<bool> Replace(CandidateModel entity) =>
             (await candidatesDao.Replace(fd.Where(c => c.CandidateId == entity.CandidateId), entity)) > 0;
 
-        public async Task<bool> Delete(string id) =>
-            (await candidatesDao.Delete(fd.Eq(c => c.CandidateId, id))) > 0;
+        public async Task<bool> Delete(string companyId, string candidateId) =>
+            (await candidatesDao.Delete(fd.Where(c => c.CompanyId == companyId && c.CandidateId == candidateId))) > 0;
 
         public async Task<CandidateModel> GetBy(string companyId, string candidateId) =>
             await candidatesDao.GetByFunc(fd.Where(c => c.CompanyId == companyId && c.CandidateId == candidateId));

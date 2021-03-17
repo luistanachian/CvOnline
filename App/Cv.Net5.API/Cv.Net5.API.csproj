@@ -12,4 +12,8 @@
     <ProjectReference Include="..\Cv.Ioc\Cv.Ioc.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+
 </Project>

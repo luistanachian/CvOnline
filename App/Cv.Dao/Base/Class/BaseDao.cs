@@ -15,32 +15,42 @@ namespace Cv.Dao.Base.Class
         IDeleteDao<T>
         where T : class
     {
-        public async Task<long> Delete(FilterDefinition<T> filter) =>
-             (await ConnectionsMongoDb<T>.GetCollection().DeleteOneAsync(filter)).DeletedCount;
-
-        public async Task<List<T>> GetAll() =>
-            await ConnectionsMongoDb<T>.GetCollection().Find(e => true).ToListAsync();
-
-        public async Task<List<T>> GetAll(FilterDefinition<T> filter) =>
-            await ConnectionsMongoDb<T>.GetCollection().Find(filter).ToListAsync();
-
-        public async Task<T> GetByFunc(FilterDefinition<T> filter) => 
-            (await ConnectionsMongoDb<T>.GetCollection().Find(filter).Limit(1).ToListAsync())?[0];
+        public async Task<List<T>> GetAll()
+        {
+            var result = await ConnectionsMongoDb<T>.GetCollection().Find(e => true).ToListAsync();
+            return result == null || result.Count == 0 ? null : result;
+        }
+        public async Task<List<T>> GetAll(FilterDefinition<T> filter)
+        {
+            var result = await ConnectionsMongoDb<T>.GetCollection().Find(filter).ToListAsync();
+            return result == null || result.Count == 0 ? null : result;
+        }
+        public async Task<T> GetByFunc(FilterDefinition<T> filter)
+        {
+            var result = await ConnectionsMongoDb<T>.GetCollection().Find(filter).Limit(1).ToListAsync();
+            return result == null || result.Count == 0 ? null : result[0];
+        }
 
         public async Task<PagedListModel<T>> GetByFunc(FilterDefinition<T> filter, int page, int pageSize)
         {
-            var count = ConnectionsMongoDb<T>.GetCollection().CountDocumentsAsync(filter);
+            var countTask = Count(filter);
             var data = ConnectionsMongoDb<T>.GetCollection().Find(filter)
-                .Skip((page - 1) * (int)pageSize)
-                .Limit((int)pageSize)
+                .Skip((page - 1) * pageSize)
+                .Limit(pageSize)
                 .ToListAsync();
 
-            return new PagedListModel<T>
+            var count = await countTask;
+            if (count == 0)
+                return null;
+            else
             {
-                Count = await count,
-                List = await data,
-                Pages = pageSize == 0 ? 1 : ((await count + (long)pageSize - 1) / (long)pageSize)
-            };
+                return new PagedListModel<T>
+                {
+                    Count = count,
+                    List = await data,
+                    Pages = pageSize == 0 ? 1 : ((count + (long)pageSize - 1) / (long)pageSize)
+                };
+            }
         }
         public async Task<long> Count(FilterDefinition<T> filter) =>
             await ConnectionsMongoDb<T>.GetCollection().CountDocumentsAsync(filter);
@@ -50,5 +60,9 @@ namespace Cv.Dao.Base.Class
 
         public async Task<long> Replace(FilterDefinition<T> filter, T entity) =>
             (await ConnectionsMongoDb<T>.GetCollection().ReplaceOneAsync(filter, entity)).ModifiedCount;
+
+        public async Task<long> Delete(FilterDefinition<T> filter) =>
+             (await ConnectionsMongoDb<T>.GetCollection().DeleteOneAsync(filter)).DeletedCount;
+
     }
 }
