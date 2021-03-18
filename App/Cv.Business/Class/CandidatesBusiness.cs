@@ -23,37 +23,35 @@ namespace Cv.Business.Class
         }
         public async Task<HttpStatusCode> Save(string userId, CandidateModel candidate)
         {
+            HttpStatusCode httpStatusCode = HttpStatusCode.NotModified;
             try
             {
+                candidate.CandidateId = string.IsNullOrWhiteSpace(candidate.CandidateId) ? null : candidate.CandidateId;
+                EventItem eventItem = new(userId, EventEnum.Insert);
                 CandidateModel candidateTemp = null;
 
                 if (Validate.Guids(candidate.CandidateId))
                     candidateTemp = await GetBy(candidate.CompanyId, candidate.CandidateId);
 
-                if (candidateTemp == null)
+                if (candidateTemp == null && candidate.CandidateId == null)
                 {
-                    if (string.IsNullOrWhiteSpace(candidate.CandidateId))
-                    {
-                        candidate.CandidateId = Guid.NewGuid().ToString();
-                        candidate.Status = (int)StatusCandiateEnum.Available;
-                        candidate.Sex = candidate.Sex?.ToLower();
+                    candidate.CandidateId = Guid.NewGuid().ToString();
+                    candidate.Status = (int)StatusCandiateEnum.Available;
+                    candidate.Sex = candidate.Sex?.ToLower();
 
-                        var insert = candidatesRepository.Insert(candidate);
-                        await candidatesHistoriesBusiness.Add(candidate.CandidateId, new EventItem(userId, EventEnum.Insert));
-                        Task.WaitAll(insert);
-                        return HttpStatusCode.OK;
-                    }
-                    return HttpStatusCode.NotModified;
+                    await candidatesRepository.Insert(candidate);
+                    httpStatusCode = HttpStatusCode.OK;
                 }
-                else
+                else if ((await candidatesRepository.Replace(candidate)))
                 {
-                    if (await candidatesRepository.Replace(candidate))
-                    {
-                        try { await candidatesHistoriesBusiness.Add(candidate.CandidateId, new EventItem(userId, EventEnum.Update)); } catch (Exception) { }
-                        return HttpStatusCode.OK;
-                    }
-                    return HttpStatusCode.NotModified;
+                    eventItem.Event = EventEnum.Update;
+                    httpStatusCode = HttpStatusCode.OK;
                 }
+
+                if (httpStatusCode == HttpStatusCode.OK)
+                    await candidatesHistoriesBusiness.Add(candidate.CandidateId, eventItem);
+
+                return httpStatusCode;
             }
             catch (Exception)
             {
