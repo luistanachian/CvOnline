@@ -35,8 +35,8 @@ namespace Cv.Business.Class
                 }
                 else if (!await clientsRepository.Replace(entity))
                     return HttpStatusCode.OK;
-
-                return HttpStatusCode.NotModified;
+                else
+                    return HttpStatusCode.NotModified;
             }
             catch (Exception) { return HttpStatusCode.InternalServerError; }
         }

@@ -4,6 +4,7 @@ using Cv.Models;
 using Cv.Models.Helpers;
 using Cv.Net5.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Cv.Net5.API.Controllers
@@ -18,14 +19,21 @@ namespace Cv.Net5.API.Controllers
             this.clientsBusiness = clientsBusiness;
         }
 
-        [HttpPut]
-        public async Task<ResultBus> Insert(ClientModel entity) => await clientsBusiness.Insert(entity);
-
         [HttpPost]
-        public async Task<ResultBus> Replace(ClientModel entity) => await clientsBusiness.Replace(entity);
+        public async Task<IActionResult> Save(ClientModel entity)
+        {
+            var result = await clientsBusiness.Save(entity);
+            if (result == HttpStatusCode.BadRequest)
+                return BadRequest("El codigo esta usado.");
 
-        [HttpDelete("{clientId}")]
-        public async Task<ResultBus> Delete(string clientId) => await clientsBusiness.Delete(clientId);
+            return StatusCode((int)result);
+        }
+
+        [HttpDelete("{companyId}/{clientId}")]
+        public async Task<IActionResult> Delete(string companyId, string clientId)
+        {
+            return StatusCode((int)await clientsBusiness.Delete(companyId, clientId));
+        }
 
         [HttpGet("count")]
         public async Task<long> Count(ClientSearch clientSearch) =>
