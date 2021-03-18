@@ -4,7 +4,6 @@ using Cv.Models;
 using Cv.Models.Helpers;
 using Cv.Models.Search;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cv.Net5.API.Controllers
@@ -44,7 +43,7 @@ namespace Cv.Net5.API.Controllers
             return StatusCode((int)await candidatesBusiness.Save(userId, candidate));
         }
 
-        [HttpDelete("{candidateId}")]
+        [HttpDelete("{companyId}/{candidateId}")]
         public async Task<IActionResult> Delete([FromRoute] string companyId, [FromRoute] string candidateId)
         {
             if (!Validate.Guids(candidateId, candidateId))

@@ -1,4 +1,6 @@
-﻿using Cv.Models.Enums;
+﻿using Cv.Models.Attributes;
+using Cv.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -23,8 +25,8 @@ namespace Cv.Models.Search
         [Range(0, 4892)]
         public int StateId { get; set; }
 
-        [EnumDataType(typeof(StatusCandiateEnum))]
-        public int Status { get; set; }
+        [NullableEnumsAttribute(typeof(StatusCandiateEnum))]
+        public int? Status { get; set; }
 
         [MinLength(5)]
         [MaxLength(100)]

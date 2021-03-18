@@ -5,10 +5,10 @@ using System;
 using Cv.Models.Enums;
 using System.Threading.Tasks;
 using Cv.Models.Helpers;
-using System.Collections.Generic;
 using Cv.Models.Items;
 using Cv.Commons;
 using System.Net;
+using Cv.Models.Search;
 
 namespace Cv.Business.Class
 {
@@ -43,7 +43,7 @@ namespace Cv.Business.Class
                         Task.WaitAll(insert);
                         return HttpStatusCode.OK;
                     }
-                    return HttpStatusCode.NotFound; 
+                    return HttpStatusCode.NotFound;
                 }
                 else
                 {
@@ -78,17 +78,36 @@ namespace Cv.Business.Class
         }
         public async Task<CandidateModel> GetBy(string companyId, string candidateId)
         {
-            return await candidatesRepository.GetBy(companyId, candidateId);
+            try
+            {
+                return await candidatesRepository.GetBy(companyId, candidateId);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
-        public async Task<PagedListModel<CandidateModel>> GetBy(string companyId, int page, int pageSize, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
+        public async Task<PagedListModel<CandidateModel>> GetBy(CandidateSearch candidateSearch)
         {
-            return await candidatesRepository.GetBy(companyId, page, pageSize, name, skills, countryId, stateId, status);
+            try
+            {
+                return await candidatesRepository.GetBy(candidateSearch);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
-        public async Task<long> Count(string companyId, string name, List<string> skills, int countryId, int stateId, StatusCandiateEnum? status = null)
+        public async Task<long> Count(CandidateSearch candidateSearch)
         {
-
-            return await candidatesRepository.Count(companyId, name, skills, countryId, stateId, status);
-
+            try
+            {
+                return await candidatesRepository.Count(candidateSearch);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
     }
 }

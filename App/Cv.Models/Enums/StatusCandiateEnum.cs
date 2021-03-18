@@ -2,7 +2,7 @@
 {
     public enum StatusCandiateEnum
     {
-        Available, 
+        Available,
         Taken, 
         Contracted, 
         ContractedOnClient, 
