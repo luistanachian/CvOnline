@@ -21,25 +21,11 @@ namespace Cv.Net5.API.Controllers
 
         [HttpGet("count")]
         public async Task<long> Count([FromBody] CandidateSearch candidateSearch) =>
-            await candidatesBusiness.Count(
-                candidateSearch.companyId,
-                candidateSearch.name,
-                candidateSearch.skills?.ToList(),
-                candidateSearch.countryId,
-                candidateSearch.stateId,
-                candidateSearch.status);
+            await candidatesBusiness.Count(candidateSearch);
 
         [HttpGet("list")]
         public async Task<PagedListModel<CandidateModel>> Get([FromBody] CandidateSearch candidateSearch) =>
-            await candidatesBusiness.GetBy(
-                candidateSearch.companyId,
-                candidateSearch.page,
-                candidateSearch.pageSize,
-                candidateSearch.name,
-                candidateSearch.skills?.ToList(),
-                candidateSearch.countryId,
-                candidateSearch.stateId,
-                candidateSearch.status);
+            await candidatesBusiness.GetBy(candidateSearch);
 
         [HttpGet("{companyId}/{candidateId}")]
         public async Task<ActionResult<CandidateModel>> GetOne([FromRoute] string companyId, [FromRoute] string candidateId)

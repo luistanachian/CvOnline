@@ -1,7 +1,7 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
-using Cv.Models.Enums;
 using Cv.Models.Helpers;
+using Cv.Models.Search;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -28,56 +28,36 @@ namespace Cv.Repository.Class
         public async Task<CandidateModel> GetBy(string companyId, string candidateId) =>
             await candidatesDao.GetByFunc(fd.Where(c => c.CompanyId == companyId && c.CandidateId == candidateId));
 
-        public async Task<PagedListModel<CandidateModel>> GetBy(
-            string companyId,
-            int page,
-            int pageSize,
-            string name,
-            List<string> skills,
-            int countryId,
-            int stateId,
-            StatusCandiateEnum? status = null) => 
-            await candidatesDao.GetByFunc(Filter(companyId, name, skills, countryId, stateId, status), page, pageSize);
+        public async Task<PagedListModel<CandidateModel>> GetBy(CandidateSearch candidateSearch) => 
+            await candidatesDao.GetByFunc(Filter(candidateSearch), candidateSearch.Page, candidateSearch.PageSize);
 
 
-        public async Task<long> Count(
-            string companyId,
-            string name,
-            List<string> skills,
-            int countryId,
-            int stateId,
-            StatusCandiateEnum? status = null) =>
-            await candidatesDao.Count(Filter(companyId, name, skills, countryId, stateId, status));
+        public async Task<long> Count(CandidateSearch candidateSearch) =>
+            await candidatesDao.Count(Filter(candidateSearch));
 
-        private FilterDefinition<CandidateModel> Filter(
-            string companyId,
-            string name,
-            List<string> skills,
-            int countryId,
-            int stateId,
-            StatusCandiateEnum? status = null)
+        private FilterDefinition<CandidateModel> Filter(CandidateSearch candidateSearch)
         {
-            name ??= string.Empty;
-            name = name.Trim();
-            skills ??= new List<string>();
-            skills.ForEach(s => s.Trim());
+            candidateSearch.Name ??= string.Empty;
+            candidateSearch.Name = candidateSearch.Name.Trim();
+            candidateSearch.Skills ??= new List<string>();
+            candidateSearch.Skills.ForEach(s => s.Trim());
 
             var filterDefinitions = new List<FilterDefinition<CandidateModel>>
             {
-                fd.Eq(c => c.CompanyId, companyId)
+                fd.Eq(c => c.CompanyId, candidateSearch.CompanyId)
             };
 
-            if (countryId > 0)
-                filterDefinitions.Add(fd.Eq(c => c.CountryId, countryId));
+            if (candidateSearch.CountryId > 0)
+                filterDefinitions.Add(fd.Eq(c => c.CountryId, candidateSearch.CountryId));
 
-            if (stateId > 0)
-                filterDefinitions.Add(fd.Eq(c => c.StateId, stateId));
+            if (candidateSearch.StateId > 0)
+                filterDefinitions.Add(fd.Eq(c => c.StateId, candidateSearch.StateId));
 
-            if (!string.IsNullOrWhiteSpace(name))
-                filterDefinitions.Add(fd.Where(c => c.FullName.Contains(name)));
+            if (!string.IsNullOrWhiteSpace(candidateSearch.Name))
+                filterDefinitions.Add(fd.Where(c => c.FullName.Contains(candidateSearch.Name)));
 
-            //if (skills.Count > 0)
-            //    filterDefinitions.Add(fd.ElemMatch(e => e.ListSkills, Builders<SkillItem>.Filter.In(y => y.Skill, skills)));
+            if (candidateSearch.Skills.Count > 0)
+                filterDefinitions.Add(fd.ElemMatch(e => e.Skills, Builders<SkillItem>.Filter.In(y => y.Skill, candidateSearch.Skills)));
 
             return fd.And(filterDefinitions);
         }
