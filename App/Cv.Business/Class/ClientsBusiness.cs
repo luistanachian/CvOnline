@@ -20,12 +20,6 @@ namespace Cv.Business.Class
             try
             {
                 entity.ClientId = string.IsNullOrWhiteSpace(entity.ClientId) ? null : entity.ClientId;
-                if (!string.IsNullOrWhiteSpace(entity.Code))
-                {
-                    if (await clientsRepository.CodeExists(entity.CompanyId, entity.ClientId, entity.Code))
-                        return HttpStatusCode.BadRequest;
-                }
-
                 if (entity.ClientId == null)
                 {
                     entity.ClientId = Guid.NewGuid().ToString();
@@ -50,10 +44,6 @@ namespace Cv.Business.Class
                 return HttpStatusCode.NotModified;
             }
             catch (Exception) { return HttpStatusCode.InternalServerError; }
-        }
-        public async Task<ClientModel> GetBy(string clientId)
-        {
-            return await clientsRepository.GetBy(clientId);
         }
         public async Task<ClientModel> GetBy(string companyId, string code)
         {

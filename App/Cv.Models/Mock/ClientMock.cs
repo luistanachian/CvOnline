@@ -13,7 +13,6 @@ namespace Cv.Models.Mock
             StarDate = DateTime.Now,
             LastUpdate = DateTime.Now,
             BlackList = false,
-            Code = "holaRamon",
             Name = "Ramona c.a",
             Document = "65468a43s",
             CountryId = 1,

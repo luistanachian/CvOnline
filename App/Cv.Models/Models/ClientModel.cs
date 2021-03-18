@@ -15,7 +15,6 @@ namespace Cv.Models
         public DateTime StarDate { get; set; }
         public DateTime LastUpdate { get; set; }
         public bool BlackList { get; set; }
-        public string Code { get; set; }
         public string Name { get; set; }
         public string Document { get; set; }
         public int CountryId { get; set; }

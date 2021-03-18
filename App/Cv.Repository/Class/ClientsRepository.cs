@@ -25,14 +25,8 @@ namespace Cv.Repository.Class
         public async Task<bool> Delete(string companyId, string clientId) =>
             (await clientsDao.Delete(fd.Where(c => c.CompanyId == companyId && c.ClientId == clientId))) > 0;
 
-        public async Task<ClientModel> GetBy(string clientId) =>
-            await clientsDao.GetByFunc(fd.Eq(c => c.ClientId, clientId));
-
-        public async Task<ClientModel> GetBy(string companyId, string code) =>
-            await clientsDao.GetByFunc(fd.Where(c => c.CompanyId == companyId && c.Code == code));
-
-        public async Task<bool> CodeExists(string companyId, string clientId, string code) =>
-            (await clientsDao.Count(fd.Where(c => c.CompanyId == companyId && c.ClientId != clientId && c.Code == code))) > 0;
+        public async Task<ClientModel> GetBy(string companyId, string clientId) =>
+            await clientsDao.GetByFunc(fd.Where(c => c.CompanyId == companyId && c.ClientId == clientId));
 
         public async Task<PagedListModel<ClientModel>> GetBy(string companyId, int page, int pageSize, string name, int countryId, int stateId) => 
             await clientsDao.GetByFunc(Filter(companyId, name, countryId, stateId), page, pageSize);

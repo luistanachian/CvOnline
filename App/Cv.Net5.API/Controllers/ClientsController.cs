@@ -1,5 +1,4 @@
-﻿using Cv.Business;
-using Cv.Business.Interface;
+﻿using Cv.Business.Interface;
 using Cv.Models;
 using Cv.Models.Helpers;
 using Cv.Net5.API.Models;
@@ -53,12 +52,8 @@ namespace Cv.Net5.API.Controllers
                 clientSearch.countryId,
                 clientSearch.stateId);
 
-        [HttpGet("{clientId}")]
-        public async Task<ClientModel> GetBy(string clientId) =>
-            await clientsBusiness.GetBy(clientId);
-
-        [HttpGet("{companyId}/{code}")]
-        public async Task<ClientModel> GetBy(string companyId, string code) =>
-            await clientsBusiness.GetBy(companyId, code);
+        [HttpGet("{companyId}/{clientId}")]
+        public async Task<ClientModel> GetBy(string companyId, string clientId) =>
+            await clientsBusiness.GetBy(companyId, clientId);
     }
 }
