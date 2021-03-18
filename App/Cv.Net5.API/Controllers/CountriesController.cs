@@ -19,11 +19,16 @@ namespace Cv.Net5.API.Controllers
         }
 
         [HttpGet]
-        public async Task<List<ComboResponse>> Get() =>
-            (await countriesBusiness.GetAll()).Select(x => new ComboResponse { id = x.id, value = x.name }).ToList();
+        public async Task<List<ComboResponse>> Get()
+        {
+            var countries = await countriesBusiness.GetAll();
+            if (countries == null)
+                return null;
 
+            return countries.Select(x => new ComboResponse { id = x.id, value = x.name }).ToList();
+        }
 
         [HttpGet("{id}")]
-        public async Task<CountryModel> Get(int id) => await countriesBusiness.GetById(id);
+        public async Task<CountryModel> Get([FromRoute] int id) => await countriesBusiness.GetById(id);
     }
 }

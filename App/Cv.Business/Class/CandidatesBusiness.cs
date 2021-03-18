@@ -43,7 +43,7 @@ namespace Cv.Business.Class
                         Task.WaitAll(insert);
                         return HttpStatusCode.OK;
                     }
-                    return HttpStatusCode.NotFound;
+                    return HttpStatusCode.NotModified;
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace Cv.Business.Class
                     try { await candidatesHistoriesBusiness.Delete(candidateId); } catch (Exception) { }
                     return HttpStatusCode.OK;
                 }
-                return HttpStatusCode.NotFound;
+                return HttpStatusCode.NotModified;
             }
             catch (Exception)
             {

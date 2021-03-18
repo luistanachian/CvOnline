@@ -18,7 +18,7 @@ namespace Cv.Repository.Class
         }
 
         public async Task<List<CountryModel>> GetAll() =>
-            (await countriesDao.GetAll()).OrderBy(c => c.name).OrderBy(x => x.name).ToList();
+            await countriesDao.GetAll();
 
         public async Task<CountryModel> GetById(int id) => 
             await countriesDao.GetByFunc(fd.Eq(e => e.id, id));

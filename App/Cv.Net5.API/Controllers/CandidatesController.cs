@@ -3,6 +3,7 @@ using Cv.Commons;
 using Cv.Models;
 using Cv.Models.Helpers;
 using Cv.Models.Search;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -35,6 +36,10 @@ namespace Cv.Net5.API.Controllers
             return await candidatesBusiness.GetBy(companyId, candidateId);
         }
         [HttpPost("{userId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status304NotModified)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Save([FromRoute] string userId, [FromBody] CandidateModel candidate)
         {
             if (!Validate.Guids(userId))
@@ -44,6 +49,11 @@ namespace Cv.Net5.API.Controllers
         }
 
         [HttpDelete("{companyId}/{candidateId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status304NotModified)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        
         public async Task<IActionResult> Delete([FromRoute] string companyId, [FromRoute] string candidateId)
         {
             if (!Validate.Guids(candidateId, candidateId))

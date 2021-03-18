@@ -17,7 +17,9 @@ namespace Cv.Repository.Class
             this.statesDao = statesDao;
         }
         public async Task<List<StateModel>> GetAllByCountryId(int id) => 
-            (await statesDao.GetAll(fd.Eq(s => s.country_id, id))).OrderBy(x => x.name).ToList();
-        public async Task<StateModel> GetByIdStateId(int id) => await statesDao.GetByFunc(fd.Eq(e => e.id, id));
+            await statesDao.GetAll(fd.Eq(s => s.country_id, id));
+
+        public async Task<StateModel> GetByIdStateId(int id) => 
+            await statesDao.GetByFunc(fd.Eq(e => e.id, id));
     }
 }
