@@ -8,7 +8,7 @@ namespace Cv.Repository.Interface
     {
         Task Insert(ClientModel entity);
         Task<bool> Replace(ClientModel entity);
-        Task<bool> Delete(string clientId);
+        Task<bool> Delete(string companyId, string clientId);
         Task<ClientModel> GetBy(string clientId);
         Task<ClientModel> GetBy(string companyId, string code);
         Task<bool> CodeExists(string companyId, string clientId, string code);
