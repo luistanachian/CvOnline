@@ -41,7 +41,7 @@ namespace Cv.Business.Class
                     await candidatesRepository.Insert(candidate);
                     httpStatusCode = HttpStatusCode.OK;
                 }
-                else if ((await candidatesRepository.Replace(candidate)))
+                else if (await candidatesRepository.Replace(candidate))
                 {
                     eventItem.Event = EventEnum.Update;
                     httpStatusCode = HttpStatusCode.OK;
