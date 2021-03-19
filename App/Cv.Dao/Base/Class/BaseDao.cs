@@ -11,25 +11,18 @@ namespace Cv.Dao.Base.Class
         IGetAllDao<T>,
         IGetByDao<T>,
         IInsertDao<T>,
-        IReplaceDao<T>,
+        IUpdateDao<T>,
         IDeleteDao<T>
         where T : class
     {
-        public async Task<List<T>> GetAll()
-        {
-            var result = await ConnectionsMongoDb<T>.GetCollection().Find(e => true).ToListAsync();
-            return result == null || result.Count == 0 ? null : result;
-        }
-        public async Task<List<T>> GetAll(FilterDefinition<T> filter)
-        {
-            var result = await ConnectionsMongoDb<T>.GetCollection().Find(filter).ToListAsync();
-            return result == null || result.Count == 0 ? null : result;
-        }
-        public async Task<T> GetByFunc(FilterDefinition<T> filter)
-        {
-            var result = await ConnectionsMongoDb<T>.GetCollection().Find(filter).Limit(1).ToListAsync();
-            return result == null || result.Count == 0 ? null : result[0];
-        }
+        public async Task<List<T>> GetAll() => 
+            await ConnectionsMongoDb<T>.GetCollection().Find(e => true).ToListAsync();
+
+        public async Task<List<T>> GetAll(FilterDefinition<T> filter) =>
+            await ConnectionsMongoDb<T>.GetCollection().Find(filter).ToListAsync();
+
+        public async Task<T> GetByFunc(FilterDefinition<T> filter) => 
+                await ConnectionsMongoDb<T>.GetCollection().Find(filter).FirstAsync();
 
         public async Task<PagedListModel<T>> GetByFunc(FilterDefinition<T> filter, int page, int pageSize)
         {
@@ -58,11 +51,17 @@ namespace Cv.Dao.Base.Class
         public async Task Insert(T entity) =>
             await ConnectionsMongoDb<T>.GetCollection().InsertOneAsync(entity);
 
+        public async Task<long> Update(FilterDefinition<T> filter, UpdateDefinition<T> update) =>
+            (await ConnectionsMongoDb<T>.GetCollection().UpdateOneAsync(filter, update)).ModifiedCount;
+
         public async Task<long> Replace(FilterDefinition<T> filter, T entity) =>
             (await ConnectionsMongoDb<T>.GetCollection().ReplaceOneAsync(filter, entity)).ModifiedCount;
 
         public async Task<long> Delete(FilterDefinition<T> filter) =>
              (await ConnectionsMongoDb<T>.GetCollection().DeleteOneAsync(filter)).DeletedCount;
+
+
+        
 
     }
 }

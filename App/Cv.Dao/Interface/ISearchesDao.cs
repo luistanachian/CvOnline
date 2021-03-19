@@ -6,7 +6,7 @@ namespace Cv.Dao.Interface
     public interface ISearchesDao :
         IGetByDao<SearchModel>,
         IInsertDao<SearchModel>,
-        IReplaceDao<SearchModel>,
+        IUpdateDao<SearchModel>,
         IDeleteDao<SearchModel>
     {
     }

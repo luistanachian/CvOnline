@@ -8,7 +8,7 @@ namespace Cv.Dao.Interface
         IGetByDao<CandidateHistoryModel>,
         IInsertDao<CandidateHistoryModel>,
         IDeleteDao<CandidateHistoryModel>,
-        IReplaceDao<CandidateHistoryModel>
+        IUpdateDao<CandidateHistoryModel>
     {
     }
 }

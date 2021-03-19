@@ -6,7 +6,7 @@ namespace Cv.Dao.Interface
     public interface ICompaniesStatisticsDao :
         IGetByDao<CompanyStatisticsModel>,
         IInsertDao<CompanyStatisticsModel>,
-        IReplaceDao<CompanyStatisticsModel>,
+        IUpdateDao<CompanyStatisticsModel>,
         IDeleteDao<CompanyStatisticsModel>
     {
     }

@@ -6,7 +6,7 @@ namespace Cv.Dao.Interface
     public interface IUsersDao :
         IGetByDao<UserModel>,
         IInsertDao<UserModel>,
-        IReplaceDao<UserModel>,
+        IUpdateDao<UserModel>,
         IDeleteDao<UserModel>
     {
     }

@@ -3,7 +3,6 @@ using Cv.Ioc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
-using Cv.Models.Mock;
 
 namespace Cv.AppConsole
 {
