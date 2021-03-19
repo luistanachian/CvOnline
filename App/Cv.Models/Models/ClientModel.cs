@@ -1,6 +1,5 @@
 ﻿using Cv.Commons;
 using Cv.Models.Attributes;
-using Cv.Models.Items;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;

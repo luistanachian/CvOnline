@@ -5,7 +5,6 @@ using System;
 using Cv.Models.Enums;
 using System.Threading.Tasks;
 using Cv.Models.Helpers;
-using Cv.Models.Items;
 using Cv.Commons;
 using System.Net;
 using Cv.Models.Search;

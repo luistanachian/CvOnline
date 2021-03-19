@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Cv.Models.Items
+namespace Cv.Models
 {
     public class TestItem
     {

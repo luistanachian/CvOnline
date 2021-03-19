@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Cv.Models.Items
+namespace Cv.Models
 {
     public class ContactItem
     {

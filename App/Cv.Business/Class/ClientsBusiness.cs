@@ -23,7 +23,6 @@ namespace Cv.Business.Class
                 if (entity.ClientId == null)
                 {
                     entity.ClientId = Guid.NewGuid().ToString();
-                    entity.StarDate = DateTime.Now;
                     await clientsRepository.Insert(entity);
                     return HttpStatusCode.OK;
                 }

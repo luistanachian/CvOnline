@@ -41,7 +41,7 @@ namespace Cv.Repository.Class
             int stateId)
         {
             name ??= string.Empty;
-            name.Trim();
+            name = name.Trim();
 
             var filterDefinitions = new List<FilterDefinition<ClientModel>>
             {
@@ -49,10 +49,10 @@ namespace Cv.Repository.Class
             };
 
             if (countryId > 0)
-                filterDefinitions.Add(fd.Eq(c => c.CountryId, countryId));
+                filterDefinitions.Add(fd.Eq(c => c.Adress.CountryId, countryId));
 
             if (stateId > 0)
-                filterDefinitions.Add(fd.Eq(c => c.StateId, stateId));
+                filterDefinitions.Add(fd.Eq(c => c.Adress.StateId, stateId));
 
             if (!string.IsNullOrWhiteSpace(name))
                 filterDefinitions.Add(fd.Where(c => c.Name.Contains(name)));

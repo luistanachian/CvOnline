@@ -1,5 +1,4 @@
 ﻿using Cv.Models;
-using Cv.Models.Items;
 using System.Threading.Tasks;
 
 namespace Cv.Business.Interface

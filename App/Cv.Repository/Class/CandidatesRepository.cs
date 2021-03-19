@@ -40,7 +40,7 @@ namespace Cv.Repository.Class
             candidateSearch.Name ??= string.Empty;
             candidateSearch.Name = candidateSearch.Name.Trim();
             candidateSearch.Skills ??= new List<string>();
-            candidateSearch.Skills.ForEach(s => s.Trim());
+            candidateSearch.Skills.ForEach( s => s = s.Trim());
 
             var filterDefinitions = new List<FilterDefinition<CandidateModel>>
             {
@@ -48,10 +48,10 @@ namespace Cv.Repository.Class
             };
 
             if (candidateSearch.CountryId > 0)
-                filterDefinitions.Add(fd.Eq(c => c.CountryId, candidateSearch.CountryId));
+                filterDefinitions.Add(fd.Eq(c => c.Adress.CountryId, candidateSearch.CountryId));
 
             if (candidateSearch.StateId > 0)
-                filterDefinitions.Add(fd.Eq(c => c.StateId, candidateSearch.StateId));
+                filterDefinitions.Add(fd.Eq(c => c.Adress.StateId, candidateSearch.StateId));
 
             if (!string.IsNullOrWhiteSpace(candidateSearch.Name))
                 filterDefinitions.Add(fd.Where(c => c.FullName.Contains(candidateSearch.Name)));

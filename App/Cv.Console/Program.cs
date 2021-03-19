@@ -33,12 +33,7 @@ namespace Cv.AppConsole
 
         public async Task Run()
         {
-            var can = ClientMock.ClientOk;
 
-            await clientsBusiness.Delete(can.ClientId);
-            await clientsBusiness.Insert(can);
-            can.Document = "00000000";
-            await clientsBusiness.Replace(can);
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args)
