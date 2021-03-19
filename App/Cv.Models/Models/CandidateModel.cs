@@ -23,7 +23,6 @@ namespace Cv.Models
         [EnumDataType(typeof(StatusCandiateEnum))]
         public int Status { get; set; }
 
-        
         [RegularExpression(RegexConst.Guid)]
         public string ClientOrSearchId { get; set; }
 
@@ -32,56 +31,33 @@ namespace Cv.Models
         [MaxLength(100)]
         public string FullName { get; set; }
 
-        
         [RegularExpression(RegexConst.Date_YYYYMMDD)]
         public string BirthDay { get; set; }
 
-        
         [RegularExpression(RegexConst.Sex)]
         public string Sex { get; set; }
 
-        
         [MinLength(5)]
         [MaxLength(20)]
         public string Dni { get; set; }
 
-        
         [Range(0, 250)]
         public int Nacionality { get; set; }
 
-        [Range(1, 250)]
-        public int CountryId { get; set; }
-
-        
-        [Range(0, 4892)]
-        public int StateId { get; set; }
-
-        
-        [MaxLength(100)]
-        public string AdressOne { get; set; }
-
-        
-        [MaxLength(100)]
-        public string AdressTwo { get; set; }
-
-        
-        [MaxLength(10)]
-        public string PostalCode { get; set; }
+        [Required]
+        public AdressItem Adress { get; set; }
 
         [Required]
         [EmailAddress]
         public string Mail { get; set; }
 
-        
         [Phone]
         [MinLength(7)]
         public string Phone { get; set; }
 
-        
         [MaxLength(50)]
         public string Occupation { get; set; }
 
-        
         [MaxLength(50)]
         public string Role { get; set; }
 
@@ -91,15 +67,10 @@ namespace Cv.Models
         [EnumDataType(typeof(WorkModeEnum))]
         public int WorkMode { get; set; }
 
-        
         public bool Relocate { get; set; }
 
-        
         [MaxLength(100)]
         public string DependentsOrPets { get; set; }
-
-
-        //// listas
 
         [MaxLength(5)]
         [Links]

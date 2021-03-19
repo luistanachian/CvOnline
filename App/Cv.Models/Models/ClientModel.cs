@@ -1,8 +1,10 @@
-﻿using Cv.Models.Items;
+﻿using Cv.Commons;
+using Cv.Models.Attributes;
+using Cv.Models.Items;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cv.Models
 {
@@ -10,20 +12,34 @@ namespace Cv.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.String)]
+        [RegularExpression(RegexConst.Guid)]
         public string ClientId { get; set; }
+
+        [Required]
+        [RegularExpression(RegexConst.Guid)]
         public string CompanyId { get; set; }
-        public DateTime StarDate { get; set; }
-        public DateTime LastUpdate { get; set; }
+
         public bool BlackList { get; set; }
+
+        [Required]
+        [MinLength(5)]
+        [MaxLength(100)]
         public string Name { get; set; }
+
+        [MinLength(5)]
+        [MaxLength(20)]
         public string Document { get; set; }
-        public int CountryId { get; set; }
-        public int StateId { get; set; }
-        public string AdressOne { get; set; }
-        public string AdressTwo { get; set; }
-        public string PostalCode { get; set; }
+
+        [Required]
+        public AdressItem Adress { get; set; }
+
+        [MaxLength(5)]
         public List<ContactItem> Contacts { get; set; }
-        public List<string> SitesList { get; set; }
+
+        [MaxLength(5)]
+        [Links]
+        public List<string> Sites { get; set; }
+
         public List<CommentItem> Comments { get; set; }
     }
 }
