@@ -12,20 +12,11 @@ namespace Cv.Models
     {
         public CandidateValidations()
         {
-            RuleFor(x => x.PersonalData).NotNull();
-            RuleFor(x => x.PersonalData.FullName).NotNull().NotEmpty().MinimumLength(5).MaximumLength(100);
+            RuleFor(x => x.PersonalData).NotNull().WithMessage("Not Null");
+            RuleFor(x => x.PersonalData.FullName)
+                .NotEmpty().WithMessage("Not Null or Empty")
+                .MinimumLength(5).WithMessage("Minimum Length 5")
+                .MaximumLength(100).WithMessage("Maximum Length 100");
         }
-
-        //public Dictionary<string, string> ValidateRules(CandidateModel entity)
-        //{
-        //    Dictionary<string, string> result = new();
-        //    ValidationResult validationResult = this.Validate(entity);
-        //    if(!validationResult.IsValid)
-        //    {
-        //        foreach (var error in validationResult.Errors)
-        //            result.Add(error.PropertyName, error.ErrorMessage);
-        //    }
-        //    return result;
-        //}
     }
 }

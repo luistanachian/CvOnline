@@ -45,17 +45,17 @@ namespace Cv.Repository.Class
                 fd.Eq(c => c.CompanyId, candidateSearch.CompanyId)
             };
 
-            if (candidateSearch.CountryId > 0)
-                filterDefinitions.Add(fd.Eq(c => c.Adress.CountryId, candidateSearch.CountryId));
+            //if (candidateSearch.CountryId > 0)
+            //    filterDefinitions.Add(fd.Eq(c => c.Adress.CountryId, candidateSearch.CountryId));
 
-            if (candidateSearch.StateId > 0)
-                filterDefinitions.Add(fd.Eq(c => c.Adress.StateId, candidateSearch.StateId));
+            //if (candidateSearch.StateId > 0)
+            //    filterDefinitions.Add(fd.Eq(c => c.Adress.StateId, candidateSearch.StateId));
 
-            if (!string.IsNullOrWhiteSpace(candidateSearch.Name))
-                filterDefinitions.Add(fd.Where(c => c.PersonalData.FullName.Contains(candidateSearch.Name)));
+            //if (!string.IsNullOrWhiteSpace(candidateSearch.Name))
+            //    filterDefinitions.Add(fd.Where(c => c.PersonalData.FullName.Contains(candidateSearch.Name)));
 
-            if (candidateSearch.Skills.Count > 0)
-                filterDefinitions.Add(fd.ElemMatch(e => e.Skills, Builders<SkillItem>.Filter.In(y => y.Skill, candidateSearch.Skills)));
+            //if (candidateSearch.Skills.Count > 0)
+            //    filterDefinitions.Add(fd.ElemMatch(e => e.Skills, Builders<SkillItem>.Filter.In(y => y.Skill, candidateSearch.Skills)));
 
             return fd.And(filterDefinitions);
         }

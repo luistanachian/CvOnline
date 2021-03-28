@@ -40,10 +40,10 @@ namespace Cv.Net5.API.Controllers
         public async Task<IActionResult> Save([FromRoute] string userId, [FromBody] CandidateModel candidate)
         {
             var (Valido, Errores) = BaseValidateFluent<CandidateModel>.ValidateRules(new CandidateValidations(), candidate);
-            Dictionary<string, string> errores = Valido ? new() : Errores;
+            Dictionary<string, List<string>> errores = Valido ? new() : Errores;
 
             if (!Validate.Guids(userId))
-                errores.Add("userId", "Debe ser un GUID valido");
+                errores.Add("userId", new List<string> { "Debe ser un GUID valido" });
 
             return errores.Count > 0 ?
                 BadRequest(JsonSerializer.Serialize(errores)) :

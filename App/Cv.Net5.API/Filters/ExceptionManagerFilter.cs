@@ -16,7 +16,8 @@ namespace Cv.Net5.API
         }
         public void OnException(ExceptionContext context)
         {
-            context.Result = new StatusCodeResult(500);
+            //context.Result = new StatusCodeResult(500);
+            context.Result = new JsonResult(context.Exception.Message);
         }
     }
 }

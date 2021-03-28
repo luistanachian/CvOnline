@@ -21,9 +21,14 @@ namespace Cv.Dao.Base.Class
         public async Task<List<T>> GetAll(FilterDefinition<T> filter) =>
             await ConnectionsMongoDb<T>.GetCollection().Find(filter).ToListAsync();
 
-        public async Task<T> GetByFunc(FilterDefinition<T> filter) => 
-                await ConnectionsMongoDb<T>.GetCollection().Find(filter).FirstAsync();
+        public async Task<T> GetByFunc(FilterDefinition<T> filter)
+        {
+            var result = await ConnectionsMongoDb<T>.GetCollection().Find(filter).Limit(1).ToListAsync();
+            if (result != null && result.Count > 0)
+                return result[0];
 
+            return null;
+        }
         public async Task<PagedListModel<T>> GetByFunc(FilterDefinition<T> filter, int page, int pageSize)
         {
             var countTask = Count(filter);
