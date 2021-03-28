@@ -22,23 +22,23 @@ namespace Cv.Models
 
         [RegularExpression(RegexConst.Guid)]
         public string ClientOrSearchId { get; set; }
-        
-        [Required]
+
+        //[Required]
         public PersonalDataItem PersonalData { get; set; }
         
-        [Required]
-        public AdressItem Adress { get; set; }
+        //[Required]
+        //public AdressItem Adress { get; set; }
 
-        [Required]
-        public ProfessionalDataItem ProfessionalData { get; set; }
+        //[Required]
+        //public ProfessionalDataItem ProfessionalData { get; set; }
 
-        [MaxLength(5)]
-        public List<LanguageItem> Languages { get; set; }
+        //[MaxLength(5)]
+        //public List<LanguageItem> Languages { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        public List<SkillItem> Skills { get; set; }
+        //[Required]
+        //[MaxLength(100)]
+        //public List<SkillItem> Skills { get; set; }
 
-        public List<CommentItem> Comments { get; set; }
+        //public List<CommentItem> Comments { get; set; }
     }
 }

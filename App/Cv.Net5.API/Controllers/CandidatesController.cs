@@ -3,6 +3,8 @@ using Cv.Commons;
 using Cv.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Cv.Net5.API.Controllers
@@ -35,24 +37,20 @@ namespace Cv.Net5.API.Controllers
             return await candidatesBusiness.GetBy(companyId, candidateId);
         }
         [HttpPost("{userId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status304NotModified)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Save([FromRoute] string userId, [FromBody] CandidateModel candidate)
         {
-            if (!Validate.Guids(userId))
-                return BadRequest();
+            var (Valido, Errores) = BaseValidateFluent<CandidateModel>.ValidateRules(new CandidateValidations(), candidate);
+            Dictionary<string, string> errores = Valido ? new() : Errores;
 
-            return StatusCode((int)await candidatesBusiness.Save(userId, candidate));
+            if (!Validate.Guids(userId))
+                errores.Add("userId", "Debe ser un GUID valido");
+
+            return errores.Count > 0 ?
+                BadRequest(JsonSerializer.Serialize(errores)) :
+                StatusCode((int)await candidatesBusiness.Save(userId, candidate));
         }
 
         [HttpDelete("{companyId}/{candidateId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status304NotModified)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        
         public async Task<IActionResult> Delete([FromRoute] string companyId, [FromRoute] string candidateId)
         {
             if (!Validate.Guids(candidateId, candidateId))

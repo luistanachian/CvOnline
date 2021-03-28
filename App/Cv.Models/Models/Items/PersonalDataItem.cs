@@ -8,9 +8,9 @@ namespace Cv.Models
 {
     public class PersonalDataItem
     {
-        [Required]
-        [MinLength(5)]
-        [MaxLength(100)]
+        //[Required]
+        //[MinLength(5)]
+        //[MaxLength(100)]
         public string FullName { get; set; }
         [Required]
         [EmailAddress]
