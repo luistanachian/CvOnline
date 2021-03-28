@@ -22,8 +22,6 @@ namespace Cv.Net5.API.Controllers
         [HttpGet]
         public async Task<List<ComboResponse>> Get()
         {
-            throw new Exception("hola soy un error");
-
             var countries = await countriesBusiness.GetAll();
             if (countries == null)
                 return null;
