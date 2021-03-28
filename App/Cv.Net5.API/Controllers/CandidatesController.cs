@@ -39,14 +39,13 @@ namespace Cv.Net5.API.Controllers
         [HttpPost("{userId}")]
         public async Task<IActionResult> Save([FromRoute] string userId, [FromBody] CandidateModel candidate)
         {
-            var (Valido, Errores) = BaseValidateFluent<CandidateModel>.ValidateRules(new CandidateValidations(), candidate);
-            Dictionary<string, List<string>> errores = Valido ? new() : Errores;
+            var (valid, errores) = Validations.IsValid<CandidateModel, CandidateValidations>(candidate);
 
             if (!Validate.Guids(userId))
                 errores.Add("userId", new List<string> { "Debe ser un GUID valido" });
 
             return errores.Count > 0 ?
-                BadRequest(JsonSerializer.Serialize(errores)) :
+                BadRequest(errores) :
                 StatusCode((int)await candidatesBusiness.Save(userId, candidate));
         }
 
