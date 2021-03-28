@@ -1,7 +1,6 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
 using Cv.Repository.Interface;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,27 +15,10 @@ namespace Cv.Business.Class
             this.statesRepository = statesRepository;
         }
 
-        public async Task<List<StateModel>> GetAllByCountryId(int id)
-        {
-            try
-            {
-                return await statesRepository.GetAllByCountryId(id);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-        public async Task<StateModel> GetByIdStateId(int id)
-        {
-            try
-            {
-                return await statesRepository.GetByIdStateId(id);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
+        public async Task<List<StateModel>> GetAllByCountryId(int id) => 
+            await statesRepository.GetAllByCountryId(id);
+
+        public async Task<StateModel> GetByIdStateId(int id) => 
+            await statesRepository.GetByIdStateId(id);
     }
 }

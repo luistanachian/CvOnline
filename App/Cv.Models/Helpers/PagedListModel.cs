@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Cv.Models.Helpers
+namespace Cv.Models
 {
     public class PagedListModel<T> where T : class
     {

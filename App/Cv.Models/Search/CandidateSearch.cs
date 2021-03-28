@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Cv.Models.Search
+namespace Cv.Models
 {
     public class CandidateSearch
     {

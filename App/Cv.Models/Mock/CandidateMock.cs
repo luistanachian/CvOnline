@@ -1,7 +1,6 @@
-﻿using Cv.Models.Enums;
-using System;
+﻿using System;
 
-namespace Cv.Models.Mock
+namespace Cv.Models
 {
     public static class CandidateMock
     {
@@ -11,8 +10,8 @@ namespace Cv.Models.Mock
             CompanyId ="7a1e1935-e45a-4792-9c19-b0f3dbb43576",
             Status = (int)StatusCandiateEnum.ContractedOnClient,
             ClientOrSearchId = Guid.NewGuid().ToString(),
-            FullName = "Luis Tanachian",
-            BirthDay = "1990-01-05",
+            //FullName = "Luis Tanachian",
+            //BirthDay = "1990-01-05",
             //Sex = "M",
             //Dni = "95900127",
             //Nacionality = 239,

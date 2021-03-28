@@ -22,89 +22,51 @@ namespace Cv.Business.Class
         }
         public async Task<HttpStatusCode> Save(string userId, CandidateModel candidate)
         {
-            HttpStatusCode httpStatusCode = HttpStatusCode.NotModified;
-            try
+            var httpStatusCode = HttpStatusCode.NotModified;
+
+            candidate.CandidateId = string.IsNullOrWhiteSpace(candidate.CandidateId) ? null : candidate.CandidateId;
+            EventItem eventItem = new(userId, EventEnum.Insert);
+            CandidateModel candidateTemp = null;
+
+            if (Validate.Guids(candidate.CandidateId))
+                candidateTemp = await GetBy(candidate.CompanyId, candidate.CandidateId);
+
+            if (candidateTemp == null && candidate.CandidateId == null)
             {
-                candidate.CandidateId = string.IsNullOrWhiteSpace(candidate.CandidateId) ? null : candidate.CandidateId;
-                EventItem eventItem = new(userId, EventEnum.Insert);
-                CandidateModel candidateTemp = null;
+                candidate.CandidateId = Guid.NewGuid().ToString();
+                candidate.Status = (int)StatusCandiateEnum.Available;
+                candidate.PersonalData.Sex = candidate.PersonalData.Sex?.ToLower();
 
-                if (Validate.Guids(candidate.CandidateId))
-                    candidateTemp = await GetBy(candidate.CompanyId, candidate.CandidateId);
-
-                if (candidateTemp == null && candidate.CandidateId == null)
-                {
-                    candidate.CandidateId = Guid.NewGuid().ToString();
-                    candidate.Status = (int)StatusCandiateEnum.Available;
-                    candidate.Sex = candidate.Sex?.ToLower();
-
-                    await candidatesRepository.Insert(candidate);
-                    httpStatusCode = HttpStatusCode.OK;
-                }
-                else if (await candidatesRepository.Replace(candidate))
-                {
-                    eventItem.Event = EventEnum.Update;
-                    httpStatusCode = HttpStatusCode.OK;
-                }
-
-                if (httpStatusCode == HttpStatusCode.OK)
-                    await candidatesHistoriesBusiness.Add(candidate.CandidateId, eventItem);
-
-                return httpStatusCode;
+                await candidatesRepository.Insert(candidate);
+                httpStatusCode = HttpStatusCode.OK;
             }
-            catch (Exception)
+            else if (await candidatesRepository.Replace(candidate))
             {
-                return HttpStatusCode.InternalServerError;
+                eventItem.Event = EventEnum.Update;
+                httpStatusCode = HttpStatusCode.OK;
             }
+
+            if (httpStatusCode == HttpStatusCode.OK)
+                await candidatesHistoriesBusiness.Add(candidate.CandidateId, eventItem);
+
+            return httpStatusCode;
         }
         public async Task<HttpStatusCode> Delete(string companyId, string candidateId)
         {
-            try
+            if (await candidatesRepository.Delete(companyId, candidateId))
             {
-                if (await candidatesRepository.Delete(companyId, candidateId))
-                {
-                    try { await candidatesHistoriesBusiness.Delete(candidateId); } catch (Exception) { }
-                    return HttpStatusCode.OK;
-                }
-                return HttpStatusCode.NotModified;
+                try { await candidatesHistoriesBusiness.Delete(candidateId); } catch (Exception) { }
+                return HttpStatusCode.OK;
             }
-            catch (Exception)
-            {
-                return HttpStatusCode.InternalServerError;
-            }
+            return HttpStatusCode.NotModified;
         }
-        public async Task<CandidateModel> GetBy(string companyId, string candidateId)
-        {
-            try
-            {
-                return await candidatesRepository.GetBy(companyId, candidateId);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-        public async Task<PagedListModel<CandidateModel>> GetBy(CandidateSearch candidateSearch)
-        {
-            try
-            {
-                return await candidatesRepository.GetBy(candidateSearch);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-        public async Task<long> Count(CandidateSearch candidateSearch)
-        {
-            try
-            {
-                return await candidatesRepository.Count(candidateSearch);
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
-        }
+        public async Task<CandidateModel> GetBy(string companyId, string candidateId) =>
+            await candidatesRepository.GetBy(companyId, candidateId);
+
+        public async Task<PagedListModel<CandidateModel>> GetBy(CandidateSearch candidateSearch) =>
+            await candidatesRepository.GetBy(candidateSearch);
+
+        public async Task<long> Count(CandidateSearch candidateSearch) =>
+            await candidatesRepository.Count(candidateSearch);
     }
 }

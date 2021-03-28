@@ -1,4 +1,4 @@
-﻿namespace Cv.Models.Enums
+﻿namespace Cv.Models
 {
     public enum StatusSearchEnum
     {

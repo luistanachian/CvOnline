@@ -1,5 +1,5 @@
 ﻿
-namespace Cv.Net5.API.Models
+namespace Cv.Models
 {
     public class ComboResponse
     {

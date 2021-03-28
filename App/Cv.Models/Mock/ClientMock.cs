@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Cv.Models.Mock
+namespace Cv.Models
 {
     public class ClientMock
     {
