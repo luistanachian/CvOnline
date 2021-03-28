@@ -1,6 +1,5 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
-using Cv.Models.Enums;
 using Cv.Repository.Interface;
 using System.Collections.Generic;
 using System.Threading.Tasks;

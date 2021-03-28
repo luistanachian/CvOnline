@@ -7,6 +7,7 @@ namespace Cv.Net5.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [TypeFilter(typeof(ExceptionManagerFilter))]
     public class CandidatesHistoriesController : ControllerBase
     {
         private readonly ICandidatesHistoriesBusiness candidatesHistoriesBusiness;

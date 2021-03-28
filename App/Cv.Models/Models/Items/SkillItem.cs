@@ -1,5 +1,4 @@
 ﻿using Cv.Models.Attributes;
-using Cv.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace Cv.Models

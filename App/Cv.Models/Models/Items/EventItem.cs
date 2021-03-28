@@ -1,5 +1,4 @@
-﻿using Cv.Models.Enums;
-using System;
+﻿using System;
 
 namespace Cv.Models
 {

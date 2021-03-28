@@ -1,6 +1,4 @@
 ﻿using Cv.Models;
-using Cv.Models.Helpers;
-using Cv.Models.Search;
 using System.Net;
 using System.Threading.Tasks;
 

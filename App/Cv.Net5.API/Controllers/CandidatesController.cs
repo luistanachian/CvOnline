@@ -1,8 +1,6 @@
 ﻿using Cv.Business.Interface;
 using Cv.Commons;
 using Cv.Models;
-using Cv.Models.Helpers;
-using Cv.Models.Search;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -11,6 +9,7 @@ namespace Cv.Net5.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [TypeFilter(typeof(ExceptionManagerFilter))]
     public class CandidatesController : ControllerBase
     {
         private readonly ICandidatesBusiness candidatesBusiness;

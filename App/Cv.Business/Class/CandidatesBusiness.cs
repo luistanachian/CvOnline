@@ -2,12 +2,9 @@
 using Cv.Models;
 using Cv.Repository.Interface;
 using System;
-using Cv.Models.Enums;
 using System.Threading.Tasks;
-using Cv.Models.Helpers;
 using Cv.Commons;
 using System.Net;
-using Cv.Models.Search;
 
 namespace Cv.Business.Class
 {

@@ -1,7 +1,7 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
-using Cv.Net5.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +10,7 @@ namespace Cv.Net5.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [TypeFilter(typeof(ExceptionManagerFilter))]
     public class CountriesController : ControllerBase
     {
         private readonly ICountriesBusiness countriesBusiness;
@@ -21,6 +22,8 @@ namespace Cv.Net5.API.Controllers
         [HttpGet]
         public async Task<List<ComboResponse>> Get()
         {
+            throw new Exception("hola soy un error");
+
             var countries = await countriesBusiness.GetAll();
             if (countries == null)
                 return null;

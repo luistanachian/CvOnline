@@ -1,6 +1,6 @@
 ﻿using Cv.Dao.Base.Interface;
 using Cv.Dao.Configurations;
-using Cv.Models.Helpers;
+using Cv.Models;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;

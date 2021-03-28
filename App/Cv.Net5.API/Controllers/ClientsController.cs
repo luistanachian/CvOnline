@@ -1,7 +1,5 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
-using Cv.Models.Helpers;
-using Cv.Net5.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
@@ -10,6 +8,7 @@ namespace Cv.Net5.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [TypeFilter(typeof(ExceptionManagerFilter))]
     public class ClientsController : ControllerBase
     {
         private readonly IClientsBusiness clientsBusiness;

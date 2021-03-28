@@ -1,7 +1,5 @@
 ﻿using Cv.Dao.Interface;
 using Cv.Models;
-using Cv.Models.Helpers;
-using Cv.Models.Search;
 using Cv.Repository.Interface;
 using MongoDB.Driver;
 using System.Collections.Generic;

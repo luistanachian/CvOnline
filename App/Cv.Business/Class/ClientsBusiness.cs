@@ -3,7 +3,6 @@ using Cv.Models;
 using Cv.Repository.Interface;
 using System;
 using System.Threading.Tasks;
-using Cv.Models.Helpers;
 using System.Net;
 
 namespace Cv.Business.Class

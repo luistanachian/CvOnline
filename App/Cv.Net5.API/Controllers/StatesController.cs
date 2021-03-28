@@ -1,6 +1,5 @@
 ﻿using Cv.Business.Interface;
 using Cv.Models;
-using Cv.Net5.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,7 @@ namespace Cv.Net5.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [TypeFilter(typeof(ExceptionManagerFilter))]
     public class StatesController : ControllerBase
     {
         private readonly IStatesBusiness statesBusiness;

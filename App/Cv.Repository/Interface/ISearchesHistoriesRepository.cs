@@ -1,5 +1,4 @@
 ﻿using Cv.Models;
-using Cv.Models.Helpers;
 using System.Threading.Tasks;
 
 namespace Cv.Repository.Interface
