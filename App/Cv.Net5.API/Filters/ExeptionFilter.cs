@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 
 namespace Cv.Net5.API
 {
@@ -16,8 +17,7 @@ namespace Cv.Net5.API
         }
         public void OnException(ExceptionContext context)
         {
-            context.ExceptionHandled = true;
-            context.Result = new JsonResult($"Fallo la app {host.ApplicationName}, Error: {context.Exception.Message}");
+            context.Result = new StatusCodeResult(500);
         }
     }
 }
